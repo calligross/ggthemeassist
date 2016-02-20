@@ -21,10 +21,23 @@ default <- list(
     hjust = 0.5,
     vjust = 0.5,
     angle = 0,
-    lineheight = 1.1),
+    lineheight = 1.1
+    ),
   axis.line = list(
     colour = 'black',
     size = 1,
     linetype = 'blank'
+    ),
+  legend.text = list(
+    size = 10,
+    face = 'plain',
+    family = 'Helvetica',
+    colour = 'black'
+  ),
+  legend.title = list(
+    size = 10,
+    face = 'plain',
+    family = 'Helvetica',
+    colour = 'black'
   )
 )

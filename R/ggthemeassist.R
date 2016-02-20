@@ -13,8 +13,8 @@ ggthemeassist <- function(){
     miniTabstripPanel(
       miniTabPanel("Axis", icon = icon('sliders'),
         miniContentPanel(
+          plotOutput("ThePlot", width = 800, height = 400),
           fillCol(flex = c(5, 3, 2),
-            plotOutput("ThePlot", width = 800, height = 400),
             fillRow(
               fillCol(
                 numericInput('axis.text.size', label = 'Textsize', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
@@ -38,16 +38,36 @@ ggthemeassist <- function(){
             )
           )
         )
-      ) #,
-      # miniTabPanel("Background", icon = icon('sliders'),
-      #   miniContentPanel(
-      #     fillCol(flex = c(5, 3, 2),
-      #       plotOutput("ThePlot2", width = 800, height = 400)
-      #       )
-      #   )
-      # )
+      ) ,
+      miniTabPanel("Background", icon = icon('sliders'),
+        miniContentPanel(
+          fillCol(flex = c(5, 3, 2),
+            plotOutput("ThePlot2", width = 800, height = 400)
+            )
+        )
+      ),
+      miniTabPanel("Legend", icon = icon('sliders'),
+                   miniContentPanel(
+                             plotOutput("ThePlot3", width = 800, height = 400),
+                             fillCol(flex = c(5, 3, 2),
+                                     fillRow(
+                                       fillCol(
+                                         numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
+                                         selectInput('legend.text.face', label = 'Legend Textface', choices = text.faces, selected = default$legend.text$face, width = input.width),
+                                         selectInput('legend.text.colour', label = 'Legend Textcolour', choices = colours.available, selected = default$axis.text$colour, width = input.width),
+                                         selectInput('legend.text.family', label = 'Legend Textfamily', choices = text.families, selected = default$legend.text$family, width = input.width)
+                                         ),
+                                       fillCol(
+                                         numericInput('legend.title.size', label = 'Legend Title Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
+                                         selectInput('legend.title.face', label = 'Legend Titleface', choices = text.faces, selected = default$legend.title$face, width = input.width),
+                                         selectInput('legend.title.colour', label = 'Legend Titlecolour', choices = colours.available, selected = default$axis.title$colour, width = input.width),
+                                         selectInput('legend.title.family', label = 'Legend Titlefamily', choices = text.families, selected = default$legend.title$family, width = input.width)
+                                       )
+                     )
+                   )
+      )
     )
-  )
+  ))
 
   server <- function(input, output, session) {
 
@@ -87,6 +107,31 @@ ggthemeassist <- function(){
       if(!is.null(gg_original$theme$axis.line$size)) {
         updateSelectInput(session, 'axis.line.size', selected = gg_original$theme$axis.line$size)
       }
+      #
+      if(!is.null(gg_original$theme$legend.text$size)) {
+        updateSelectInput(session, 'legend.text.size', selected = gg_original$theme$legend.text$size)
+      }
+      if(!is.null(gg_original$theme$legend.text$face)) {
+        updateSelectInput(session, 'legend.text.face', selected = gg_original$theme$legend.text$face)
+      }
+      if(!is.null(gg_original$theme$legend.text$colour)) {
+        updateSelectInput(session, 'legend.text$colour', selected = gg_original$theme$legend.text$colour)
+      }
+      if(!is.null(gg_original$theme$legend.text$family)) {
+        updateSelectInput(session, 'legend.text$family', selected = gg_original$theme$legend.text$family)
+      }
+      if(!is.null(gg_original$theme$legend.text$size)) {
+        updateSelectInput(session, 'legend.title.size', selected = gg_original$theme$legend.text$size)
+      }
+      if(!is.null(gg_original$theme$legend.text$face)) {
+        updateSelectInput(session, 'legend.title.face', selected = gg_original$theme$legend.text$face)
+      }
+      if(!is.null(gg_original$theme$legend.text$colour)) {
+        updateSelectInput(session, 'legend.title$colour', selected = gg_original$theme$legend.text$colour)
+      }
+      if(!is.null(gg_original$theme$legend.text$family)) {
+        updateSelectInput(session, 'legend.title$family', selected = gg_original$theme$legend.text$family)
+      }
     })
 
     gg_reactive <- reactive({
@@ -103,7 +148,19 @@ ggthemeassist <- function(){
           axis.line = element_line(
             linetype = input$axis.line.type,
             colour = input$axis.line.colour,
-            size = input$axis.line.size)
+            size = input$axis.line.size),
+          legend.text = element_text(
+            size = input$legend.text.size,
+            face = input$legend.text.face,
+            colour = input$legend.text.colour,
+            family = input$legend.text.family
+          ),
+          legend.title = element_text(
+            size = input$legend.title.size,
+            face = input$legend.title.face,
+            colour = input$legend.title.colour,
+            family = input$legend.title.family
+          )
           )
     })
 
@@ -112,10 +169,13 @@ ggthemeassist <- function(){
   })
   output$ThePlot <- ThePlot
   output$ThePlot2 <- ThePlot
+  output$ThePlot3 <- ThePlot
 
   observeEvent(input$done, {
     result <- construcThemeString('axis.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text')
     result <- c(result, construcThemeString('axis.line', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
+    result <- c(result, construcThemeString('legend.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
+    result <- c(result, construcThemeString('legend.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
 
     if(!is.null(result)){
       result <- paste0(text, ' + theme(', paste(result, collapse = ', '),')')
@@ -128,7 +188,7 @@ ggthemeassist <- function(){
 
   }
 
-  viewer <- dialogViewer(dialogName = 'ggthemassist', width = 900, height = 900)
+  viewer <- dialogViewer(dialogName = 'ggthemassist', width = 990, height = 900)
   runGadget(ui, server, viewer = viewer)
 
 }
