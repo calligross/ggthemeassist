@@ -13,8 +13,8 @@ ggthemeassist <- function(){
     miniTabstripPanel(
       miniTabPanel("Axis", icon = icon('sliders'),
         miniContentPanel(
-          plotOutput("ThePlot", width = 800, height = 400),
           fillCol(flex = c(5, 3, 2),
+            plotOutput("ThePlot", width = 800, height = 400),
             fillRow(
               fillCol(
                 numericInput('axis.text.size', label = 'Textsize', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
@@ -48,8 +48,8 @@ ggthemeassist <- function(){
       ),
       miniTabPanel("Legend", icon = icon('sliders'),
                    miniContentPanel(
-                             plotOutput("ThePlot3", width = 800, height = 400),
                              fillCol(flex = c(5, 3, 2),
+                               plotOutput("ThePlot3", width = 800, height = 400),
                                      fillRow(
                                        fillCol(
                                          numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
@@ -60,7 +60,7 @@ ggthemeassist <- function(){
                                        fillCol(
                                          numericInput('legend.title.size', label = 'Legend Title Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
                                          selectInput('legend.title.face', label = 'Legend Titleface', choices = text.faces, selected = default$legend.title$face, width = input.width),
-                                         selectInput('legend.title.colour', label = 'Legend Titlecolour', choices = colours.available, selected = default$axis.title$colour, width = input.width),
+                                         selectInput('legend.title.colour', label = 'Legend Titlecolour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
                                          selectInput('legend.title.family', label = 'Legend Titlefamily', choices = text.families, selected = default$legend.title$family, width = input.width)
                                        )
                      )
