@@ -28,6 +28,12 @@ default <- list(
     size = 1,
     linetype = 'blank'
     ),
+  panel.background = list(
+    fill = 'grey92',
+    colour = 'black',
+    size = 0.5,
+    linetype = 'blank'
+  ),
   legend.text = list(
     size = 10,
     face = 'plain',

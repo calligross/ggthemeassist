@@ -42,7 +42,13 @@ ggthemeassist <- function(){
       miniTabPanel("Background", icon = icon('sliders'),
         miniContentPanel(
           fillCol(flex = c(5, 3, 2),
-            plotOutput("ThePlot2", width = 800, height = 400)
+            plotOutput("ThePlot2", width = 800, height = 400),
+            fillRow(
+              selectInput('panel.background.fill', label = 'Fillcolour', choices = c(NA, colours.available), width = input.width, selected = default$panel.background$fill),
+              selectInput('panel.background.colour', label = 'Colour', choices = c(colours.available), width = input.width, selected = default$panel.background$colour),
+              numericInput('panel.background.size', label = 'Backgroundsize', step = 0.1, value = default$panel.background$size, width = input.width),
+              selectInput('panel.background.linetype', label = 'Backgroundlinetype', choices = linetypes, selected = default$panel.background$linetype, width = input.width)
+            )
             )
         )
       ),
@@ -107,6 +113,18 @@ ggthemeassist <- function(){
       if(!is.null(gg_original$theme$axis.line$size)) {
         updateSelectInput(session, 'axis.line.size', selected = gg_original$theme$axis.line$size)
       }
+      if(!is.null(gg_original$theme$panel.background$fill)) {
+        updateSelectInput(session, 'panel.background.fill', selected = gg_original$theme$panel.background$fill)
+      }
+      if(!is.null(gg_original$theme$panel.background$size)) {
+        updateSelectInput(session, 'panel.background.size', selected = gg_original$theme$panel.background$size)
+      }
+      if(!is.null(gg_original$theme$panel.background$colour)) {
+        updateSelectInput(session, 'panel.background.colour', selected = gg_original$theme$panel.background$colour)
+      }
+      if(!is.null(gg_original$theme$panel.background$linetype)) {
+        updateSelectInput(session, 'panel.background.linetype', selected = gg_original$theme$panel.background$linetype)
+      }
       #
       if(!is.null(gg_original$theme$legend.text$size)) {
         updateSelectInput(session, 'legend.text.size', selected = gg_original$theme$legend.text$size)
@@ -149,6 +167,12 @@ ggthemeassist <- function(){
             linetype = input$axis.line.type,
             colour = input$axis.line.colour,
             size = input$axis.line.size),
+          panel.background = element_rect(
+            fill = input$panel.background.fill,
+            colour = input$panel.background.colour,
+            size = input$panel.background.size,
+            linetype = input$panel.background.linetype
+          ),
           legend.text = element_text(
             size = input$legend.text.size,
             face = input$legend.text.face,
@@ -174,6 +198,7 @@ ggthemeassist <- function(){
   observeEvent(input$done, {
     result <- construcThemeString('axis.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text')
     result <- c(result, construcThemeString('axis.line', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
+    result <- c(result, construcThemeString('panel.background', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
     result <- c(result, construcThemeString('legend.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
     result <- c(result, construcThemeString('legend.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
 
