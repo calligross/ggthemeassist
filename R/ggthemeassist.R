@@ -127,7 +127,8 @@ ggthemeassist <- function(){
       }
       #
       if(!is.null(gg_original$theme$legend.text$size)) {
-        updateNumericInput(session, 'legend.text.size', value = gg_original$theme$legend.text$size)
+        if(gg_original$theme$legend.text$size != 0.8)
+          updateNumericInput(session, 'legend.text.size', value = gg_original$theme$legend.text$size)
       }
       if(!is.null(gg_original$theme$legend.text$face)) {
         updateSelectInput(session, 'legend.text.face', selected = gg_original$theme$legend.text$face)
@@ -138,17 +139,18 @@ ggthemeassist <- function(){
       if(!is.null(gg_original$theme$legend.text$family)) {
         updateSelectInput(session, 'legend.text$family', selected = gg_original$theme$legend.text$family)
       }
-      if(!is.null(gg_original$theme$legend.text$size)) {
-        updateNumericInput(session, 'legend.title.size', value = gg_original$theme$legend.text$size)
+      if(!is.null(gg_original$theme$legend.title$size)) {
+        if(gg_original$theme$legend.title$size != 0.8)
+          updateNumericInput(session, 'legend.title.size', value = gg_original$theme$legend.title$size)
       }
-      if(!is.null(gg_original$theme$legend.text$face)) {
-        updateSelectInput(session, 'legend.title.face', selected = gg_original$theme$legend.text$face)
+      if(!is.null(gg_original$theme$legend.title$face)) {
+        updateSelectInput(session, 'legend.title.face', selected = gg_original$theme$legend.tile$face)
       }
-      if(!is.null(gg_original$theme$legend.text$colour)) {
-        updateSelectInput(session, 'legend.title$colour', selected = gg_original$theme$legend.text$colour)
+      if(!is.null(gg_original$theme$legend.title$colour)) {
+        updateSelectInput(session, 'legend.title$colour', selected = gg_original$theme$legend.title$colour)
       }
       if(!is.null(gg_original$theme$legend.text$family)) {
-        updateSelectInput(session, 'legend.title$family', selected = gg_original$theme$legend.text$family)
+        updateSelectInput(session, 'legend.title$family', selected = gg_original$theme$legend.title$family)
       }
     })
 

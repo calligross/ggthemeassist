@@ -10,7 +10,9 @@ construcThemeString <- function(theme, original, new, std = default, element) {
   DifferentToStandard <- DifferentToStandard[!is.na(DifferentToStandard)]
   DifferentToStandard <- new[DifferentToStandard]
   if(!is.null(original)){
-    DifferentToOriginal <- names(original)[!original[names(original)] == new[names(original)]]
+    DifferentToOriginal <- (!new[names(new)] == original[names(new)])
+    DifferentToOriginal[is.na(DifferentToOriginal)] <- TRUE
+    DifferentToOriginal <- names(DifferentToOriginal)[DifferentToOriginal]
 
     Different <- ((names(DifferentToStandard) %in% DifferentToOriginal))
     result <- DifferentToStandard[Different]
