@@ -45,7 +45,7 @@ ggthemeassist <- function(){
           fillCol(flex = c(5, 3, 2),
             fillRow(
               selectInput('panel.background.fill', label = 'Fillcolour', choices = c(NA, colours.available), width = input.width, selected = default$panel.background$fill),
-              selectInput('panel.background.colour', label = 'Colour', choices = c(colours.available), width = input.width, selected = default$panel.background$colour),
+              selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour),
               numericInput('panel.background.size', label = 'Backgroundsize', step = 0.1, value = default$panel.background$size, width = input.width),
               selectInput('panel.background.linetype', label = 'Backgroundlinetype', choices = linetypes, selected = default$panel.background$linetype, width = input.width)
             )
@@ -87,16 +87,16 @@ ggthemeassist <- function(){
         updateSelectInput(session, 'axis.text.face', selected = gg_original$theme$axis.text$face)
       }
       if(!is.null(gg_original$theme$axis.text$angle)) {
-        updateSelectInput(session, 'axis.text.angle', selected = gg_original$theme$axis.text$angle)
+        updateNumericInput(session, 'axis.text.angle', value = gg_original$theme$axis.text$angle)
       }
       if(!is.null(gg_original$theme$axis.text$lineheight)) {
-        updateSelectInput(session, 'axis.text.lineheight', selected = gg_original$theme$axis.text$lineheight)
+        updateNumericInput(session, 'axis.text.lineheight', value = gg_original$theme$axis.text$lineheight)
       }
       if(!is.null(gg_original$theme$axis.text$hjust)) {
-        updateSelectInput(session, 'axis.text.hjust', selected = gg_original$theme$axis.text$hjust)
+        updateNumericInput(session, 'axis.text.hjust', value = gg_original$theme$axis.text$hjust)
       }
       if(!is.null(gg_original$theme$axis.text$vjust)) {
-        updateSelectInput(session, 'axis.text.vjust', selected = gg_original$theme$axis.text$vjust)
+        updateNumericInput(session, 'axis.text.vjust', value = gg_original$theme$axis.text$vjust)
       }
       if(!is.null(gg_original$theme$axis.text$family)) {
         updateSelectInput(session, 'axis.text.family', selected = gg_original$theme$axis.text$family)
@@ -111,23 +111,23 @@ ggthemeassist <- function(){
         updateSelectInput(session, 'axis.line.colour', selected = gg_original$theme$axis.line$colour)
       }
       if(!is.null(gg_original$theme$axis.line$size)) {
-        updateSelectInput(session, 'axis.line.size', selected = gg_original$theme$axis.line$size)
+        updateNumericInput(session, 'axis.line.size', value = gg_original$theme$axis.line$size)
       }
       if(!is.null(gg_original$theme$panel.background$fill)) {
         updateSelectInput(session, 'panel.background.fill', selected = gg_original$theme$panel.background$fill)
       }
       if(!is.null(gg_original$theme$panel.background$size)) {
-        updateSelectInput(session, 'panel.background.size', selected = gg_original$theme$panel.background$size)
+        updateNumericInput(session, 'panel.background.size', value = gg_original$theme$panel.background$size)
       }
       if(!is.null(gg_original$theme$panel.background$colour)) {
-        updateSelectInput(session, 'panel.background.colour', selected = gg_original$theme$panel.background$colour)
+        updateSelectInput(session, 'panel.background.colour', selected = 'black')
       }
       if(!is.null(gg_original$theme$panel.background$linetype)) {
         updateSelectInput(session, 'panel.background.linetype', selected = gg_original$theme$panel.background$linetype)
       }
       #
       if(!is.null(gg_original$theme$legend.text$size)) {
-        updateSelectInput(session, 'legend.text.size', selected = gg_original$theme$legend.text$size)
+        updateNumericInput(session, 'legend.text.size', value = gg_original$theme$legend.text$size)
       }
       if(!is.null(gg_original$theme$legend.text$face)) {
         updateSelectInput(session, 'legend.text.face', selected = gg_original$theme$legend.text$face)
@@ -139,7 +139,7 @@ ggthemeassist <- function(){
         updateSelectInput(session, 'legend.text$family', selected = gg_original$theme$legend.text$family)
       }
       if(!is.null(gg_original$theme$legend.text$size)) {
-        updateSelectInput(session, 'legend.title.size', selected = gg_original$theme$legend.text$size)
+        updateNumericInput(session, 'legend.title.size', value = gg_original$theme$legend.text$size)
       }
       if(!is.null(gg_original$theme$legend.text$face)) {
         updateSelectInput(session, 'legend.title.face', selected = gg_original$theme$legend.text$face)
