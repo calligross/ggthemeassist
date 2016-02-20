@@ -1,0 +1,16 @@
+Package: ggthemeassist
+Type: Package
+Title: Addin to customize ggplot themes
+Version: 0.0.1
+Author: Calli Gross
+Description: Just a addin
+License: MIT + file LICENSE
+LazyData: TRUE
+Imports:
+    shiny (>= 0.13),
+    miniUI (>= 0.1.1),
+    rstudioapi (>= 0.5),
+    formatR
+RoxygenNote: 5.0.1
+Depends:
+    R (>= 3.0.0)
