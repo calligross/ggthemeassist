@@ -4,5 +4,5 @@
 #'
 #' @name ggthemeassist
 #' @docType package
-#' @import shiny miniUI rstudioapi formatR
+#' @import shiny miniUI rstudioapi formatR ggplot2
 NULL
