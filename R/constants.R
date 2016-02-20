@@ -1,7 +1,5 @@
 # Choices to pick from
-
-# colours.available <- c('black', 'green', 'yellow', 'red')
-colours.available <- colors()
+colours.available <- c(' ' = NA, colors())
 text.faces <- c('plain', 'italic', 'bold', 'bold.italic')
 text.families <- names(pdfFonts())
 linetypes <- c('blank', 'solid', 'dashed', 'dotted', 'dotdash', 'longdash', 'twodash')
@@ -11,7 +9,6 @@ input.width <- '50%'
 
 
 # default values
-
 default <- list(
   axis.text = list(
     family = 'Helvetica',
@@ -30,7 +27,7 @@ default <- list(
     ),
   panel.background = list(
     fill = 'grey92',
-    colour = 'black',
+    colour = 'NA',
     size = 0.5,
     linetype = 'blank'
   ),
