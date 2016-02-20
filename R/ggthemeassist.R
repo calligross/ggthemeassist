@@ -13,8 +13,8 @@ ggthemeassist <- function(){
     miniTabstripPanel(
       miniTabPanel("Axis", icon = icon('sliders'),
         miniContentPanel(
+          plotOutput("ThePlot", width = 800, height = 400),
           fillCol(flex = c(5, 3, 2),
-            plotOutput("ThePlot", width = 800, height = 400),
             fillRow(
               fillCol(
                 numericInput('axis.text.size', label = 'Textsize', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
@@ -41,8 +41,8 @@ ggthemeassist <- function(){
       ) ,
       miniTabPanel("Background", icon = icon('sliders'),
         miniContentPanel(
+          plotOutput("ThePlot2", width = 800, height = 400),
           fillCol(flex = c(5, 3, 2),
-            plotOutput("ThePlot2", width = 800, height = 400),
             fillRow(
               selectInput('panel.background.fill', label = 'Fillcolour', choices = c(NA, colours.available), width = input.width, selected = default$panel.background$fill),
               selectInput('panel.background.colour', label = 'Colour', choices = c(colours.available), width = input.width, selected = default$panel.background$colour),
@@ -54,8 +54,8 @@ ggthemeassist <- function(){
       ),
       miniTabPanel("Legend", icon = icon('sliders'),
                    miniContentPanel(
+                             plotOutput("ThePlot3", width = 800, height = 400),
                              fillCol(flex = c(5, 3, 2),
-                               plotOutput("ThePlot3", width = 800, height = 400),
                                      fillRow(
                                        fillCol(
                                          numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
