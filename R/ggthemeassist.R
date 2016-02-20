@@ -28,7 +28,7 @@ ggthemeassist <- function(){
               fillCol(
                 numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width),
                 numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width),
-                numericInput('axis.text.vjust', 'Vvust', value = default$axis.text$vjust, step = 0.25, width = input.width)
+                numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width)
               )
             ),
             fillRow(
