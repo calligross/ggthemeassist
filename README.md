@@ -19,3 +19,7 @@ devtools::install_github("calligross/ggthemeassist")
 Usage
 ------------
 Just select a ggplot object with your cursor and start the addin.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/calligross/ggthemeassist/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
