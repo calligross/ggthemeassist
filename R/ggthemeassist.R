@@ -12,30 +12,28 @@ ggthemeassist <- function(){
     gadgetTitleBar("ggplot Theme Assistant"),
     miniTabstripPanel(
       miniTabPanel("Axis", icon = icon('sliders'),
-        miniContentPanel(
-          fillCol(flex = c(5, 3, 1, 1),
+        miniContentPanel(scrollable = TRUE,
+          fillCol(
             plotOutput("ThePlot", width = '100%'),
-            fillRow(
-              fillCol(
+            fillCol(
+              fillRow(flex = c(1, 1, 1),
                 selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
+                selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
                 selectInput('axis.text.colour', label = 'Textcolour', choices = colours.available, selected = default$axis.text$colour, width = input.width)
               ),
-              fillCol(
-                selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
-                numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width)
-              ),
-              fillCol(
+              fillRow(flex = c(1, 1, 1),
+                numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width),
                 numericInput('axis.text.size', label = 'Textsize', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
                 numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width)
-              )
-            ),
-            fillRow(width = '33%',
-              numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width)
-            ),
-            fillRow(
-                selectInput('axis.line.type', label = 'Linetype', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
-                selectInput('axis.line.colour', label = 'Linecolour', choices = colours.available, selected = default$axis.line$colour, width = input.width),
+              ),
+              fillRow(flex = c(1, 1, 1),
+              numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
+              selectInput('axis.line.type', label = 'Linetype', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
+              selectInput('axis.line.colour', label = 'Linecolour', choices = colours.available, selected = default$axis.line$colour, width = input.width)
+              ),
+              fillRow(width = '33%',
                 numericInput('axis.line.size', label = 'Linesize', step = 0.1, value = default$axis.line$size, width = input.width)
+              )
             )
           )
         )
