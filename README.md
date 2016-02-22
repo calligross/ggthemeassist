@@ -3,7 +3,7 @@ ggplot Theme Assistant
 
 Please be aware that this addin is under heavy developement. At the moment it is possible to alter the theme for:
 
-* axis.text and axis.line
+* axis.text, axis.line and axis.title
 * panel.background
 * legend.text, legend.title, legend.background and legend.key
 

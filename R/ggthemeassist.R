@@ -38,7 +38,29 @@ ggthemeassist <- function(){
             )
           )
         )
-      ) ,
+      ),
+      miniTabPanel("Title", icon = icon('sliders'),
+                          miniContentPanel(scrollable = TRUE,
+                                           fillCol(
+                                             plotOutput("ThePlot4", width = '100%', height = '90%'),
+                                             fillCol(height = '250px',
+                                                     fillRow(
+                                                       selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width),
+                                                       selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
+                                                       numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
+                                                     ),
+                                                     fillRow(
+                                                       numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
+                                                       selectInput('axis.title.colour', label = 'Textcolour', choices = colours.available, selected = default$axis.title$colour, width = input.width),
+                                                       numericInput('axis.title.size', label = 'Textsize', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
+                                                     ),
+                                                     fillRow(width = '33%',
+                                                       numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
+                                                     )
+                                             )
+                                           )
+                          )
+      ),
       miniTabPanel("Panel", icon = icon('sliders'),
         miniContentPanel(
           plotOutput("ThePlot2", width = 800, height = 400),
@@ -126,6 +148,33 @@ ggthemeassist <- function(){
       if(!is.null(gg_original$theme$axis.line$size)) {
         updateNumericInput(session, 'axis.line.size', value = gg_original$theme$axis.line$size)
       }
+      #
+      if(! is.null(gg_original$theme$axis.title$size)) {
+        if(gg_original$theme$axis.title$size != 0.8)
+          updateNumericInput(session, 'axis.title.size', value = gg_original$theme$axis.title$size)
+      }
+      if(!is.null(gg_original$theme$axis.title$face)) {
+        updateSelectInput(session, 'axis.title.face', selected = gg_original$theme$axis.title$face)
+      }
+      if(!is.null(gg_original$theme$axis.title$angle)) {
+        updateNumericInput(session, 'axis.title.angle', value = gg_original$theme$axis.title$angle)
+      }
+      if(!is.null(gg_original$theme$axis.title$lineheight)) {
+        updateNumericInput(session, 'axis.title.lineheight', value = gg_original$theme$axis.title$lineheight)
+      }
+      if(!is.null(gg_original$theme$axis.title$hjust)) {
+        updateNumericInput(session, 'axis.title.hjust', value = gg_original$theme$axis.title$hjust)
+      }
+      if(!is.null(gg_original$theme$axis.title$vjust)) {
+        updateNumericInput(session, 'axis.title.vjust', value = gg_original$theme$axis.title$vjust)
+      }
+      if(!is.null(gg_original$theme$axis.title$family)) {
+        updateSelectInput(session, 'axis.title.family', selected = gg_original$theme$axis.title$family)
+      }
+      if(!is.null(gg_original$theme$axis.title$colour)) {
+        updateSelectInput(session, 'axis.title.colour', selected = gg_original$theme$axis.title$colour)
+      }
+      #
       if(!is.null(gg_original$theme$panel.background$fill)) {
         updateSelectInput(session, 'panel.background.fill', selected = gg_original$theme$panel.background$fill)
       }
@@ -207,6 +256,15 @@ ggthemeassist <- function(){
             linetype = input$axis.line.type,
             colour = input$axis.line.colour,
             size = input$axis.line.size),
+          axis.title = element_text(
+            size = input$axis.title.size,
+            colour = input$axis.title.colour,
+            face = input$axis.title.face,
+            family = input$axis.title.family,
+            angle = input$axis.title.angle,
+            hjust = input$axis.title.hjust,
+            vjust = input$axis.title.vjust,
+            lineheight = input$axis.title.lineheight),
           panel.background = element_rect(
             fill = input$panel.background.fill,
             colour = input$panel.background.colour,
@@ -246,10 +304,12 @@ ggthemeassist <- function(){
   output$ThePlot <- ThePlot
   output$ThePlot2 <- ThePlot
   output$ThePlot3 <- ThePlot
+  output$ThePlot4 <- ThePlot
 
   observeEvent(input$done, {
     result <- construcThemeString('axis.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text')
     result <- c(result, construcThemeString('axis.line', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
+    result <- c(result, construcThemeString('axis.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
     result <- c(result, construcThemeString('panel.background', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
     result <- c(result, construcThemeString('legend.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
     result <- c(result, construcThemeString('legend.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
