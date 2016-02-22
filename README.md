@@ -1,6 +1,14 @@
 ggplot Theme Assistant
 ==============
 
+Please be aware that this addin is under heavy developement. At the moment it is possible to alter the theme for:
+
+* axis.text and axis.line
+* panel.background
+* legend.text, legend.title, legend.background and legend.key
+
+The UI is at the moment less apealing and will be covered in the near future.
+
 Installation
 ------------
 First, ensure that you have the latest versions of
