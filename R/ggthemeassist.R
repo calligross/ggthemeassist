@@ -15,7 +15,7 @@ ggthemeassist <- function(){
         miniContentPanel(scrollable = TRUE,
           fillCol(
             plotOutput("ThePlot", width = '100%', height = '90%'),
-            fillCol(
+            fillCol(height = '250px',
               fillRow(
                 selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
                 selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
