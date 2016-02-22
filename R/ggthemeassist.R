@@ -265,9 +265,13 @@ ggthemeassist <- function(){
     invisible(stopApp())
   })
 
+  observeEvent(input$cancel, {
+    invisible(stopApp())
+  })
+
   }
 
   viewer <- dialogViewer(dialogName = 'ggthemeassist', width = 990, height = 900)
-  runGadget(ui, server, viewer = viewer)
+  runGadget(ui, server, stopOnCancel = FALSE, viewer = viewer)
 
 }
