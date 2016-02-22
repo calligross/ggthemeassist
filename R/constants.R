@@ -11,7 +11,7 @@ input.width <- '50%'
 # default values
 default <- list(
   axis.text = list(
-    family = 'Helvetica',
+    family = 'sans',
     size = 10,
     face = 'plain',
     colour = 'black',
@@ -34,13 +34,13 @@ default <- list(
   legend.text = list(
     size = 10,
     face = 'plain',
-    family = 'Helvetica',
+    family = 'sans',
     colour = 'black'
   ),
   legend.title = list(
     size = 10,
     face = 'plain',
-    family = 'Helvetica',
+    family = 'sans',
     colour = 'black'
   ),
   legend.background = list(
