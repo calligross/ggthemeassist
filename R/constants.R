@@ -42,5 +42,17 @@ default <- list(
     face = 'plain',
     family = 'Helvetica',
     colour = 'black'
+  ),
+  legend.background = list(
+    fill = 'NA',
+    colour = 'NA',
+    size = 0.5,
+    linetype = 'blank'
+  ),
+  legend.key = list(
+    fill = 'grey94',
+    colour = 'black',
+    size = 0.5,
+    linetype = 'blank'
   )
 )
