@@ -1,5 +1,5 @@
 # Choices to pick from
-colours.available <- c(' ' = NA, colors())
+colours.available <- c('None' = NA, colors())
 text.faces <- c('plain', 'italic', 'bold', 'bold.italic')
 text.families <- names(pdfFonts())
 linetypes <- c('blank', 'solid', 'dashed', 'dotted', 'dotdash', 'longdash', 'twodash')
@@ -25,6 +25,16 @@ default <- list(
     size = 1,
     linetype = 'blank'
     ),
+  axis.title = list(
+    family = 'sans',
+    size = 11,
+    face = 'plain',
+    colour = 'black',
+    hjust = 0.5,
+    vjust = 0.5,
+    angle = 0,
+    lineheight = 1.1
+  ),
   panel.background = list(
     fill = 'grey92',
     colour = 'NA',
@@ -51,7 +61,7 @@ default <- list(
   ),
   legend.key = list(
     fill = 'grey94',
-    colour = 'black',
+    colour = 'NA',
     size = 0.5,
     linetype = 'blank'
   )
