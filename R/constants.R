@@ -41,6 +41,16 @@ default <- list(
     size = 0.5,
     linetype = 'blank'
   ),
+  panel.grid.major = list(
+    colour = 'grey100',
+    size = 0.5,
+    linetype = 'solid'
+  ),
+  panel.grid.minor = list(
+    colour = 'grey100',
+    size = 0.5,
+    linetype = 'solid'
+  ),
   legend.text = list(
     size = 10,
     face = 'plain',

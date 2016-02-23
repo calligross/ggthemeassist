@@ -15,7 +15,7 @@ ggthemeassist <- function(){
         miniContentPanel(scrollable = TRUE,
           fillCol(
             plotOutput("ThePlot", width = '100%', height = '99%'),
-            fillCol(height = '350px', width = '950px',
+            fillCol(height = '360px', width = '950px',
               fillRow(
                 selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
                 selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
@@ -27,9 +27,9 @@ ggthemeassist <- function(){
                 numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width)
               ),
               fillRow(
-              numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
-              selectInput('axis.line.type', label = 'Linetype', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
-              selectInput('axis.line.colour', label = 'Linecolour', choices = colours.available, selected = default$axis.line$colour, width = input.width)
+                numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
+                selectInput('axis.line.type', label = 'Linetype', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
+                selectInput('axis.line.colour', label = 'Linecolour', choices = colours.available, selected = default$axis.line$colour, width = input.width)
               ),
               fillRow(width = '33%',
                 numericInput('axis.line.size', label = 'Linesize', step = 0.1, value = default$axis.line$size, width = input.width)
@@ -39,76 +39,88 @@ ggthemeassist <- function(){
         )
       ),
       miniTabPanel("Title", icon = icon('sliders'),
-                          miniContentPanel(scrollable = TRUE,
-                                           fillCol(
-                                             plotOutput("ThePlot4", width = '100%', height = '99%'),
-                                             fillCol(height = '350px', width = '950px',
-                                                     fillRow(
-                                                       selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width),
-                                                       selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
-                                                       numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
-                                                     ),
-                                                     fillRow(
-                                                       numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
-                                                       selectInput('axis.title.colour', label = 'Textcolour', choices = colours.available, selected = default$axis.title$colour, width = input.width),
-                                                       numericInput('axis.title.size', label = 'Textsize', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
-                                                     ),
-                                                     fillRow(width = '33%',
-                                                       numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
-                                                     )
-                                             )
-                                           )
-                          )
+        miniContentPanel(scrollable = TRUE,
+          fillCol(
+            plotOutput("ThePlot4", width = '100%', height = '99%'),
+            fillCol(height = '270px', width = '950px',
+              fillRow(
+                selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width),
+                selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
+                numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
+              ),
+              fillRow(
+                numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
+                selectInput('axis.title.colour', label = 'Textcolour', choices = colours.available, selected = default$axis.title$colour, width = input.width),
+                numericInput('axis.title.size', label = 'Textsize', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
+              ),
+              fillRow(width = '33%',
+                numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
+              )
+            )
+          )
+        )
       ),
       miniTabPanel("Panel", icon = icon('sliders'),
         miniContentPanel(
           fillCol(
             plotOutput("ThePlot2", width = '100%', height = '99%'),
-            fillCol(height = '350px', width = '950px',
-                    fillRow(
-                      selectInput('panel.background.fill', label = 'Fillcolour', choices = colours.available, width = input.width, selected = default$panel.background$fill),
-                      selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour),
-                      numericInput('panel.background.size', label = 'Backgroundsize', step = 0.1, value = default$panel.background$size, width = input.width),
-                      selectInput('panel.background.linetype', label = 'Backgroundlinetype', choices = linetypes, selected = default$panel.background$linetype, width = input.width)
-                    )
+            fillCol(height = '270px', width = '950px',
+              fillRow(
+                selectInput('panel.background.fill', label = 'Fillcolour', choices = colours.available, width = input.width, selected = default$panel.background$fill),
+                selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour),
+                numericInput('panel.background.size', label = 'Backgroundsize', step = 0.1, value = default$panel.background$size, width = input.width),
+                selectInput('panel.background.linetype', label = 'Backgroundlinetype', choices = linetypes, selected = default$panel.background$linetype, width = input.width)
+              ),
+              fillRow(width = '75%',
+                selectInput('panel.grid.major.type', label = 'Grid major type', choices = linetypes, selected = default$panel.grid.major$linetype, width = input.width),
+                selectInput('panel.grid.major.colour', label = 'Grid major colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width),
+                numericInput('panel.grid.major.size', label = 'Grid major size', step = 0.1, value = default$panel.grid.major$size, width = input.width)
+              ),
+              fillRow(width = '75%',
+                selectInput('panel.grid.minor.type', label = 'Grid minor type', choices = linetypes, selected = default$panel.grid.minor$linetype, width = input.width),
+                selectInput('panel.grid.minor.colour', label = 'Grid minor colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width),
+                numericInput('panel.grid.minor.size', label = 'Grid minor size', step = 0.1, value = default$panel.grid.minor$size, width = input.width)
+              )
+
             )
           )
         )
       ),
       miniTabPanel("Legend", icon = icon('sliders'),
-                   miniContentPanel(
-                     fillCol(
-                       plotOutput("ThePlot3", width = '100%', height = '99%'),
-                       fillCol(height = '350px', width = '950px',
-                             fillRow(
-                                 numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
-                                 selectInput('legend.text.face', label = 'Legend Textface', choices = text.faces, selected = default$legend.text$face, width = input.width),
-                                 selectInput('legend.text.colour', label = 'Textcolour', choices = colours.available, selected = default$axis.text$colour, width = input.width),
-                                 selectInput('legend.text.family', label = 'Legend Textfamily', choices = text.families, selected = default$legend.text$family, width = input.width)
-                               ),
-                               fillRow(
-                                 numericInput('legend.title.size', label = 'Legend Title Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
-                                 selectInput('legend.title.face', label = 'Legend Titleface', choices = text.faces, selected = default$legend.title$face, width = input.width),
-                                 selectInput('legend.title.colour', label = 'Titlecolour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
-                                 selectInput('legend.title.family', label = 'Titlefamily', choices = text.families, selected = default$legend.title$family, width = input.width)
-                               ),
-                               fillRow(
-                                 selectInput('legend.background.fill', label = 'Background', choices = colours.available, width = input.width, selected = default$legend.background$fill),
-                                 selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour),
-                                 numericInput('legend.background.size', label = 'Linesize', step = 0.1, value = default$legend.background$size, width = input.width),
-                                 selectInput('legend.background.linetype', label = 'Linetype', choices = linetypes, selected = default$legend.background$linetype, width = input.width)
-                               ),
-                               fillRow(
-                                 selectInput('legend.key.fill', label = 'Key Background', choices = colours.available, width = input.width, selected = default$legend.key$fill),
-                                 selectInput('legend.key.colour', label = 'Keycolour', choices = colours.available, width = input.width, selected = default$legend.key$colour),
-                                 numericInput('legend.key.size', label = 'Keysize', step = 0.1, value = default$legend.key$size, width = input.width),
-                                 selectInput('legend.key.linetype', label = 'Keylinetype', choices = linetypes, selected = default$legend.key$linetype, width = input.width)
-                               )
-                       )
-                     )
+        miniContentPanel(
+          fillCol(
+            plotOutput("ThePlot3", width = '100%', height = '99%'),
+            fillCol(height = '360px', width = '950px',
+              fillRow(
+                numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
+                selectInput('legend.text.face', label = 'Legend Textface', choices = text.faces, selected = default$legend.text$face, width = input.width),
+                selectInput('legend.text.colour', label = 'Textcolour', choices = colours.available, selected = default$axis.text$colour, width = input.width),
+                selectInput('legend.text.family', label = 'Legend Textfamily', choices = text.families, selected = default$legend.text$family, width = input.width)
+              ),
+              fillRow(
+                numericInput('legend.title.size', label = 'Legend Title Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
+                selectInput('legend.title.face', label = 'Legend Titleface', choices = text.faces, selected = default$legend.title$face, width = input.width),
+                selectInput('legend.title.colour', label = 'Titlecolour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
+                selectInput('legend.title.family', label = 'Titlefamily', choices = text.families, selected = default$legend.title$family, width = input.width)
+              ),
+              fillRow(
+                selectInput('legend.background.fill', label = 'Background', choices = colours.available, width = input.width, selected = default$legend.background$fill),
+                selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour),
+                numericInput('legend.background.size', label = 'Linesize', step = 0.1, value = default$legend.background$size, width = input.width),
+                selectInput('legend.background.linetype', label = 'Linetype', choices = linetypes, selected = default$legend.background$linetype, width = input.width)
+              ),
+              fillRow(
+                selectInput('legend.key.fill', label = 'Key Background', choices = colours.available, width = input.width, selected = default$legend.key$fill),
+                selectInput('legend.key.colour', label = 'Keycolour', choices = colours.available, width = input.width, selected = default$legend.key$colour),
+                numericInput('legend.key.size', label = 'Keysize', step = 0.1, value = default$legend.key$size, width = input.width),
+                selectInput('legend.key.linetype', label = 'Keylinetype', choices = linetypes, selected = default$legend.key$linetype, width = input.width)
+              )
+            )
+          )
+        )
       )
     )
-  ))
+  )
 
   server <- function(input, output, session) {
 
@@ -186,6 +198,24 @@ ggthemeassist <- function(){
       }
       if(!is.null(gg_original$theme$panel.background$linetype)) {
         updateSelectInput(session, 'panel.background.linetype', selected = gg_original$theme$panel.background$linetype)
+      }
+      if(!is.null(gg_original$theme$panel.grid.major$linetype)) {
+        updateSelectInput(session, 'panel.grid.major.type', selected = gg_original$theme$panel.grid.major$linetype)
+      }
+      if(!is.null(gg_original$theme$panel.grid.major$colour)) {
+        updateSelectInput(session, 'panel.grid.major.colour', selected = gg_original$theme$panel.grid.major$colour)
+      }
+      if(!is.null(gg_original$theme$panel.grid.major$size)) {
+        updateNumericInput(session, 'panel.grid.major.size', value = gg_original$theme$panel.grid.major$size)
+      }
+      if(!is.null(gg_original$theme$panel.grid.minor$linetype)) {
+        updateSelectInput(session, 'panel.grid.minor.type', selected = gg_original$theme$panel.grid.minor$linetype)
+      }
+      if(!is.null(gg_original$theme$panel.grid.minor$colour)) {
+        updateSelectInput(session, 'panel.grid.minor.colour', selected = gg_original$theme$panel.grid.minor$colour)
+      }
+      if(!is.null(gg_original$theme$panel.grid.minor$size)) {
+        updateNumericInput(session, 'panel.grid.minor.size', value = gg_original$theme$panel.grid.minor$size)
       }
       #
       if(!is.null(gg_original$theme$legend.text$size)) {
@@ -271,6 +301,14 @@ ggthemeassist <- function(){
             size = input$panel.background.size,
             linetype = input$panel.background.linetype
           ),
+          panel.grid.major = element_line(
+            linetype = input$panel.grid.major.type,
+            colour = input$panel.grid.major.colour,
+            size = input$panel.grid.major.size),
+          panel.grid.minor = element_line(
+            linetype = input$panel.grid.minor.type,
+            colour = input$panel.grid.minor.colour,
+            size = input$panel.grid.minor.size),
           legend.text = element_text(
             size = input$legend.text.size,
             face = input$legend.text.face,
@@ -311,6 +349,8 @@ ggthemeassist <- function(){
     result <- c(result, construcThemeString('axis.line', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
     result <- c(result, construcThemeString('axis.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
     result <- c(result, construcThemeString('panel.background', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
+    result <- c(result, construcThemeString('panel.grid.major', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
+    result <- c(result, construcThemeString('panel.grid.minor', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
     result <- c(result, construcThemeString('legend.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
     result <- c(result, construcThemeString('legend.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
     result <- c(result, construcThemeString('legend.background', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
