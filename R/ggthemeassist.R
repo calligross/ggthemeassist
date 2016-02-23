@@ -32,7 +32,7 @@ ggthemeassist <- function(){
                 selectInput('axis.line.colour', label = 'Linecolour', choices = colours.available, selected = default$axis.line$colour, width = input.width)
               ),
               fillRow(width = '33%',
-                numericInput('axis.line.size', label = 'Linesize', step = 0.1, value = default$axis.line$size, width = input.width)
+                numericInput('axis.line.size', label = 'Linesize', step = 0.1, value = default$axis.line$size, min = 0,width = input.width)
               )
             )
           )
@@ -74,12 +74,12 @@ ggthemeassist <- function(){
               fillRow(width = '75%',
                 selectInput('panel.grid.major.type', label = 'Grid major type', choices = linetypes, selected = default$panel.grid.major$linetype, width = input.width),
                 selectInput('panel.grid.major.colour', label = 'Grid major colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width),
-                numericInput('panel.grid.major.size', label = 'Grid major size', step = 0.1, value = default$panel.grid.major$size, width = input.width)
+                numericInput('panel.grid.major.size', label = 'Grid major size', step = 0.1, value = default$panel.grid.major$size, min = 0, width = input.width)
               ),
               fillRow(width = '75%',
                 selectInput('panel.grid.minor.type', label = 'Grid minor type', choices = linetypes, selected = default$panel.grid.minor$linetype, width = input.width),
                 selectInput('panel.grid.minor.colour', label = 'Grid minor colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width),
-                numericInput('panel.grid.minor.size', label = 'Grid minor size', step = 0.1, value = default$panel.grid.minor$size, width = input.width)
+                numericInput('panel.grid.minor.size', label = 'Grid minor size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width)
               )
 
             )
