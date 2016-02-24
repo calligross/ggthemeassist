@@ -9,6 +9,10 @@ Please be aware that this addin is under heavy developement. At the moment it is
 * panel.background, panel.grid.major and panel.grid.minor
 * legend.text, legend.title, legend.background, legend.key, legend.position and legend.direction
 
+When done, a string is returned with only the elements which have been altered:
+
+![Screenshot](examples/result.PNG)
+
 The UI is at the moment less apealing and will be covered in the near future.
 
 Installation
