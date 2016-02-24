@@ -94,7 +94,7 @@ ggthemeassist <- function(){
               fillRow(
                 numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
                 selectInput('legend.text.face', label = 'Legend Textface', choices = text.faces, selected = default$legend.text$face, width = input.width),
-                selectInput('legend.text.colour', label = 'Textcolour', choices = colours.available, selected = default$axis.text$colour, width = input.width),
+                selectInput('legend.text.colour', label = 'Textcolour', choices = colours.available, selected = default$legend.text$colour, width = input.width),
                 selectInput('legend.text.family', label = 'Legend Textfamily', choices = text.families, selected = default$legend.text$family, width = input.width)
               ),
               fillRow(

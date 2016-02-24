@@ -14,7 +14,7 @@ default <- list(
     family = 'sans',
     size = 10,
     face = 'plain',
-    colour = 'black',
+    colour = 'grey30',
     hjust = 0.5,
     vjust = 0.5,
     angle = 0,
@@ -70,7 +70,7 @@ default <- list(
     linetype = 'blank'
   ),
   legend.key = list(
-    fill = 'grey94',
+    fill = 'grey95',
     colour = 'NA',
     size = 0.5,
     linetype = 'blank'
