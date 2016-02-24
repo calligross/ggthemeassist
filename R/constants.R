@@ -2,6 +2,8 @@
 colours.available <- c('None' = NA, colors())
 text.faces <- c('plain', 'italic', 'bold', 'bold.italic')
 text.families <- names(pdfFonts())
+legend.positions <- c('none', 'left', 'right', 'top', 'bottom')
+legend.directions <- c('horizontal', 'vertical')
 linetypes <- c('blank', 'solid', 'dashed', 'dotted', 'dotdash', 'longdash', 'twodash')
 
 # Configurations
@@ -25,6 +27,11 @@ default <- list(
     size = 1,
     linetype = 'blank'
     ),
+  axis.ticks = list(
+    colour = 'grey20',
+    size = 0.5,
+    linetype = 'solid'
+  ),
   axis.title = list(
     family = 'sans',
     size = 11,
@@ -74,5 +81,7 @@ default <- list(
     colour = 'NA',
     size = 0.5,
     linetype = 'blank'
-  )
+  ),
+  legend.position = 'right',
+  legend.direction = 'vertical'
 )

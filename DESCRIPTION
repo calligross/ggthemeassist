@@ -1,7 +1,7 @@
 Package: ggthemeassist
 Type: Package
 Title: Addin to customize ggplot themes
-Version: 0.0.2
+Version: 0.0.3
 Author: Calli Gross
 Description: Just a addin
 License: MIT + file LICENSE

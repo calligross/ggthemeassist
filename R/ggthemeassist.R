@@ -15,7 +15,7 @@ ggthemeassist <- function(){
         miniContentPanel(scrollable = TRUE,
           fillCol(
             plotOutput("ThePlot", width = '100%', height = '99%'),
-            fillCol(height = '360px', width = '950px',
+            fillCol(height = '450px', width = '950px',
               fillRow(
                 selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
                 selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
@@ -24,15 +24,20 @@ ggthemeassist <- function(){
               fillRow(
                 numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width),
                 numericInput('axis.text.size', label = 'Textsize', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
+                numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width)
+              ),
+              fillRow(width = '33%',
                 numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width)
               ),
               fillRow(
-                numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
                 selectInput('axis.line.type', label = 'Linetype', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
-                selectInput('axis.line.colour', label = 'Linecolour', choices = colours.available, selected = default$axis.line$colour, width = input.width)
-              ),
-              fillRow(width = '33%',
+                selectInput('axis.line.colour', label = 'Linecolour', choices = colours.available, selected = default$axis.line$colour, width = input.width),
                 numericInput('axis.line.size', label = 'Linesize', step = 0.1, value = default$axis.line$size, min = 0,width = input.width)
+              ),
+              fillRow(
+                selectInput('axis.ticks.type', label = 'Ticktype', choices = linetypes, selected = default$axis.ticks$linetype, width = input.width),
+                selectInput('axis.ticks.colour', label = 'Tickcolour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width),
+                numericInput('axis.ticks.size', label = 'Ticksize', step = 0.1, value = default$axis.ticks$size, min = 0,width = input.width)
               )
             )
           )
@@ -90,7 +95,11 @@ ggthemeassist <- function(){
         miniContentPanel(
           fillCol(
             plotOutput("ThePlot3", width = '100%', height = '99%'),
-            fillCol(height = '360px', width = '950px',
+            fillCol(height = '450px', width = '950px',
+              fillRow(
+                selectInput('legend.position', label = 'Position', choices = legend.positions, selected =default$legend.position, width = input.width),
+                selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected =default$legend.direction, width = input.width)
+              ),
               fillRow(
                 numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
                 selectInput('legend.text.face', label = 'Legend Textface', choices = text.faces, selected = default$legend.text$face, width = input.width),
@@ -159,6 +168,15 @@ ggthemeassist <- function(){
       }
       if(is.valid(gg_original$theme$axis.line$size)) {
         updateNumericInput(session, 'axis.line.size', value = gg_original$theme$axis.line$size)
+      }
+      if(is.valid(gg_original$theme$axis.ticks$linetype)) {
+        updateSelectInput(session, 'axis.ticks.type', selected = gg_original$theme$axis.ticks$linetype)
+      }
+      if(is.valid(gg_original$theme$axis.ticks$colour)) {
+        updateSelectInput(session, 'axis.ticks.colour', selected = gg_original$theme$axis.ticks$colour)
+      }
+      if(is.valid(gg_original$theme$axis.ticks$size)) {
+        updateNumericInput(session, 'axis.ticks.size', value = gg_original$theme$axis.ticks$size)
       }
       #
       if(! is.null(gg_original$theme$axis.title$size)) {
@@ -268,6 +286,14 @@ ggthemeassist <- function(){
       if(is.valid(gg_original$theme$legend.key$linetype)) {
         updateSelectInput(session, 'legend.key.linetype', selected = gg_original$theme$legend.key$linetype)
       }
+      if(is.valid(gg_original$theme$legend.position)) {
+        updateSelectInput(session, 'legend.position', selected = gg_original$theme$legend.position)
+      }
+      if(is.valid(gg_original$theme$legend.direction)) {
+        updateSelectInput(session, 'legend.direction', selected = gg_original$theme$legend.direction)
+      }
+
+
 
     })
 
@@ -286,6 +312,10 @@ ggthemeassist <- function(){
             linetype = input$axis.line.type,
             colour = input$axis.line.colour,
             size = input$axis.line.size),
+          axis.ticks = element_line(
+            linetype = input$axis.ticks.type,
+            colour = input$axis.ticks.colour,
+            size = input$axis.ticks.size),
           axis.title = element_text(
             size = input$axis.title.size,
             colour = input$axis.title.colour,
@@ -332,7 +362,9 @@ ggthemeassist <- function(){
             colour = input$legend.key.colour,
             size = input$legend.key.size,
             linetype = input$legend.key.linetype
-          )
+          ),
+          legend.position = input$legend.position,
+          legend.direction = input$legend.direction
           )
     })
 
@@ -347,6 +379,7 @@ ggthemeassist <- function(){
   observeEvent(input$done, {
     result <- construcThemeString('axis.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text')
     result <- c(result, construcThemeString('axis.line', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
+    result <- c(result, construcThemeString('axis.ticks', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
     result <- c(result, construcThemeString('axis.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
     result <- c(result, construcThemeString('panel.background', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
     result <- c(result, construcThemeString('panel.grid.major', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
@@ -355,8 +388,10 @@ ggthemeassist <- function(){
     result <- c(result, construcThemeString('legend.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
     result <- c(result, construcThemeString('legend.background', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
     result <- c(result, construcThemeString('legend.key', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
+    result <- c(result, construcThemeString('legend.position', original = gg_original, new = gg_reactive(), std = default))
+    result <- c(result, construcThemeString('legend.direction', original = gg_original, new = gg_reactive(), std = default))
 
-    if(!is.null(result)){
+        if(!is.null(result)){
       result <- paste0(text, ' + theme(', paste(result, collapse = ', '),')')
       result <- formatR::tidy_source(text = result, output = FALSE, width.cutoff = 40)$text.tidy
       result <- paste(result, collapse = "\n")
