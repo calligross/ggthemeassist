@@ -42,6 +42,16 @@ default <- list(
     angle = 0,
     lineheight = 1.1
   ),
+  plot.title = list(
+    family = 'sans',
+    size = 13,
+    face = 'plain',
+    colour = 'black',
+    hjust = 0.5,
+    vjust = 0.5,
+    angle = 0,
+    lineheight = 1.1
+  ),
   panel.background = list(
     fill = 'grey92',
     colour = 'NA',
@@ -83,5 +93,12 @@ default <- list(
     linetype = 'blank'
   ),
   legend.position = 'right',
-  legend.direction = 'vertical'
+  legend.direction = 'vertical',
+  labs = list(
+    title = '',
+    x = '',
+    y = '',
+    colour = '',
+    fill = ''
+  )
 )

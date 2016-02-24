@@ -3,6 +3,8 @@ ggplot Theme Assistant
 
 Please be aware that this addin is under heavy developement. At the moment it is possible to alter the theme for:
 
+* Change axis labels and titles
+* Plot.title
 * axis.text, axis.line, axis.ticks and axis.title
 * panel.background, panel.grid.major and panel.grid.minor
 * legend.text, legend.title, legend.background, legend.key, legend.position and legend.direction

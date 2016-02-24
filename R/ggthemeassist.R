@@ -47,19 +47,37 @@ ggthemeassist <- function(){
         miniContentPanel(scrollable = TRUE,
           fillCol(
             plotOutput("ThePlot4", width = '100%', height = '99%'),
-            fillCol(height = '270px', width = '950px',
+            fillCol(height = '640px', width = '950px',
               fillRow(
-                selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width),
-                selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
+                textInput('plot.title', label = 'Plot title', value = '', width = input.width),
+                textInput('axis.title.x', label = 'x Axis', value = '', width = input.width),
+                textInput('axis.title.y', label = 'x Axis', value = '', width = input.width)
+              ),
+              fillRow(
+                selectInput('plot.title.family', label = 'Title Family', choices = text.families, selected = default$plot.title$family, width = input.width),
+                selectInput('plot.title.face', label = 'Title Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
+                numericInput('plot.title.angle', label = 'Title Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width)
+              ),
+              fillRow(
+                numericInput('plot.title.hjust', 'Title Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
+                selectInput('plot.title.colour', label = 'Title  Textcolour', choices = colours.available, selected = default$plot.title$colour, width = input.width),
+                numericInput('plot.title.size', label = 'Title  Textsize', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width)
+              ),
+              fillRow(width = '33%',
+                      numericInput('plot.title.vjust', 'Title  Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width)
+              ),
+              fillRow(
+                selectInput('axis.title.family', label = 'Axis Family', choices = text.families, selected = default$axis.title$family, width = input.width),
+                selectInput('axis.title.face', label = 'Axis Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
                 numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
               ),
               fillRow(
-                numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
-                selectInput('axis.title.colour', label = 'Textcolour', choices = colours.available, selected = default$axis.title$colour, width = input.width),
-                numericInput('axis.title.size', label = 'Textsize', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
+                numericInput('axis.title.hjust', 'Axis Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
+                selectInput('axis.title.colour', label = 'Axis Textcolour', choices = colours.available, selected = default$axis.title$colour, width = input.width),
+                numericInput('axis.title.size', label = 'Axis Textsize', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
               ),
               fillRow(width = '33%',
-                numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
+                numericInput('axis.title.vjust', 'Axis Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
               )
             )
           )
@@ -96,7 +114,7 @@ ggthemeassist <- function(){
           fillCol(
             plotOutput("ThePlot3", width = '100%', height = '99%'),
             fillCol(height = '450px', width = '950px',
-              fillRow(
+              fillRow(width = '66%',
                 selectInput('legend.position', label = 'Position', choices = legend.positions, selected =default$legend.position, width = input.width),
                 selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected =default$legend.direction, width = input.width)
               ),
@@ -179,6 +197,16 @@ ggthemeassist <- function(){
         updateNumericInput(session, 'axis.ticks.size', value = gg_original$theme$axis.ticks$size)
       }
       #
+      if(!is.null(gg_original$labels$title)){
+        updateTextInput(session, 'plot.title', value = gg_original$labels$title)
+      }
+      if(!is.null(gg_original$labels$x)){
+        updateTextInput(session, 'axis.title.x', value = gg_original$labels$x)
+      }
+      if(!is.null(gg_original$labels$y)){
+        updateTextInput(session, 'axis.title.y', value = gg_original$labels$y)
+      }
+      #
       if(! is.null(gg_original$theme$axis.title$size)) {
         if(gg_original$theme$axis.title$size != 0.8)
           updateNumericInput(session, 'axis.title.size', value = gg_original$theme$axis.title$size)
@@ -203,6 +231,32 @@ ggthemeassist <- function(){
       }
       if(is.valid(gg_original$theme$axis.title$colour)) {
         updateSelectInput(session, 'axis.title.colour', selected = gg_original$theme$axis.title$colour)
+      }
+      #
+      if(! is.null(gg_original$theme$plot.title$size)) {
+        if(gg_original$theme$plot.title$size != 0.8)
+          updateNumericInput(session, 'plot.title.size', value = gg_original$theme$plot.title$size)
+      }
+      if(is.valid(gg_original$theme$plot.title$face)) {
+        updateSelectInput(session, 'plot.title.face', selected = gg_original$theme$plot.title$face)
+      }
+      if(is.valid(gg_original$theme$plot.title$angle)) {
+        updateNumericInput(session, 'plot.title.angle', value = gg_original$theme$plot.title$angle)
+      }
+      if(is.valid(gg_original$theme$plot.title$lineheight)) {
+        updateNumericInput(session, 'plot.title.lineheight', value = gg_original$theme$plot.title$lineheight)
+      }
+      if(is.valid(gg_original$theme$plot.title$hjust)) {
+        updateNumericInput(session, 'plot.title.hjust', value = gg_original$theme$plot.title$hjust)
+      }
+      if(is.valid(gg_original$theme$plot.title$vjust)) {
+        updateNumericInput(session, 'plot.title.vjust', value = gg_original$theme$plot.title$vjust)
+      }
+      if(is.valid(gg_original$theme$plot.title$family)) {
+        updateSelectInput(session, 'plot.title.family', selected = gg_original$theme$plot.title$family)
+      }
+      if(is.valid(gg_original$theme$plot.title$colour)) {
+        updateSelectInput(session, 'plot.title.colour', selected = gg_original$theme$plot.title$colour)
       }
       #
       if(is.valid(gg_original$theme$panel.background$fill)) {
@@ -299,6 +353,9 @@ ggthemeassist <- function(){
 
     gg_reactive <- reactive({
       gg_original +
+        labs(title = input$plot.title,
+          x = input$axis.title.x,
+          y = input$axis.title.y) +
         theme(axis.text = element_text(
           size = input$axis.text.size,
           colour = input$axis.text.colour,
@@ -325,6 +382,15 @@ ggthemeassist <- function(){
             hjust = input$axis.title.hjust,
             vjust = input$axis.title.vjust,
             lineheight = input$axis.title.lineheight),
+          plot.title = element_text(
+            size = input$plot.title.size,
+            colour = input$plot.title.colour,
+            face = input$plot.title.face,
+            family = input$plot.title.family,
+            angle = input$plot.title.angle,
+            hjust = input$plot.title.hjust,
+            vjust = input$plot.title.vjust,
+            lineheight = input$plot.title.lineheight),
           panel.background = element_rect(
             fill = input$panel.background.fill,
             colour = input$panel.background.colour,
@@ -381,6 +447,7 @@ ggthemeassist <- function(){
     result <- c(result, construcThemeString('axis.line', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
     result <- c(result, construcThemeString('axis.ticks', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
     result <- c(result, construcThemeString('axis.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
+    result <- c(result, construcThemeString('plot.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
     result <- c(result, construcThemeString('panel.background', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
     result <- c(result, construcThemeString('panel.grid.major', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
     result <- c(result, construcThemeString('panel.grid.minor', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
@@ -391,8 +458,17 @@ ggthemeassist <- function(){
     result <- c(result, construcThemeString('legend.position', original = gg_original, new = gg_reactive(), std = default))
     result <- c(result, construcThemeString('legend.direction', original = gg_original, new = gg_reactive(), std = default))
 
-        if(!is.null(result)){
-      result <- paste0(text, ' + theme(', paste(result, collapse = ', '),')')
+    labelResult <- construcThemeString('labs', original = gg_original, new = gg_reactive(), std = default, category = 'labels')
+
+    if(!is.null(result) || !is.null(labelResult)) {
+      if(!is.null(result)) {
+        result <- paste0(' + theme(', paste(result, collapse = ', '),')')
+      }
+      if(!is.null(labelResult)) {
+        result <- c(result, ' + ', labelResult)
+      }
+      result <- paste0(text, paste(result, collapse = ' '))
+
       result <- formatR::tidy_source(text = result, output = FALSE, width.cutoff = 40)$text.tidy
       result <- paste(result, collapse = "\n")
       rstudioapi::insertText(result)
