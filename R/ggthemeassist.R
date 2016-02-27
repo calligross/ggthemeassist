@@ -120,21 +120,23 @@ ggthemeassist <- function(){
           fillCol(
             plotOutput("ThePlot3", width = '100%', height = '99%'),
             fillCol(height = '450px', width = '950px',
-              fillRow(width = '66%',
-                selectInput('legend.position', label = 'Position', choices = legend.positions, selected =default$legend.position, width = input.width),
-                selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected =default$legend.direction, width = input.width)
-              ),
               fillRow(
-                numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
-                selectInput('legend.text.face', label = 'Legend Textface', choices = text.faces, selected = default$legend.text$face, width = input.width),
-                selectInput('legend.text.colour', label = 'Textcolour', choices = colours.available, selected = default$legend.text$colour, width = input.width),
-                selectInput('legend.text.family', label = 'Legend Textfamily', choices = text.families, selected = default$legend.text$family, width = input.width)
+                selectInput('legend.position', label = 'Position', choices = legend.positions, selected = default$legend.position, width = input.width),
+                selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected = default$legend.direction, width = input.width),
+                textInput('legend.lab.fill', label = 'Legend (fill)', value = gg_original$labels$fill, width = input.width),
+                textInput('legend.lab.colour', label = 'Legend (colour)', value = gg_original$labels$colour, width = input.width)
               ),
               fillRow(
                 numericInput('legend.title.size', label = 'Legend Title Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
                 selectInput('legend.title.face', label = 'Legend Titleface', choices = text.faces, selected = default$legend.title$face, width = input.width),
                 selectInput('legend.title.colour', label = 'Titlecolour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
                 selectInput('legend.title.family', label = 'Titlefamily', choices = text.families, selected = default$legend.title$family, width = input.width)
+              ),
+              fillRow(
+                numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
+                selectInput('legend.text.face', label = 'Legend Textface', choices = text.faces, selected = default$legend.text$face, width = input.width),
+                selectInput('legend.text.colour', label = 'Textcolour', choices = colours.available, selected = default$legend.text$colour, width = input.width),
+                selectInput('legend.text.family', label = 'Legendfamily', choices = text.families, selected = default$legend.text$family, width = input.width)
               ),
               fillRow(
                 selectInput('legend.background.fill', label = 'Background', choices = colours.available, width = input.width, selected = default$legend.background$fill),
@@ -161,7 +163,9 @@ ggthemeassist <- function(){
       gg_original +
         labs(title = input$plot.title,
           x = input$axis.title.x,
-          y = input$axis.title.y) +
+          y = input$axis.title.y,
+          fill = input$legend.lab.fill,
+          colour = input$legend.lab.colour) +
         theme(axis.text = element_text(
           size = input$axis.text.size,
           colour = input$axis.text.colour,
