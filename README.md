@@ -17,6 +17,9 @@ The UI is at the moment less apealing and will be covered in the near future.
 
 Installation
 ------------
+
+Please be aware that you need the **most recent release of RStudio** (v0.99.878 or later).
+
 First, ensure that you have the latest versions of
 [htmltools](https://github.com/rstudio/htmltools),
 [shiny](https://github.com/rstudio/shiny), and
@@ -34,4 +37,4 @@ Usage
 ------------
 Just select a ggplot object with your cursor and start the addin.
 
-![Screenshot](examples/screenshot.PNG)
+![Screenshot](examples/usage.gif)
