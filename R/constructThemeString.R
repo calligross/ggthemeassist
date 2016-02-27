@@ -46,7 +46,18 @@ construcThemeString <- function(theme, original, new, std = default, element = N
 }
 
 addQuotes <- function(x){
-  chars <- grepl(pattern = '[a-zA-Z]', x)
-  x[chars] <- paste("'", x[chars], "'", sep = '')
+  if(! x %in% c('NA', 'NULL')) {
+    chars <- grepl(pattern = '[a-zA-Z]', x)
+    x[chars] <- paste("'", x[chars], "'", sep = '')
+  }
   x
+}
+
+setNullNA <- function(x) {
+  if (x == 'NULL') {
+    x <- NULL
+  } else if (x == 'NA') {
+    x <- NA
+  }
+  return(x)
 }
