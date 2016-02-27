@@ -6,11 +6,13 @@ ggthemeassist <- function(){
 
   # Set the default data to use based on the selection.
   text <- context$selection[[1]]$text
-  if(grepl('[\\+\\(]', text)) {
+  if (grepl('[\\+\\(]', text)) {
     gg_original <- eval(parse(text = text))
   } else {
     gg_original <- get(text, envir = .GlobalEnv)
   }
+
+  default <- updateDefaults(gg_original, default)
 
   ui <- miniPage(
     gadgetTitleBar("ggplot Theme Assistant"),
@@ -53,9 +55,9 @@ ggthemeassist <- function(){
             plotOutput("ThePlot4", width = '100%', height = '99%'),
             fillCol(height = '640px', width = '950px',
               fillRow(
-                textInput('plot.title', label = 'Plot title', value = '', width = input.width),
-                textInput('axis.title.x', label = 'x Axis', value = '', width = input.width),
-                textInput('axis.title.y', label = 'x Axis', value = '', width = input.width)
+                textInput('plot.title', label = 'Plot title', value = gg_original$labels$title, width = input.width),
+                textInput('axis.title.x', label = 'x Axis', value = gg_original$labels$x, width = input.width),
+                textInput('axis.title.y', label = 'x Axis', value = gg_original$labels$y, width = input.width)
               ),
               fillRow(
                 selectInput('plot.title.family', label = 'Title Family', choices = text.families, selected = default$plot.title$family, width = input.width),
@@ -154,206 +156,6 @@ ggthemeassist <- function(){
   )
 
   server <- function(input, output, session) {
-
-    theme <- observe({
-      gg_original
-      if(is.valid(gg_original$theme$axis.text$size)) {
-        if(gg_original$theme$axis.text$size != 0.8)
-          updateNumericInput(session, 'axis.text.size', value = gg_original$theme$axis.text$size)
-      }
-      if(is.valid(gg_original$theme$axis.text$face)) {
-        updateSelectInput(session, 'axis.text.face', selected = gg_original$theme$axis.text$face)
-      }
-      if(is.valid(gg_original$theme$axis.text$angle)) {
-        updateNumericInput(session, 'axis.text.angle', value = gg_original$theme$axis.text$angle)
-      }
-      if(is.valid(gg_original$theme$axis.text$lineheight)) {
-        updateNumericInput(session, 'axis.text.lineheight', value = gg_original$theme$axis.text$lineheight)
-      }
-      if(is.valid(gg_original$theme$axis.text$hjust)) {
-        updateNumericInput(session, 'axis.text.hjust', value = gg_original$theme$axis.text$hjust)
-      }
-      if(is.valid(gg_original$theme$axis.text$vjust)) {
-        updateNumericInput(session, 'axis.text.vjust', value = gg_original$theme$axis.text$vjust)
-      }
-      if(is.valid(gg_original$theme$axis.text$family)) {
-        updateSelectInput(session, 'axis.text.family', selected = gg_original$theme$axis.text$family)
-      }
-      if(is.valid(gg_original$theme$axis.text$colour)) {
-        updateSelectInput(session, 'axis.text.colour', selected = gg_original$theme$axis.text$colour)
-      }
-      if(is.valid(gg_original$theme$axis.line$linetype)) {
-        updateSelectInput(session, 'axis.line.type', selected = gg_original$theme$axis.line$linetype)
-      }
-      if(is.valid(gg_original$theme$axis.line$colour)) {
-        updateSelectInput(session, 'axis.line.colour', selected = gg_original$theme$axis.line$colour)
-      }
-      if(is.valid(gg_original$theme$axis.line$size)) {
-        updateNumericInput(session, 'axis.line.size', value = gg_original$theme$axis.line$size)
-      }
-      if(is.valid(gg_original$theme$axis.ticks$linetype)) {
-        updateSelectInput(session, 'axis.ticks.type', selected = gg_original$theme$axis.ticks$linetype)
-      }
-      if(is.valid(gg_original$theme$axis.ticks$colour)) {
-        updateSelectInput(session, 'axis.ticks.colour', selected = gg_original$theme$axis.ticks$colour)
-      }
-      if(is.valid(gg_original$theme$axis.ticks$size)) {
-        updateNumericInput(session, 'axis.ticks.size', value = gg_original$theme$axis.ticks$size)
-      }
-      #
-      if(!is.null(gg_original$labels$title)){
-        updateTextInput(session, 'plot.title', value = gg_original$labels$title)
-      }
-      if(!is.null(gg_original$labels$x)){
-        updateTextInput(session, 'axis.title.x', value = gg_original$labels$x)
-      }
-      if(!is.null(gg_original$labels$y)){
-        updateTextInput(session, 'axis.title.y', value = gg_original$labels$y)
-      }
-      #
-      if(! is.null(gg_original$theme$axis.title$size)) {
-        if(gg_original$theme$axis.title$size != 0.8)
-          updateNumericInput(session, 'axis.title.size', value = gg_original$theme$axis.title$size)
-      }
-      if(is.valid(gg_original$theme$axis.title$face)) {
-        updateSelectInput(session, 'axis.title.face', selected = gg_original$theme$axis.title$face)
-      }
-      if(is.valid(gg_original$theme$axis.title$angle)) {
-        updateNumericInput(session, 'axis.title.angle', value = gg_original$theme$axis.title$angle)
-      }
-      if(is.valid(gg_original$theme$axis.title$lineheight)) {
-        updateNumericInput(session, 'axis.title.lineheight', value = gg_original$theme$axis.title$lineheight)
-      }
-      if(is.valid(gg_original$theme$axis.title$hjust)) {
-        updateNumericInput(session, 'axis.title.hjust', value = gg_original$theme$axis.title$hjust)
-      }
-      if(is.valid(gg_original$theme$axis.title$vjust)) {
-        updateNumericInput(session, 'axis.title.vjust', value = gg_original$theme$axis.title$vjust)
-      }
-      if(is.valid(gg_original$theme$axis.title$family)) {
-        updateSelectInput(session, 'axis.title.family', selected = gg_original$theme$axis.title$family)
-      }
-      if(is.valid(gg_original$theme$axis.title$colour)) {
-        updateSelectInput(session, 'axis.title.colour', selected = gg_original$theme$axis.title$colour)
-      }
-      #
-      if(! is.null(gg_original$theme$plot.title$size)) {
-        if(gg_original$theme$plot.title$size != 0.8)
-          updateNumericInput(session, 'plot.title.size', value = gg_original$theme$plot.title$size)
-      }
-      if(is.valid(gg_original$theme$plot.title$face)) {
-        updateSelectInput(session, 'plot.title.face', selected = gg_original$theme$plot.title$face)
-      }
-      if(is.valid(gg_original$theme$plot.title$angle)) {
-        updateNumericInput(session, 'plot.title.angle', value = gg_original$theme$plot.title$angle)
-      }
-      if(is.valid(gg_original$theme$plot.title$lineheight)) {
-        updateNumericInput(session, 'plot.title.lineheight', value = gg_original$theme$plot.title$lineheight)
-      }
-      if(is.valid(gg_original$theme$plot.title$hjust)) {
-        updateNumericInput(session, 'plot.title.hjust', value = gg_original$theme$plot.title$hjust)
-      }
-      if(is.valid(gg_original$theme$plot.title$vjust)) {
-        updateNumericInput(session, 'plot.title.vjust', value = gg_original$theme$plot.title$vjust)
-      }
-      if(is.valid(gg_original$theme$plot.title$family)) {
-        updateSelectInput(session, 'plot.title.family', selected = gg_original$theme$plot.title$family)
-      }
-      if(is.valid(gg_original$theme$plot.title$colour)) {
-        updateSelectInput(session, 'plot.title.colour', selected = gg_original$theme$plot.title$colour)
-      }
-      #
-      if(is.valid(gg_original$theme$panel.background$fill)) {
-        updateSelectInput(session, 'panel.background.fill', selected = gg_original$theme$panel.background$fill)
-      }
-      if(is.valid(gg_original$theme$panel.background$size)) {
-        updateNumericInput(session, 'panel.background.size', value = gg_original$theme$panel.background$size)
-      }
-      if(is.valid(gg_original$theme$panel.background$colour)) {
-        updateSelectInput(session, 'panel.background.colour', selected = gg_original$theme$panel.background$colour)
-      }
-      if(is.valid(gg_original$theme$panel.background$linetype)) {
-        updateSelectInput(session, 'panel.background.linetype', selected = gg_original$theme$panel.background$linetype)
-      }
-      if(is.valid(gg_original$theme$panel.grid.major$linetype)) {
-        updateSelectInput(session, 'panel.grid.major.type', selected = gg_original$theme$panel.grid.major$linetype)
-      }
-      if(is.valid(gg_original$theme$panel.grid.major$colour)) {
-        updateSelectInput(session, 'panel.grid.major.colour', selected = gg_original$theme$panel.grid.major$colour)
-      }
-      if(is.valid(gg_original$theme$panel.grid.major$size)) {
-        updateNumericInput(session, 'panel.grid.major.size', value = gg_original$theme$panel.grid.major$size)
-      }
-      if(is.valid(gg_original$theme$panel.grid.minor$linetype)) {
-        updateSelectInput(session, 'panel.grid.minor.type', selected = gg_original$theme$panel.grid.minor$linetype)
-      }
-      if(is.valid(gg_original$theme$panel.grid.minor$colour)) {
-        updateSelectInput(session, 'panel.grid.minor.colour', selected = gg_original$theme$panel.grid.minor$colour)
-      }
-      if(is.valid(gg_original$theme$panel.grid.minor$size)) {
-        updateNumericInput(session, 'panel.grid.minor.size', value = gg_original$theme$panel.grid.minor$size)
-      }
-      #
-      if(is.valid(gg_original$theme$legend.text$size)) {
-        if(gg_original$theme$legend.text$size != 0.8)
-          updateNumericInput(session, 'legend.text.size', value = gg_original$theme$legend.text$size)
-      }
-      if(is.valid(gg_original$theme$legend.text$face)) {
-        updateSelectInput(session, 'legend.text.face', selected = gg_original$theme$legend.text$face)
-      }
-      if(is.valid(gg_original$theme$legend.text$colour)) {
-        updateSelectInput(session, 'legend.text$colour', selected = gg_original$theme$legend.text$colour)
-      }
-      if(is.valid(gg_original$theme$legend.text$family)) {
-        updateSelectInput(session, 'legend.text$family', selected = gg_original$theme$legend.text$family)
-      }
-      if(is.valid(gg_original$theme$legend.title$size)) {
-        if(gg_original$theme$legend.title$size != 0.8)
-          updateNumericInput(session, 'legend.title.size', value = gg_original$theme$legend.title$size)
-      }
-      if(is.valid(gg_original$theme$legend.title$face)) {
-        updateSelectInput(session, 'legend.title.face', selected = gg_original$theme$legend.tile$face)
-      }
-      if(is.valid(gg_original$theme$legend.title$colour)) {
-        updateSelectInput(session, 'legend.title$colour', selected = gg_original$theme$legend.title$colour)
-      }
-      if(is.valid(gg_original$theme$legend.text$family)) {
-        updateSelectInput(session, 'legend.title$family', selected = gg_original$theme$legend.title$family)
-      }
-      if(is.valid(gg_original$theme$legend.background$fill)) {
-        updateSelectInput(session, 'legend.background.fill', selected = gg_original$theme$legend.background$fill)
-      }
-      if(is.valid(gg_original$theme$legend.background$size)) {
-        updateNumericInput(session, 'legend.background.size', value = gg_original$theme$legend.background$size)
-      }
-      if(is.valid(gg_original$theme$legend.background$colour)) {
-        updateSelectInput(session, 'legend.background.colour', selected = gg_original$theme$legend.background$colour)
-      }
-      if(is.valid(gg_original$theme$legend.background$linetype)) {
-        updateSelectInput(session, 'legend.background.linetype', selected = gg_original$theme$legend.background$linetype)
-      }
-      if(is.valid(gg_original$theme$legend.key$fill)) {
-        updateSelectInput(session, 'legend.key.fill', selected = gg_original$theme$legend.key$fill)
-      }
-      if(is.valid(gg_original$theme$legend.key$size)) {
-        updateNumericInput(session, 'legend.key.size', value = gg_original$theme$legend.key$size)
-      }
-      if(is.valid(gg_original$theme$legend.key$colour)) {
-        updateSelectInput(session, 'legend.key.colour', selected = gg_original$theme$legend.key$colour)
-      }
-      if(is.valid(gg_original$theme$legend.key$linetype)) {
-        updateSelectInput(session, 'legend.key.linetype', selected = gg_original$theme$legend.key$linetype)
-      }
-      if(is.valid(gg_original$theme$legend.position)) {
-        updateSelectInput(session, 'legend.position', selected = gg_original$theme$legend.position)
-      }
-      if(is.valid(gg_original$theme$legend.direction)) {
-        updateSelectInput(session, 'legend.direction', selected = gg_original$theme$legend.direction)
-      }
-
-
-
-    })
 
     gg_reactive <- reactive({
       gg_original +
