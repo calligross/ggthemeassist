@@ -20,17 +20,17 @@ construcThemeString <- function(theme, original, new, std = default, element = N
 
     original <- unlist(original[[category]][[theme]])
 
-  } else if(category == 'labels') {
+  } else if (category == 'labels') {
     new <- unlist(new[[category]])
     original <- unlist(original[[category]])
   }
 
-  if(is.list(std) || length(std) > 1){
+  if (is.list(std) || length(std) > 1){
     DifferentToStandard <- names(std)[!new[names(std)] == std[names(std)]]
     DifferentToStandard <- DifferentToStandard[!is.na(DifferentToStandard)]
     DifferentToStandard <- new[DifferentToStandard]
 
-    if(!is.null(original)) {
+    if (!is.null(original)) {
       DifferentToOriginal <- (!new[names(new)] == original[names(new)])
       DifferentToOriginal[is.na(DifferentToOriginal)] <- TRUE
       DifferentToOriginal <- names(DifferentToOriginal)[DifferentToOriginal]
@@ -41,9 +41,9 @@ construcThemeString <- function(theme, original, new, std = default, element = N
       result <- DifferentToStandard
     }
 
-    if(!is.null(result) && length(result) > 0) {
+    if (!is.null(result) && length(result) > 0) {
       result <- addQuotes(result)
-      if(category == 'labels') {
+      if (category == 'labels') {
         result <- paste0(theme, '(', element, '', paste(names(result), ' = ', result, collapse = ', '),')')
       } else {
         result <- paste0(theme, ' = ', element, '(', paste(names(result), ' = ', result, collapse = ', '),')')
@@ -52,8 +52,11 @@ construcThemeString <- function(theme, original, new, std = default, element = N
     } else {
       NULL
     }
-  } else if(length(std) == 1 && class(std) == 'character') {
-    if(is.null(original) && new != std) {
+  } else if (length(std) == 1 && class(std) == 'character' && !is.null(new)) {
+    if (is.null(original)) {
+      original <- ''
+    }
+    if (new != std && new != original) {
       result <- paste0(theme, ' = ', addQuotes(new))
       return(result)
     }

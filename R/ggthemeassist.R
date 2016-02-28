@@ -163,7 +163,7 @@ ggthemeassist <- function(){
                                     fillRow(height = line.height, width = '100%',
                                             conditionalPanel(
                                               condition = "input['legend.position'] == 'XY'",
-                                              numericInput('legend.position.x', label = 'X Coord', min = 0, max = 1, value = 0.5, step = 0.01, width = input.width)
+                                              numericInput('legend.position.x', label = 'X Coord', min = 0, max = 1, value = default$legend.position.x, step = 0.01, width = input.width)
                                             ),
                                             numericInput('legend.title.size', label = 'Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
                                             numericInput('legend.text.size', label = 'Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
@@ -173,7 +173,7 @@ ggthemeassist <- function(){
                                     fillRow(height = line.height, width = '100%',
                                             conditionalPanel(
                                               condition = "input['legend.position'] == 'XY'",
-                                              numericInput('legend.position.y', label = 'Y Coord', min = 0, max = 1, value = 0.5, step = 0.01, width = input.width)
+                                              numericInput('legend.position.y', label = 'Y Coord', min = 0, max = 1, value = default$legend.position.y, step = 0.01, width = input.width)
                                             ),
                                             selectInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
                                             selectInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width),
@@ -268,7 +268,11 @@ ggthemeassist <- function(){
             size = input$legend.key.size,
             linetype = input$legend.key.linetype
           ),
-          legend.position = input$legend.position,
+          legend.position = (if (input$legend.position == 'XY') {
+            c(input$legend.position.x, input$legend.position.y)
+          } else {
+            input$legend.position
+          }),
           legend.direction = input$legend.direction
         )
     })

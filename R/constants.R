@@ -83,7 +83,7 @@ default <- list(
     colour = 'black'
   ),
   legend.background = list(
-    fill = 'NA',
+    fill = 'grey100',
     colour = 'NA',
     size = 0.5,
     linetype = 'blank'
@@ -95,6 +95,8 @@ default <- list(
     linetype = 'blank'
   ),
   legend.position = 'right',
+  legend.position.x = 0.5,
+  legend.position.y = 0.5,
   legend.direction = 'vertical',
   labs = list(
     title = '',
