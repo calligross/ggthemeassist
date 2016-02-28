@@ -124,37 +124,40 @@ ggthemeassist <- function(){
       miniTabPanel("Legend", icon = icon('sliders'),
         miniContentPanel(
           fillCol(
-            plotOutput("ThePlot3", width = '100%', height = '99%'),
-            fillCol(height = '450px', width = '950px',
-              fillRow(
+            plotOutput("ThePlot3", width = '100%', height = '400px'),
+            fillCol(height = '450px', width = '950px', flex = NA,
+              headingOutput('Legend position'),
+              fillRow(height = line.height, width = '50%',
                 selectInput('legend.position', label = 'Position', choices = legend.positions, selected = default$legend.position, width = input.width),
-                selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected = default$legend.direction, width = input.width),
-                textInput('legend.lab.fill', label = 'Legend (fill)', value = gg_original$labels$fill, width = input.width),
-                textInput('legend.lab.colour', label = 'Legend (colour)', value = gg_original$labels$colour, width = input.width)
+                selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected = default$legend.direction, width = input.width)
               ),
-              fillRow(
-                numericInput('legend.title.size', label = 'Legend Title Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
-                selectInput('legend.title.face', label = 'Legend Titleface', choices = text.faces, selected = default$legend.title$face, width = input.width),
-                selectInput('legend.title.colour', label = 'Titlecolour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
-                selectInput('legend.title.family', label = 'Titlefamily', choices = text.families, selected = default$legend.title$family, width = input.width)
+              headingOutput('Legend title'),
+              fillRow(height = line.height,
+                selectInput('legend.title.family', label = 'Family', choices = text.families, selected = default$legend.title$family, width = input.width),
+                numericInput('legend.title.size', label = 'Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
+                selectInput('legend.title.face', label = 'Face', choices = text.faces, selected = default$legend.title$face, width = input.width),
+                selectInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width)
               ),
-              fillRow(
-                numericInput('legend.text.size', label = 'Legend Text Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
-                selectInput('legend.text.face', label = 'Legend Textface', choices = text.faces, selected = default$legend.text$face, width = input.width),
-                selectInput('legend.text.colour', label = 'Textcolour', choices = colours.available, selected = default$legend.text$colour, width = input.width),
-                selectInput('legend.text.family', label = 'Legendfamily', choices = text.families, selected = default$legend.text$family, width = input.width)
+              headingOutput('Legend text'),
+              fillRow(height = line.height,
+                selectInput('legend.text.family', label = 'Family', choices = text.families, selected = default$legend.text$family, width = input.width),
+                numericInput('legend.text.size', label = 'Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
+                selectInput('legend.text.face', label = 'Face', choices = text.faces, selected = default$legend.text$face, width = input.width),
+                selectInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width)
               ),
-              fillRow(
-                selectInput('legend.background.fill', label = 'Background', choices = colours.available, width = input.width, selected = default$legend.background$fill),
-                selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour),
-                numericInput('legend.background.size', label = 'Linesize', step = 0.1, value = default$legend.background$size, width = input.width),
-                selectInput('legend.background.linetype', label = 'Linetype', choices = linetypes, selected = default$legend.background$linetype, width = input.width)
+              headingOutput('Legend background'),
+              fillRow(height = line.height,
+                selectInput('legend.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.background$fill),
+                selectInput('legend.background.linetype', label = 'Type', choices = linetypes, selected = default$legend.background$linetype, width = input.width),
+                numericInput('legend.background.size', label = 'Size', step = 0.1, value = default$legend.background$size, width = input.width),
+                selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour)
               ),
-              fillRow(
-                selectInput('legend.key.fill', label = 'Key Background', choices = colours.available, width = input.width, selected = default$legend.key$fill),
-                selectInput('legend.key.colour', label = 'Keycolour', choices = colours.available, width = input.width, selected = default$legend.key$colour),
-                numericInput('legend.key.size', label = 'Keysize', step = 0.1, value = default$legend.key$size, width = input.width),
-                selectInput('legend.key.linetype', label = 'Keylinetype', choices = linetypes, selected = default$legend.key$linetype, width = input.width)
+              headingOutput('Legend keys'),
+              fillRow(height = line.height,
+                selectInput('legend.key.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.key$fill),
+                selectInput('legend.key.linetype', label = 'Type', choices = linetypes, selected = default$legend.key$linetype, width = input.width),
+                numericInput('legend.key.size', label = 'Size', step = 0.1, value = default$legend.key$size, width = input.width),
+                selectInput('legend.key.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.key$colour)
               )
             )
           )
