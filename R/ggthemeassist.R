@@ -151,14 +151,20 @@ ggthemeassist <- function(){
                                             selectInput('legend.key.linetype', label = 'Type', choices = linetypes, selected = default$legend.key$linetype, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            numericInput('legend.position.x', label = 'X Coord', min = 0, max = 1, value = 0.5, step = 0.01, width = input.width),
+                                            conditionalPanel(
+                                              condition = "input['legend.position'] == 'XY'",
+                                              numericInput('legend.position.x', label = 'X Coord', min = 0, max = 1, value = 0.5, step = 0.01, width = input.width)
+                                            ),
                                             numericInput('legend.title.size', label = 'Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
                                             numericInput('legend.text.size', label = 'Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
                                             numericInput('legend.background.size', label = 'Size', step = 0.1, value = default$legend.background$size, width = input.width),
                                             numericInput('legend.key.size', label = 'Size', step = 0.1, value = default$legend.key$size, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            numericInput('legend.position.y', label = 'Y Coord', min = 0, max = 1, value = 0.5, step = 0.01, width = input.width),
+                                            conditionalPanel(
+                                              condition = "input['legend.position'] == 'XY'",
+                                              numericInput('legend.position.y', label = 'Y Coord', min = 0, max = 1, value = 0.5, step = 0.01, width = input.width)
+                                            ),
                                             selectInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
                                             selectInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width),
                                             selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour),
