@@ -18,153 +18,299 @@ ggthemeassist <- function(){
     gadgetTitleBar("ggplot Theme Assistant"),
     miniTabstripPanel(
       miniTabPanel("Axis", icon = icon('sliders'),
+        plotOutput("ThePlot", width = '100%', height = '400px'),
         miniContentPanel(scrollable = TRUE,
-          fillCol(
-            plotOutput("ThePlot", width = '100%', height = '400px'),
-            fillCol(height = '450px', width = '950px', flex = NA,
-              headingOutput('Axis text'),
-              fillRow(height = line.height,
-                selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
-                numericInput('axis.text.size', label = 'Size', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
-                selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
-                selectInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width)
-              ),
-              fillRow(height = line.height, width = '75%',
-                numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width),
-                numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
-                numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width)
-              ),
-              headingOutput('Axis line'),
-              fillRow(height = line.height, width = '75%',
-                selectInput('axis.line.type', label = 'Type', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
-                numericInput('axis.line.size', label = 'Size', step = 0.1, value = default$axis.line$size, min = 0,width = input.width),
-                selectInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width)
-              ),
-              headingOutput('Axis ticks'),
-              fillRow(height = line.height, width = '75%',
-                selectInput('axis.ticks.type', label = 'Type', choices = linetypes, selected = default$axis.ticks$linetype, width = input.width),
-                numericInput('axis.ticks.size', label = 'Size', step = 0.1, value = default$axis.ticks$size, min = 0,width = input.width),
-                selectInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width)
-              )
-            )
+          fillRow(height = line.height, width = '100%',
+                  headingOutput('Axis text'),headingOutput('Axis line'),headingOutput('Axis ticks')
+                  ),
+          fillRow(height = line.height, width = '100%',
+                  selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
+                  selectInput('axis.line.type', label = 'Type', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
+                  selectInput('axis.ticks.type', label = 'Type', choices = linetypes, selected = default$axis.ticks$linetype, width = input.width)
+                  ),
+          fillRow(height = line.height, width = '100%',
+                  selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
+                  numericInput('axis.line.size', label = 'Size', step = 0.1, value = default$axis.line$size, min = 0,width = input.width),
+                  numericInput('axis.ticks.size', label = 'Size', step = 0.1, value = default$axis.ticks$size, min = 0,width = input.width)
+          ),
+          fillRow(height = line.height, width = '100%',
+                  numericInput('axis.text.size', label = 'Size', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
+                  selectInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width),
+                  selectInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width)
+          ),
+          fillRow(height = line.height, width = '100%',
+                  selectInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width),
+                  "",
+                  ""
+          ),
+          fillRow(height = line.height, width = '100%',
+                  numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width),
+                  "",
+                  ""
+          ),
+          fillRow(height = line.height, width = '100%',
+                  numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
+                  "",
+                  ""
+          ),
+          fillRow(height = line.height, width = '100%',
+                  numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width),
+                  "",
+                  ""
           )
-        )
-      ),
+          )),
+          # fillCol(
+          #   plotOutput("ThePlot", width = '100%', height = '400px'),
+          #   fillCol(height = '450px', width = '950px', flex = NA,
+          #     headingOutput('Axis text'),
+          #     fillRow(height = line.height,
+          #       selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
+          #       numericInput('axis.text.size', label = 'Size', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
+          #       selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
+          #       selectInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width)
+          #     ),
+          #     fillRow(height = line.height, width = '75%',
+          #       numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width),
+          #       numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
+          #       numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width)
+          #     ),
+          #     headingOutput('Axis line'),
+          #     fillRow(height = line.height, width = '75%',
+          #       selectInput('axis.line.type', label = 'Type', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
+          #       numericInput('axis.line.size', label = 'Size', step = 0.1, value = default$axis.line$size, min = 0,width = input.width),
+          #       selectInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width)
+          #     ),
+          #     headingOutput('Axis ticks'),
+          #     fillRow(height = line.height, width = '75%',
+          #       selectInput('axis.ticks.type', label = 'Type', choices = linetypes, selected = default$axis.ticks$linetype, width = input.width),
+          #       numericInput('axis.ticks.size', label = 'Size', step = 0.1, value = default$axis.ticks$size, min = 0,width = input.width),
+          #       selectInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width)
+          #     )
+          #   )
+          # )
+      #   )
+      # ),
       miniTabPanel("Title and label", icon = icon('sliders'),
+        plotOutput("ThePlot4", width = '100%', height = '400px'),
         miniContentPanel(scrollable = TRUE,
-          fillCol(
-            plotOutput("ThePlot4", width = '100%', height = '400px'),
-            fillCol(height = '450px', width = '950px', flex = NA,
-              headingOutput('Labels'),
-              fillRow(height = line.height,
-                textInput('plot.title', label = 'Title', value = gg_original$labels$title, width = input.width),
-                textInput('axis.title.x', label = 'x-Axis', value = gg_original$labels$x, width = input.width),
-                textInput('axis.title.y', label = 'y-Axis', value = gg_original$labels$y, width = input.width),
-                textInput('legend.colour.title', label = 'Colour', value = gg_original$labels$colour, width = input.width)
-              ),
-              fillRow(height = line.height, width = '25%',
-                textInput('legend.fill.title', label = 'Fill', value = gg_original$labels$fill, width = input.width)
-              ),
-              headingOutput('Plot title font'),
-              fillRow(height = line.height,
-                selectInput('plot.title.family', label = 'Family', choices = text.families, selected = default$plot.title$family, width = input.width),
-                numericInput('plot.title.size', label = 'Size', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width),
-                selectInput('plot.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
-                selectInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width)
-              ),
-              fillRow(height = line.height, width = '75%',
-                numericInput('plot.title.hjust', 'Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
-                numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
-                numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width)
-              ),
-              headingOutput('Axis label font'),
-              fillRow(height = line.height,
-                selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width),
-                selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
-                numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width),
-                selectInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width)
-              ),
-              fillRow(height = line.height, width = '75%',
-                numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
-                numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width),
-                numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
-              )
-            )
+          fillRow(height = line.height, width = '100%',
+                  headingOutput('Labels'),headingOutput('Plot Title'),headingOutput('Axis Labels')
+                  ),
+          fillRow(height = line.height, width = '100%',
+                  textInput('plot.title', label = 'Title', value = gg_original$labels$title, width = input.width),
+                  selectInput('plot.title.family', label = 'Family', choices = text.families, selected = default$plot.title$family, width = input.width),
+                  selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width)
+                  ),
+          fillRow(height = line.height, width = '100%',
+                  textInput('axis.title.x', label = 'x-Axis', value = gg_original$labels$x, width = input.width),
+                  selectInput('plot.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
+                  selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face)
+                  ),
+          fillRow(height = line.height, width = '100%',
+                  textInput('axis.title.y', label = 'y-Axis', value = gg_original$labels$y, width = input.width),
+                  numericInput('plot.title.size', label = 'Size', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width),
+                  numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
+                  ),
+          fillRow(height = line.height, width = '100%',
+                  textInput('legend.colour.title', label = 'Colour', value = gg_original$labels$colour, width = input.width),
+                  selectInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width),
+                  selectInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width)
+                  ),
+          fillRow(height = line.height, width = '100%',
+                  textInput('legend.fill.title', label = 'Fill', value = gg_original$labels$fill, width = input.width),
+                  numericInput('plot.title.hjust', 'Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
+                  numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width)
+                  ),
+          fillRow(height = line.height, width = '100%',
+                  "",
+                  numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
+                  numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
+                  ),
+          fillRow(height = line.height, width = '100%',
+                  "",
+                  numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width),
+                  numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
+                  )
           )
-        )
       ),
+        # miniContentPanel(scrollable = TRUE,
+        #   fillCol(
+        #     plotOutput("ThePlot4", width = '100%', height = '400px'),
+        #     fillCol(height = '450px', width = '950px', flex = NA,
+        #       headingOutput('Labels'),
+        #       fillRow(height = line.height,
+        #         textInput('plot.title', label = 'Title', value = gg_original$labels$title, width = input.width),
+        #         textInput('axis.title.x', label = 'x-Axis', value = gg_original$labels$x, width = input.width),
+        #         textInput('axis.title.y', label = 'y-Axis', value = gg_original$labels$y, width = input.width),
+        #         textInput('legend.colour.title', label = 'Colour', value = gg_original$labels$colour, width = input.width)
+        #       ),
+        #       fillRow(height = line.height, width = '25%',
+        #         textInput('legend.fill.title', label = 'Fill', value = gg_original$labels$fill, width = input.width)
+        #       ),
+        #       headingOutput('Plot title font'),
+        #       fillRow(height = line.height,
+        #         selectInput('plot.title.family', label = 'Family', choices = text.families, selected = default$plot.title$family, width = input.width),
+        #         numericInput('plot.title.size', label = 'Size', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width),
+        #         selectInput('plot.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
+        #         selectInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width)
+        #       ),
+        #       fillRow(height = line.height, width = '75%',
+        #         numericInput('plot.title.hjust', 'Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
+        #         numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
+        #         numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width)
+        #       ),
+        #       headingOutput('Axis label font'),
+        #       fillRow(height = line.height,
+        #         selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width),
+        #         selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
+        #         numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width),
+        #         selectInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width)
+        #       ),
+        #       fillRow(height = line.height, width = '75%',
+        #         numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
+        #         numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width),
+        #         numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
+        #       )
+        #     )
+        #   )
+        # )
+      #),
       miniTabPanel("Panel", icon = icon('sliders'),
-        miniContentPanel(
-          fillCol(
-            plotOutput("ThePlot2", width = '100%', height = '400px'),
-            fillCol(height = '450px', width = '950px', flex = NA,
-              headingOutput('Panel Background'),
-              fillRow(height = line.height,
-                selectInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill),
-                selectInput('panel.background.linetype', label = 'Type', choices = linetypes, selected = default$panel.background$linetype, width = input.width),
-                numericInput('panel.background.size', label = 'Size', step = 0.1, value = default$panel.background$size, width = input.width),
-                selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour)
-              ),
-              headingOutput('Grid major'),
-              fillRow(height = line.height, width = '75%',
-                selectInput('panel.grid.major.type', label = 'Type', choices = linetypes, selected = default$panel.grid.major$linetype, width = input.width),
-                numericInput('panel.grid.major.size', label = 'Size', step = 0.1, value = default$panel.grid.major$size, min = 0, width = input.width),
-                selectInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width)
-              ),
-              headingOutput('Grid minor'),
-              fillRow(height = line.height, width = '75%',
-                selectInput('panel.grid.minor.type', label = 'Type', choices = linetypes, selected = default$panel.grid.minor$linetype, width = input.width),
-                numericInput('panel.grid.minor.size', label = 'Size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width),
-                selectInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width)
-              )
+        plotOutput("ThePlot2", width = '100%', height = '400px'),
+        miniContentPanel(scrollable = TRUE,
+            fillRow(height = line.height, width = '100%',
+                    headingOutput('Panel Background'),headingOutput('Grid Major'),headingOutput('Grid Minor')
+                    ),
+            fillRow(height = line.height, width = '100%',
+                    selectInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill),
+                    "",
+                    ""
+                    ),
+            fillRow(height = line.height, width = '100%',
+                    selectInput('panel.background.linetype', label = 'Type', choices = linetypes, selected = default$panel.background$linetype, width = input.width),
+                    selectInput('panel.grid.major.type', label = 'Type', choices = linetypes, selected = default$panel.grid.major$linetype, width = input.width),
+                    selectInput('panel.grid.minor.type', label = 'Type', choices = linetypes, selected = default$panel.grid.minor$linetype, width = input.width)
+                    ),
+            fillRow(height = line.height, width = '100%',
+                    numericInput('panel.background.size', label = 'Size', step = 0.1, value = default$panel.background$size, width = input.width),
+                    numericInput('panel.grid.major.size', label = 'Size', step = 0.1, value = default$panel.grid.major$size, min = 0, width = input.width),
+                    numericInput('panel.grid.minor.size', label = 'Size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width)
+                    ),
+            fillRow(height = line.height, width = '100%',
+                    selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour),
+                    selectInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width),
+                    selectInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width)
+                    )
             )
-          )
-        )
+        # miniContentPanel(
+        #   fillCol(
+        #     plotOutput("ThePlot2", width = '100%', height = '400px'),
+        #     fillCol(height = '450px', width = '950px', flex = NA,
+        #       headingOutput('Panel Background'),
+        #       fillRow(height = line.height,
+        #         selectInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill),
+        #         selectInput('panel.background.linetype', label = 'Type', choices = linetypes, selected = default$panel.background$linetype, width = input.width),
+        #         numericInput('panel.background.size', label = 'Size', step = 0.1, value = default$panel.background$size, width = input.width),
+        #         selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour)
+        #       ),
+        #       headingOutput('Grid major'),
+        #       fillRow(height = line.height, width = '75%',
+        #         selectInput('panel.grid.major.type', label = 'Type', choices = linetypes, selected = default$panel.grid.major$linetype, width = input.width),
+        #         numericInput('panel.grid.major.size', label = 'Size', step = 0.1, value = default$panel.grid.major$size, min = 0, width = input.width),
+        #         selectInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width)
+        #       ),
+        #       headingOutput('Grid minor'),
+        #       fillRow(height = line.height, width = '75%',
+        #         selectInput('panel.grid.minor.type', label = 'Type', choices = linetypes, selected = default$panel.grid.minor$linetype, width = input.width),
+        #         numericInput('panel.grid.minor.size', label = 'Size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width),
+        #         selectInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width)
+        #       )
+        #     )
+        #   )
+        # )
       ),
       miniTabPanel("Legend", icon = icon('sliders'),
-        miniContentPanel(
-          fillCol(
-            plotOutput("ThePlot3", width = '100%', height = '400px'),
-            fillCol(height = '450px', width = '950px', flex = NA,
-              headingOutput('Legend position'),
-              fillRow(height = line.height, width = '50%',
-                selectInput('legend.position', label = 'Position', choices = legend.positions, selected = default$legend.position, width = input.width),
-                selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected = default$legend.direction, width = input.width)
-              ),
-              headingOutput('Legend title'),
-              fillRow(height = line.height,
-                selectInput('legend.title.family', label = 'Family', choices = text.families, selected = default$legend.title$family, width = input.width),
-                numericInput('legend.title.size', label = 'Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
-                selectInput('legend.title.face', label = 'Face', choices = text.faces, selected = default$legend.title$face, width = input.width),
-                selectInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width)
-              ),
-              headingOutput('Legend text'),
-              fillRow(height = line.height,
-                selectInput('legend.text.family', label = 'Family', choices = text.families, selected = default$legend.text$family, width = input.width),
-                numericInput('legend.text.size', label = 'Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
-                selectInput('legend.text.face', label = 'Face', choices = text.faces, selected = default$legend.text$face, width = input.width),
-                selectInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width)
-              ),
-              headingOutput('Legend background'),
-              fillRow(height = line.height,
-                selectInput('legend.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.background$fill),
-                selectInput('legend.background.linetype', label = 'Type', choices = linetypes, selected = default$legend.background$linetype, width = input.width),
-                numericInput('legend.background.size', label = 'Size', step = 0.1, value = default$legend.background$size, width = input.width),
-                selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour)
-              ),
-              headingOutput('Legend keys'),
-              fillRow(height = line.height,
-                selectInput('legend.key.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.key$fill),
-                selectInput('legend.key.linetype', label = 'Type', choices = linetypes, selected = default$legend.key$linetype, width = input.width),
-                numericInput('legend.key.size', label = 'Size', step = 0.1, value = default$legend.key$size, width = input.width),
-                selectInput('legend.key.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.key$colour)
-              )
-            )
+        plotOutput("ThePlot3", width = '100%', height = '400px'),
+        miniContentPanel(scrollable = TRUE,
+          fillRow(height = line.height, width = '100%',
+                  headingOutput('Legend position'),headingOutput('Legend Title'),headingOutput('Legend Text'), headingOutput("Legend Background"), headingOutput("Legend Keys")
+          ),
+          fillRow(height = line.height, width = '100%',
+                  selectInput('legend.position', label = 'Position', choices = legend.positions, selected = default$legend.position, width = input.width),
+                  selectInput('legend.title.family', label = 'Family', choices = text.families, selected = default$legend.title$family, width = input.width),
+                  selectInput('legend.text.family', label = 'Family', choices = text.families, selected = default$legend.text$family, width = input.width),
+                  selectInput('legend.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.background$fill),
+                  selectInput('legend.key.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.key$fill)
+          ),
+          fillRow(height = line.height, width = '100%',
+                  selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected = default$legend.direction, width = input.width),
+                  selectInput('legend.title.face', label = 'Face', choices = text.faces, selected = default$legend.title$face, width = input.width),
+                  selectInput('legend.text.face', label = 'Face', choices = text.faces, selected = default$legend.text$face, width = input.width),
+                  selectInput('legend.background.linetype', label = 'Type', choices = linetypes, selected = default$legend.background$linetype, width = input.width),
+                  selectInput('legend.key.linetype', label = 'Type', choices = linetypes, selected = default$legend.key$linetype, width = input.width)
+          ),
+          fillRow(height = line.height, width = '100%',
+                  numericInput('legend.position.x', label = 'X Coord', min = 0, max = 1, value = 0.5, step = 0.01, width = input.width),
+                  numericInput('legend.title.size', label = 'Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
+                  numericInput('legend.text.size', label = 'Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
+                  numericInput('legend.background.size', label = 'Size', step = 0.1, value = default$legend.background$size, width = input.width),
+                  numericInput('legend.key.size', label = 'Size', step = 0.1, value = default$legend.key$size, width = input.width)
+          ),
+          fillRow(height = line.height, width = '100%',
+                  numericInput('legend.position.y', label = 'Y Coord', min = 0, max = 1, value = 0.5, step = 0.01, width = input.width),
+                  selectInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
+                  selectInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width),
+                  selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour),
+                  selectInput('legend.key.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.key$colour)
           )
-        )
-      )
+          )
+  )
     )
   )
+
+        # miniContentPanel(
+        #   fillCol(
+        #     plotOutput("ThePlot3", width = '100%', height = '400px'),
+        #     fillCol(height = '450px', width = '950px', flex = NA,
+        #       headingOutput('Legend position'),
+        #       fillRow(height = line.height, width = '50%',
+        #         selectInput('legend.position', label = 'Position', choices = legend.positions, selected = default$legend.position, width = input.width),
+        #         selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected = default$legend.direction, width = input.width)
+        #       ),
+        #       headingOutput('Legend title'),
+        #       fillRow(height = line.height,
+        #         selectInput('legend.title.family', label = 'Family', choices = text.families, selected = default$legend.title$family, width = input.width),
+        #         numericInput('legend.title.size', label = 'Size', min = 1, max = 30, value = default$legend.title$size, step = 1, width = input.width),
+        #         selectInput('legend.title.face', label = 'Face', choices = text.faces, selected = default$legend.title$face, width = input.width),
+        #         selectInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width)
+        #       ),
+        #       headingOutput('Legend text'),
+        #       fillRow(height = line.height,
+        #         selectInput('legend.text.family', label = 'Family', choices = text.families, selected = default$legend.text$family, width = input.width),
+        #         numericInput('legend.text.size', label = 'Size', min = 1, max = 30, value = default$legend.text$size, step = 1, width = input.width),
+        #         selectInput('legend.text.face', label = 'Face', choices = text.faces, selected = default$legend.text$face, width = input.width),
+        #         selectInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width)
+        #       ),
+        #       headingOutput('Legend background'),
+        #       fillRow(height = line.height,
+        #         selectInput('legend.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.background$fill),
+        #         selectInput('legend.background.linetype', label = 'Type', choices = linetypes, selected = default$legend.background$linetype, width = input.width),
+        #         numericInput('legend.background.size', label = 'Size', step = 0.1, value = default$legend.background$size, width = input.width),
+        #         selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour)
+        #       ),
+        #       headingOutput('Legend keys'),
+        #       fillRow(height = line.height,
+        #         selectInput('legend.key.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.key$fill),
+        #         selectInput('legend.key.linetype', label = 'Type', choices = linetypes, selected = default$legend.key$linetype, width = input.width),
+        #         numericInput('legend.key.size', label = 'Size', step = 0.1, value = default$legend.key$size, width = input.width),
+        #         selectInput('legend.key.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.key$colour)
+        #       )
+        #     )
+        #   )
+        # )
+  #     )
+  #   )
+  # )
 
   server <- function(input, output, session) {
 
