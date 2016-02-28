@@ -96,25 +96,27 @@ ggthemeassist <- function(){
       miniTabPanel("Panel", icon = icon('sliders'),
         miniContentPanel(
           fillCol(
-            plotOutput("ThePlot2", width = '100%', height = '99%'),
-            fillCol(height = '270px', width = '950px',
-              fillRow(
-                selectInput('panel.background.fill', label = 'Fillcolour', choices = colours.available, width = input.width, selected = default$panel.background$fill),
-                selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour),
-                numericInput('panel.background.size', label = 'Backgroundsize', step = 0.1, value = default$panel.background$size, width = input.width),
-                selectInput('panel.background.linetype', label = 'Backgroundlinetype', choices = linetypes, selected = default$panel.background$linetype, width = input.width)
+            plotOutput("ThePlot2", width = '100%', height = '400px'),
+            fillCol(height = '450px', width = '950px', flex = NA,
+              headingOutput('Panel Background'),
+              fillRow(height = line.height,
+                selectInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill),
+                selectInput('panel.background.linetype', label = 'Type', choices = linetypes, selected = default$panel.background$linetype, width = input.width),
+                numericInput('panel.background.size', label = 'Size', step = 0.1, value = default$panel.background$size, width = input.width),
+                selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour)
               ),
-              fillRow(width = '75%',
-                selectInput('panel.grid.major.type', label = 'Grid major type', choices = linetypes, selected = default$panel.grid.major$linetype, width = input.width),
-                selectInput('panel.grid.major.colour', label = 'Grid major colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width),
-                numericInput('panel.grid.major.size', label = 'Grid major size', step = 0.1, value = default$panel.grid.major$size, min = 0, width = input.width)
+              headingOutput('Grid major'),
+              fillRow(height = line.height, width = '75%',
+                selectInput('panel.grid.major.type', label = 'Type', choices = linetypes, selected = default$panel.grid.major$linetype, width = input.width),
+                numericInput('panel.grid.major.size', label = 'Size', step = 0.1, value = default$panel.grid.major$size, min = 0, width = input.width),
+                selectInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width)
               ),
-              fillRow(width = '75%',
-                selectInput('panel.grid.minor.type', label = 'Grid minor type', choices = linetypes, selected = default$panel.grid.minor$linetype, width = input.width),
-                selectInput('panel.grid.minor.colour', label = 'Grid minor colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width),
-                numericInput('panel.grid.minor.size', label = 'Grid minor size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width)
+              headingOutput('Grid minor'),
+              fillRow(height = line.height, width = '75%',
+                selectInput('panel.grid.minor.type', label = 'Type', choices = linetypes, selected = default$panel.grid.minor$linetype, width = input.width),
+                numericInput('panel.grid.minor.size', label = 'Size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width),
+                selectInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width)
               )
-
             )
           )
         )
