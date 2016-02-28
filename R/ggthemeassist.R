@@ -19,10 +19,10 @@ ggthemeassist <- function(){
     miniTabstripPanel(
       miniTabPanel("Axis", icon = icon('sliders'),
                    plotOutput("ThePlot", width = '100%', height = '400px'),
+                   fillRow(height = line.height, width = '100%',
+                           headingOutput('Axis text'),headingOutput('Axis line'),headingOutput('Axis ticks')
+                   ),
                    miniContentPanel(scrollable = TRUE,
-                                    fillRow(height = line.height, width = '100%',
-                                            headingOutput('Axis text'),headingOutput('Axis line'),headingOutput('Axis ticks')
-                                    ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
                                             selectInput('axis.line.type', label = 'Type', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
@@ -61,10 +61,10 @@ ggthemeassist <- function(){
                    )),
       miniTabPanel("Title and label", icon = icon('sliders'),
                    plotOutput("ThePlot4", width = '100%', height = '400px'),
+                   fillRow(height = line.height, width = '100%',
+                           headingOutput('Labels'),headingOutput('Plot Title'),headingOutput('Axis Labels')
+                   ),
                    miniContentPanel(scrollable = TRUE,
-                                    fillRow(height = line.height, width = '100%',
-                                            headingOutput('Labels'),headingOutput('Plot Title'),headingOutput('Axis Labels')
-                                    ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('plot.title', label = 'Title', value = gg_original$labels$title, width = input.width),
                                             selectInput('plot.title.family', label = 'Family', choices = text.families, selected = default$plot.title$family, width = input.width),
@@ -104,10 +104,10 @@ ggthemeassist <- function(){
       ),
       miniTabPanel("Panel", icon = icon('sliders'),
                    plotOutput("ThePlot2", width = '100%', height = '400px'),
+                   fillRow(height = line.height, width = '100%',
+                           headingOutput('Panel Background'),headingOutput('Grid Major'),headingOutput('Grid Minor')
+                   ),
                    miniContentPanel(scrollable = TRUE,
-                                    fillRow(height = line.height, width = '100%',
-                                            headingOutput('Panel Background'),headingOutput('Grid Major'),headingOutput('Grid Minor')
-                                    ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill),
                                             "",
@@ -132,10 +132,10 @@ ggthemeassist <- function(){
       ),
       miniTabPanel("Legend", icon = icon('sliders'),
                    plotOutput("ThePlot3", width = '100%', height = '400px'),
+                   fillRow(height = line.height, width = '100%',
+                           headingOutput('Legend position'),headingOutput('Legend Title'),headingOutput('Legend Text'), headingOutput("Legend Background"), headingOutput("Legend Keys")
+                   ),
                    miniContentPanel(scrollable = TRUE,
-                                    fillRow(height = line.height, width = '100%',
-                                            headingOutput('Legend position'),headingOutput('Legend Title'),headingOutput('Legend Text'), headingOutput("Legend Background"), headingOutput("Legend Keys")
-                                    ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('legend.position', label = 'Position', choices = legend.positions, selected = default$legend.position, width = input.width),
                                             selectInput('legend.title.family', label = 'Family', choices = text.families, selected = default$legend.title$family, width = input.width),
