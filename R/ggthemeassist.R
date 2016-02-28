@@ -20,30 +20,31 @@ ggthemeassist <- function(){
       miniTabPanel("Axis", icon = icon('sliders'),
         miniContentPanel(scrollable = TRUE,
           fillCol(
-            plotOutput("ThePlot", width = '100%', height = '99%'),
-            fillCol(height = '450px', width = '950px',
-              fillRow(
+            plotOutput("ThePlot", width = '100%', height = '400px'),
+            fillCol(height = '450px', width = '950px', flex = NA,
+              headingOutput('Axis text'),
+              fillRow(height = line.height,
                 selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
+                numericInput('axis.text.size', label = 'Size', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
                 selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
-                selectInput('axis.text.colour', label = 'Textcolour', choices = colours.available, selected = default$axis.text$colour, width = input.width)
+                selectInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width)
               ),
-              fillRow(
+              fillRow(height = line.height, width = '75%',
                 numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width),
-                numericInput('axis.text.size', label = 'Textsize', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
-                numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width)
-              ),
-              fillRow(width = '33%',
+                numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
                 numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width)
               ),
-              fillRow(
-                selectInput('axis.line.type', label = 'Linetype', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
-                selectInput('axis.line.colour', label = 'Linecolour', choices = colours.available, selected = default$axis.line$colour, width = input.width),
-                numericInput('axis.line.size', label = 'Linesize', step = 0.1, value = default$axis.line$size, min = 0,width = input.width)
+              headingOutput('Axis line'),
+              fillRow(height = line.height, width = '75%',
+                selectInput('axis.line.type', label = 'Type', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
+                numericInput('axis.line.size', label = 'Size', step = 0.1, value = default$axis.line$size, min = 0,width = input.width),
+                selectInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width)
               ),
-              fillRow(
-                selectInput('axis.ticks.type', label = 'Ticktype', choices = linetypes, selected = default$axis.ticks$linetype, width = input.width),
-                selectInput('axis.ticks.colour', label = 'Tickcolour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width),
-                numericInput('axis.ticks.size', label = 'Ticksize', step = 0.1, value = default$axis.ticks$size, min = 0,width = input.width)
+              headingOutput('Axis ticks'),
+              fillRow(height = line.height, width = '75%',
+                selectInput('axis.ticks.type', label = 'Type', choices = linetypes, selected = default$axis.ticks$linetype, width = input.width),
+                numericInput('axis.ticks.size', label = 'Size', step = 0.1, value = default$axis.ticks$size, min = 0,width = input.width),
+                selectInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width)
               )
             )
           )

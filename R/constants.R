@@ -8,6 +8,7 @@ linetypes <- c('blank', 'solid', 'dashed', 'dotted', 'dotdash', 'longdash', 'two
 
 # Configurations
 input.width <- '50%'
+line.height <- '70px'
 
 
 # default values
