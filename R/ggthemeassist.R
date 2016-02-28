@@ -50,41 +50,44 @@ ggthemeassist <- function(){
           )
         )
       ),
-      miniTabPanel("Title", icon = icon('sliders'),
+      miniTabPanel("Title and label", icon = icon('sliders'),
         miniContentPanel(scrollable = TRUE,
           fillCol(
-            plotOutput("ThePlot4", width = '100%', height = '99%'),
-            fillCol(height = '640px', width = '950px',
-              fillRow(
-                textInput('plot.title', label = 'Plot title', value = gg_original$labels$title, width = input.width),
-                textInput('axis.title.x', label = 'x Axis', value = gg_original$labels$x, width = input.width),
-                textInput('axis.title.y', label = 'x Axis', value = gg_original$labels$y, width = input.width)
+            plotOutput("ThePlot4", width = '100%', height = '400px'),
+            fillCol(height = '450px', width = '950px', flex = NA,
+              headingOutput('Labels'),
+              fillRow(height = line.height,
+                textInput('plot.title', label = 'Title', value = gg_original$labels$title, width = input.width),
+                textInput('axis.title.x', label = 'x-Axis', value = gg_original$labels$x, width = input.width),
+                textInput('axis.title.y', label = 'y-Axis', value = gg_original$labels$y, width = input.width),
+                textInput('legend.colour.title', label = 'Colour', value = gg_original$labels$colour, width = input.width)
               ),
-              fillRow(
-                selectInput('plot.title.family', label = 'Title Family', choices = text.families, selected = default$plot.title$family, width = input.width),
-                selectInput('plot.title.face', label = 'Title Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
-                numericInput('plot.title.angle', label = 'Title Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width)
+              fillRow(height = line.height, width = '25%',
+                textInput('legend.fill.title', label = 'Fill', value = gg_original$labels$fill, width = input.width)
               ),
-              fillRow(
-                numericInput('plot.title.hjust', 'Title Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
-                selectInput('plot.title.colour', label = 'Title  Textcolour', choices = colours.available, selected = default$plot.title$colour, width = input.width),
-                numericInput('plot.title.size', label = 'Title  Textsize', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width)
+              headingOutput('Plot title font'),
+              fillRow(height = line.height,
+                selectInput('plot.title.family', label = 'Family', choices = text.families, selected = default$plot.title$family, width = input.width),
+                numericInput('plot.title.size', label = 'Size', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width),
+                selectInput('plot.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
+                selectInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width)
               ),
-              fillRow(width = '33%',
-                      numericInput('plot.title.vjust', 'Title  Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width)
+              fillRow(height = line.height, width = '75%',
+                numericInput('plot.title.hjust', 'Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
+                numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
+                numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width)
               ),
-              fillRow(
-                selectInput('axis.title.family', label = 'Axis Family', choices = text.families, selected = default$axis.title$family, width = input.width),
-                selectInput('axis.title.face', label = 'Axis Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
+              headingOutput('Axis label font'),
+              fillRow(height = line.height,
+                selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width),
+                selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
+                numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width),
+                selectInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width)
+              ),
+              fillRow(height = line.height, width = '75%',
+                numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
+                numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width),
                 numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
-              ),
-              fillRow(
-                numericInput('axis.title.hjust', 'Axis Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
-                selectInput('axis.title.colour', label = 'Axis Textcolour', choices = colours.available, selected = default$axis.title$colour, width = input.width),
-                numericInput('axis.title.size', label = 'Axis Textsize', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
-              ),
-              fillRow(width = '33%',
-                numericInput('axis.title.vjust', 'Axis Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
               )
             )
           )
@@ -165,8 +168,8 @@ ggthemeassist <- function(){
         labs(title = input$plot.title,
           x = input$axis.title.x,
           y = input$axis.title.y,
-          fill = input$legend.lab.fill,
-          colour = input$legend.lab.colour) +
+          fill = input$legend.fill.title,
+          colour = input$legend.colour.title) +
         theme(axis.text = element_text(
           size = input$axis.text.size,
           colour = input$axis.text.colour,
