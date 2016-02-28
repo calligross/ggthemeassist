@@ -2,9 +2,24 @@ construcThemeString <- function(theme, original, new, std = default, element = N
   result <- NULL
   std <- unlist(std[[theme]])
 
-  if(category == 'theme') {
+  if (category == 'theme') {
+    # if you value good style of coding, don't read the next few lines, it's an ugly workaround for legend.position
+    if (theme == 'legend.position' && length(new[[category]][[theme]]) > 1) {
+      legend_position <- new[[category]][[theme]]
+      legend_position <- paste0('c(',paste(legend_position, collapse = ', '), ')')
+      new[[category]][[theme]] <- legend_position
+    }
+
     new <- unlist(new[[category]][[theme]])
+
+    if (theme == 'legend.position' && length(original[[category]][[theme]]) > 1) {
+      legend_position <- original[[category]][[theme]]
+      legend_position <- paste0('c(',paste(legend_position, collapse = ', '), ')')
+      original[[category]][[theme]] <- legend_position
+    }
+
     original <- unlist(original[[category]][[theme]])
+
   } else if(category == 'labels') {
     new <- unlist(new[[category]])
     original <- unlist(original[[category]])
@@ -43,21 +58,4 @@ construcThemeString <- function(theme, original, new, std = default, element = N
       return(result)
     }
   }
-}
-
-addQuotes <- function(x){
-  if(! x %in% c('NA', 'NULL')) {
-    chars <- grepl(pattern = '[a-zA-Z]', x)
-    x[chars] <- paste("'", x[chars], "'", sep = '')
-  }
-  x
-}
-
-setNullNA <- function(x) {
-  if (x == 'NULL') {
-    x <- NULL
-  } else if (x == 'NA') {
-    x <- NA
-  }
-  return(x)
 }
