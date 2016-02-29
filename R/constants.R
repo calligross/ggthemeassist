@@ -106,3 +106,76 @@ default <- list(
     fill = ''
   )
 )
+
+AvailableElements <- list(
+  axis.line = list(
+    name = 'axis.line',
+    type = 'element_line',
+    enabled = TRUE
+  ),
+  axis.ticks = list(
+    name = 'axis.ticks',
+    type = 'element_line',
+    enabled = TRUE
+  ),
+  panel.ticks.major = list(
+    name = 'panel.ticks.major',
+    type = 'element_line',
+    enabled = TRUE
+  ),
+  panel.ticks.minor = list(
+    name = 'panel.ticks.minor',
+    type = 'element_line',
+    enabled = TRUE
+  ),
+  axis.title = list(
+    name = 'axis.title',
+    type = 'element_text',
+    enabled = TRUE
+  ),
+  axis.text = list(
+    name = 'axis.text',
+    type = 'element_text',
+    enabled = TRUE
+  ),
+  plot.title = list(
+    name = 'plot.title',
+    type = 'element_text',
+    enabled = TRUE
+  ),
+  legend.text = list(
+    name = 'legend.text',
+    type = 'element_text',
+    enabled = TRUE
+  ),
+  legend.title = list(
+    name = 'legend.title',
+    type = 'element_text',
+    enabled = TRUE
+  ),
+    panel.background = list(
+    name = 'panel.background',
+    type = 'element_rect',
+    enabled = TRUE
+  ),
+  legend.key = list(
+    name = 'legend.key',
+    type = 'element_rect',
+    enabled = TRUE
+  ),
+  legend.background = list(
+    name = 'legend.background',
+    type = 'element_rect',
+    enabled = TRUE
+  ),
+  legend.position = list(
+    name = 'legend.position',
+    type = '',
+    enabled = TRUE
+  ),
+  legend.direction = list(
+    name = 'legend.direction',
+    type = '',
+    enabled = TRUE
+  )
+)

@@ -286,20 +286,8 @@ ggthemeassist <- function(){
     output$ThePlot4 <- ThePlot
 
     observeEvent(input$done, {
-      result <- construcThemeString('axis.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text')
-      result <- c(result, construcThemeString('axis.line', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
-      result <- c(result, construcThemeString('axis.ticks', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
-      result <- c(result, construcThemeString('axis.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
-      result <- c(result, construcThemeString('plot.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
-      result <- c(result, construcThemeString('panel.background', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
-      result <- c(result, construcThemeString('panel.grid.major', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
-      result <- c(result, construcThemeString('panel.grid.minor', original = gg_original, new = gg_reactive(), std = default, element = 'element_line'))
-      result <- c(result, construcThemeString('legend.text', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
-      result <- c(result, construcThemeString('legend.title', original = gg_original, new = gg_reactive(), std = default, element = 'element_text'))
-      result <- c(result, construcThemeString('legend.background', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
-      result <- c(result, construcThemeString('legend.key', original = gg_original, new = gg_reactive(), std = default, element = 'element_rect'))
-      result <- c(result, construcThemeString('legend.position', original = gg_original, new = gg_reactive(), std = default))
-      result <- c(result, construcThemeString('legend.direction', original = gg_original, new = gg_reactive(), std = default))
+      result <- sapply(AvailableElements, compileResults, new = gg_reactive(), original = gg_original, std = default, USE.NAMES = FALSE)
+      result <- result[!is.na(result)]
 
       labelResult <- construcThemeString('labs', original = gg_original, new = gg_reactive(), std = default, category = 'labels')
 
