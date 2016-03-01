@@ -303,7 +303,7 @@ ggthemeassist <- function(){
       labelResult <- construcThemeString('labs', original = gg_original, new = gg_reactive(), std = default, category = 'labels')
 
       if(!is.null(result) || !is.null(labelResult)) {
-        if(!is.null(result)) {
+        if(!is.null(result) && length(result) > 0) {
           result <- paste0(' + theme(', paste(result, collapse = ', '),')')
         }
         if(!is.null(labelResult)) {
