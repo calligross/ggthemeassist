@@ -1,19 +1,17 @@
 ggplot Theme Assistant
 ==============
 
-Please be aware that this addin is under heavy developement. At the moment it is possible to alter the theme for:
+Please be aware that this addin is under heavy developement. At the moment following features are supported:
 
-* Change axis labels and titles
-* Plot.title
-* axis.text, axis.line, axis.ticks and axis.title
-* panel.background, panel.grid.major and panel.grid.minor
-* legend.text, legend.title, legend.background, legend.key, legend.position and legend.direction
+* Set title for the plot, the axes and the legend (`colour` & `fill`)
+* Alter text, lines and ticks of the axes
+* Change appearance of the plot panel and alter the major and minor grid
+* Set the legend position and change text, panel, background and keys of the legend
 
-When done, a string is returned with only those elements which have been altered:
+When done, a string is returned with only those theme elements which have been altered:
 
-![Screenshot](examples/result.PNG)
+![Screenshot](examples/script.gif)
 
-The UI is at the moment less apealing and will be covered in the near future.
 
 Installation
 ------------
@@ -33,8 +31,15 @@ if (!requireNamespace("devtools", quietly = TRUE))
 devtools::install_github("calligross/ggthemeassist")
 ```
 
+A CRAN package will follow as soon as ggThemeAssist left the current early stage of development.
+
 Usage
 ------------
 Just select a ggplot object with your cursor and start the addin.
 
-![Screenshot](examples/usage.gif)
+![Screenshot](examples/usage2.gif)
+
+News
+------------
+* the UI was considerably improved
+* ggThemeAssist now supports `legend.position = c(x,y)`
