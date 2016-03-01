@@ -2,7 +2,6 @@
 
 import(formatR)
 import(ggplot2)
-import(htmltools)
 import(miniUI)
 import(rstudioapi)
 import(shiny)

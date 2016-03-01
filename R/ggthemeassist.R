@@ -6,7 +6,6 @@
 #' @return \code{ggthemeassist} returns a character vector.
 #' @import miniUI
 #' @import shiny
-#' @import htmltools
 #' @import ggplot2
 #' @import formatR
 #' @import rstudioapi
