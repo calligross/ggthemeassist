@@ -6,11 +6,16 @@ ggthemeassist <- function(){
 
   # Set the default data to use based on the selection.
   text <- context$selection[[1]]$text
+
+  stopifnot(nchar(text) > 0)
+
   if (grepl('[\\+\\(]', text)) {
     gg_original <- eval(parse(text = text))
   } else {
     gg_original <- get(text, envir = .GlobalEnv)
   }
+
+  stopifnot(is.ggplot(gg_original))
 
   default <- updateDefaults(gg_original, default)
 
