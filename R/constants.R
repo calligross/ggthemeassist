@@ -60,6 +60,12 @@ default <- list(
     size = 0.5,
     linetype = 'blank'
   ),
+  plot.background = list(
+    fill = NULL,
+    colour = 'white',
+    size = 0.5,
+    linetype = 'blank'
+  ),
   panel.grid.major = list(
     colour = 'grey100',
     size = 0.5,
@@ -155,6 +161,11 @@ AvailableElements <- list(
   ),
     panel.background = list(
     name = 'panel.background',
+    type = 'element_rect',
+    enabled = TRUE
+  ),
+  plot.background = list(
+    name = 'plot.background',
     type = 'element_rect',
     enabled = TRUE
   ),
