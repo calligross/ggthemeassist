@@ -1,4 +1,15 @@
-
+#' ggthemeassist
+#'
+#' \code{ggthemeassist} is a RStudio-Addin that delivers a graphical interface for editing ggplot2 theme elements.
+#'
+#' @details To run the addin, highlight a ggplot2-object in your current script and select \code{ggthemeassist} from the Addins-menu within RStudio. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
+#' @return \code{ggthemeassist} returns a character vector.
+#' @import miniUI
+#' @import shiny
+#' @import htmltools
+#' @import ggplot2
+#' @import formatR
+#' @import rstudioapi
 ggthemeassist <- function(){
 
   # Get the document context.
