@@ -4,7 +4,7 @@ Title: Addin to customize ggplot2 themes
 Version: 0.0.3
 Author: Calli Gross [aut, cre],
         Philipp Ottolinger [aut, ctb]
-Maintainer: Calli Gross <your@email.com>
+Maintainer: Calli Gross <ggthemeassist@icloud.com>
 Description: ggThemeAssist is a RStudio-Addin that delivers a graphical interface for editing ggplot2 theme elements.
 License: MIT + file LICENSE
 URL: https://github.com/calligross/ggthemeassist
