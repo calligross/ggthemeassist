@@ -6,7 +6,7 @@ headingOutput <- function(heading, height = '20px', css = 'color: #ad1d28; text-
 
 addQuotes <- function(x){
   chars <- grepl(pattern = '[a-zA-Z]', x)
-  chars[grep('[(NA)(NULL)(^c\\(.*\\)]', x)] <- FALSE
+  chars[grep('^(c\\(.*|NA|NULL)*$', x)] <- FALSE
   x[chars] <- paste("'", x[chars], "'", sep = '')
   x
 }
