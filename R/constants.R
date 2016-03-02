@@ -61,7 +61,7 @@ default <- list(
     linetype = 'blank'
   ),
   plot.background = list(
-    fill = NULL,
+    fill = 'NA',
     colour = 'white',
     size = 0.5,
     linetype = 'blank'
