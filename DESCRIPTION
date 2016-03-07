@@ -1,7 +1,7 @@
 Package: ggthemeassist
 Type: Package
 Title: Addin to customize ggplot2 themes
-Version: 0.0.3
+Version: 0.0.4
 Author: Calli Gross [aut, cre],
         Philipp Ottolinger [aut, ctb]
 Maintainer: Calli Gross <ggthemeassist@icloud.com>
