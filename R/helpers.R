@@ -8,6 +8,7 @@ addQuotes <- function(x){
   chars <- grepl(pattern = '[a-zA-Z]', x)
   chars[grep('^(c\\(.*|NA|NULL)*$', x)] <- FALSE
   x[chars] <- paste("'", x[chars], "'", sep = '')
+  x <- ifelse(nchar(x) == 0, "''", x)
   x
 }
 

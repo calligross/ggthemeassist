@@ -105,11 +105,11 @@ default <- list(
   legend.position.y = 0.5,
   legend.direction = 'vertical',
   labs = list(
-    title = '',
-    x = '',
-    y = '',
-    colour = '',
-    fill = ''
+    title = ' ',
+    x = ' ',
+    y = ' ',
+    colour = ' ',
+    fill = ' '
   )
 )
 
