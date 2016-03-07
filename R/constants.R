@@ -61,7 +61,7 @@ default <- list(
     linetype = 'blank'
   ),
   plot.background = list(
-    fill = 'NA',
+    fill = NULL,
     colour = 'white',
     size = 0.5,
     linetype = 'blank'
@@ -105,11 +105,11 @@ default <- list(
   legend.position.y = 0.5,
   legend.direction = 'vertical',
   labs = list(
-    title = '',
-    x = '',
-    y = '',
-    colour = '',
-    fill = ''
+    title = ' ',
+    x = ' ',
+    y = ' ',
+    colour = ' ',
+    fill = ' '
   )
 )
 
