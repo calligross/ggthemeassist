@@ -1,4 +1,14 @@
-
+#' ggthemeassist
+#'
+#' \code{ggthemeassist} is a RStudio-Addin that delivers a graphical interface for editing ggplot2 theme elements.
+#'
+#' @details To run the addin, highlight a ggplot2-object in your current script and select \code{ggthemeassist} from the Addins-menu within RStudio. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
+#' @return \code{ggthemeassist} returns a character vector.
+#' @import miniUI
+#' @import shiny
+#' @import ggplot2
+#' @import formatR
+#' @import rstudioapi
 ggthemeassist <- function(){
 
   # Get the document context.
@@ -6,17 +16,57 @@ ggthemeassist <- function(){
 
   # Set the default data to use based on the selection.
   text <- context$selection[[1]]$text
+
+  stopifnot(nchar(text) > 0)
+
   if (grepl('[\\+\\(]', text)) {
     gg_original <- eval(parse(text = text))
   } else {
     gg_original <- get(text, envir = .GlobalEnv)
   }
 
+  stopifnot(is.ggplot(gg_original))
+
   default <- updateDefaults(gg_original, default)
 
   ui <- miniPage(
     gadgetTitleBar("ggplot Theme Assistant"),
     miniTabstripPanel(
+      miniTabPanel("Panel & Background", icon = icon('sliders'),
+                   plotOutput("ThePlot2", width = '100%', height = '400px'),
+                   miniContentPanel(scrollable = TRUE,
+                                    fillRow(height = heading.height, width = '100%',
+                                            headingOutput('Plot Background'),
+                                            headingOutput('Panel Background'),
+                                            headingOutput('Grid Major'),
+                                            headingOutput('Grid Minor')
+                                    ),
+                                    fillRow(height = line.height, width = '100%',
+                                            selectInput('plot.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$plot.background$fill),
+                                            selectInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill),
+                                            "",
+                                            ""
+                                    ),
+                                    fillRow(height = line.height, width = '100%',
+                                            selectInput('plot.background.linetype', label = 'Type', choices = linetypes, selected = default$plot.background$linetype, width = input.width),
+                                            selectInput('panel.background.linetype', label = 'Type', choices = linetypes, selected = default$panel.background$linetype, width = input.width),
+                                            selectInput('panel.grid.major.type', label = 'Type', choices = linetypes, selected = default$panel.grid.major$linetype, width = input.width),
+                                            selectInput('panel.grid.minor.type', label = 'Type', choices = linetypes, selected = default$panel.grid.minor$linetype, width = input.width)
+                                    ),
+                                    fillRow(height = line.height, width = '100%',
+                                            numericInput('plot.background.size', label = 'Size', step = 0.1, value = default$plot.background$size, width = input.width),
+                                            numericInput('panel.background.size', label = 'Size', step = 0.1, value = default$panel.background$size, width = input.width),
+                                            numericInput('panel.grid.major.size', label = 'Size', step = 0.1, value = default$panel.grid.major$size, min = 0, width = input.width),
+                                            numericInput('panel.grid.minor.size', label = 'Size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width)
+                                    ),
+                                    fillRow(height = line.height, width = '100%',
+                                            selectInput('plot.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$plot.background$colour),
+                                            selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour),
+                                            selectInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width),
+                                            selectInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width)
+                                    )
+                   )
+      ),
       miniTabPanel("Axis", icon = icon('sliders'),
                    plotOutput("ThePlot", width = '100%', height = '400px'),
                    miniContentPanel(scrollable = TRUE,
@@ -103,36 +153,6 @@ ggthemeassist <- function(){
                                             "",
                                             numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width),
                                             numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
-                                    )
-                   )
-      ),
-      miniTabPanel("Panel", icon = icon('sliders'),
-                   plotOutput("ThePlot2", width = '100%', height = '400px'),
-                   miniContentPanel(scrollable = TRUE,
-                                    fillRow(height = heading.height, width = '100%',
-                                            headingOutput('Panel Background'),
-                                            headingOutput('Grid Major'),
-                                            headingOutput('Grid Minor')
-                                    ),
-                                    fillRow(height = line.height, width = '100%',
-                                            selectInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill),
-                                            "",
-                                            ""
-                                    ),
-                                    fillRow(height = line.height, width = '100%',
-                                            selectInput('panel.background.linetype', label = 'Type', choices = linetypes, selected = default$panel.background$linetype, width = input.width),
-                                            selectInput('panel.grid.major.type', label = 'Type', choices = linetypes, selected = default$panel.grid.major$linetype, width = input.width),
-                                            selectInput('panel.grid.minor.type', label = 'Type', choices = linetypes, selected = default$panel.grid.minor$linetype, width = input.width)
-                                    ),
-                                    fillRow(height = line.height, width = '100%',
-                                            numericInput('panel.background.size', label = 'Size', step = 0.1, value = default$panel.background$size, width = input.width),
-                                            numericInput('panel.grid.major.size', label = 'Size', step = 0.1, value = default$panel.grid.major$size, min = 0, width = input.width),
-                                            numericInput('panel.grid.minor.size', label = 'Size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width)
-                                    ),
-                                    fillRow(height = line.height, width = '100%',
-                                            selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour),
-                                            selectInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width),
-                                            selectInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width)
                                     )
                    )
       ),
@@ -230,6 +250,12 @@ ggthemeassist <- function(){
             hjust = input$plot.title.hjust,
             vjust = input$plot.title.vjust,
             lineheight = input$plot.title.lineheight),
+          plot.background = element_rect(
+            fill = input$plot.background.fill,
+            colour = input$plot.background.colour,
+            size = input$plot.background.size,
+            linetype = input$plot.background.linetype
+          ),
           panel.background = element_rect(
             fill = input$panel.background.fill,
             colour = input$panel.background.colour,
@@ -292,7 +318,7 @@ ggthemeassist <- function(){
       labelResult <- construcThemeString('labs', original = gg_original, new = gg_reactive(), std = default, category = 'labels')
 
       if(!is.null(result) || !is.null(labelResult)) {
-        if(!is.null(result)) {
+        if(!is.null(result) && length(result) > 0) {
           result <- paste0(' + theme(', paste(result, collapse = ', '),')')
         }
         if(!is.null(labelResult)) {

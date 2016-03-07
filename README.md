@@ -43,3 +43,5 @@ News
 ------------
 * the UI was considerably improved
 * ggThemeAssist now supports `legend.position = c(x,y)`
+* Added support for plot.background
+
