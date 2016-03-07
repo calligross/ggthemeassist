@@ -20,7 +20,7 @@ setNullNA <- function(x) {
   return(x)
 }
 
-compileResults <- function(element, original = gg_original, new = gg_reactive(), std = default) {
+compileResults <- function(element, original, new, std = default) {
   if(element$enabled == TRUE) {
     result <- construcThemeString(element$name, original = original, new = new, std = std, element = element$type)
     if(is.null(result))
