@@ -23,6 +23,16 @@ construcThemeString <- function(theme, original, new, std = default, element = N
   } else if (category == 'labels') {
     new <- unlist(new[[category]])
     original <- unlist(original[[category]])
+
+    new_names <- names(new)
+    original_names <- names(original)
+
+    lost_names <- original_names[!original_names %in% new_names]
+
+    if(length(lost_names) > 0) {
+      new[lost_names] <- 'NULL'
+    }
+
   }
 
   if (is.list(std) || length(std) > 1){

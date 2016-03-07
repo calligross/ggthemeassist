@@ -210,11 +210,11 @@ ggthemeassist <- function(){
 
     gg_reactive <- reactive({
       gg_original +
-        labs(title = input$plot.title,
-             x = input$axis.title.x,
-             y = input$axis.title.y,
-             fill = input$legend.fill.title,
-             colour = input$legend.colour.title) +
+        labs(title = if (input$plot.title == '') { NULL } else { input$plot.title },
+             x = if (input$axis.title.x == '') { NULL } else { input$axis.title.x },
+             y = if (input$axis.title.y == '') { NULL } else { input$axis.title.y },
+             fill = if (input$legend.fill.title == '') { NULL } else { input$legend.fill.title },
+             colour = if (input$legend.colour.title == '') { NULL } else { input$legend.colour.title }) +
         theme(axis.text = element_text(
           size = input$axis.text.size,
           colour = input$axis.text.colour,
