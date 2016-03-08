@@ -5,3 +5,4 @@
 ^.Rhistory
 ^.RData
 ^NEWS\.md$
+^cran-comments\.md$
