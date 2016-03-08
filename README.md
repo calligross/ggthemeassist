@@ -37,7 +37,7 @@ Usage
 ------------
 Just select a ggplot object with your cursor and start the addin.
 
-![Screenshot](examples/usage2.gif)
+![Screenshot](examples/usage3.gif)
 
 News
 ------------
