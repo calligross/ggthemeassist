@@ -3,7 +3,7 @@ ggThemeAssist
 
 **ggThemeAssist** is a RStudio-Addin that uses the [`rstudioapi`](https://github.com/rstudio/rstudioapi) package and provides a GUI for editing [`ggplot2`](https://github.com/hadley/ggplot2) themes. 
 
-For a full list of features see `NEWS`.
+For a full list of features see [`NEWS`](./NEWS.md).
 
 
 Installation
