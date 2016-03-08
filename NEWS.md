@@ -1,6 +1,6 @@
-# ggThemeAssist 0.0.4
+# ggThemeAssist 0.1.0
 
-**ggThemeAssist** is now available on CRAN (v0.0.4).
+**ggThemeAssist** is now available on CRAN (v0.1.0).
 
 Full list of supported themes:
 

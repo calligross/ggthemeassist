@@ -1,5 +1,7 @@
 ggThemeAssist
 ==============
+[![CRAN](http://www.r-pkg.org/badges/version/ggThemeAssist)](http://cran.rstudio.com/package=ggThemeAssist) [![Downloads](http://cranlogs.r-pkg.org/badges/ggThemeAssist?color=brightgreen)](http://www.r-pkg.org/pkg/ggThemeAssist)
+
 
 **ggThemeAssist** is a RStudio-Addin that uses the [`rstudioapi`](https://github.com/rstudio/rstudioapi) package and provides a GUI for editing [`ggplot2`](https://github.com/hadley/ggplot2) themes. 
 
@@ -22,9 +24,9 @@ devtools::install_github("calligross/ggthemeassist")
 
 #### Install from CRAN
 
-The first stable version of **ggThemeAssist**, v0.0.4, is now available on CRAN:
+The first stable version of **ggThemeAssist**, v0.1.0, is now available on CRAN:
 ```r
-install.packages("ggthemeassist")
+install.packages("ggThemeAssist")
 ```
 
 Usage
