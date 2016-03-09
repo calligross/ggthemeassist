@@ -1,3 +1,8 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Altered the Description in DESCRIPTION to prevent possibly mispelled word. 
+
 ## Test environments
 * local OS X install, R 3.2.3
 * local Windows install, R 3.2.3
