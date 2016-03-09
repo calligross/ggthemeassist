@@ -124,13 +124,13 @@ AvailableElements <- list(
     type = 'element_line',
     enabled = TRUE
   ),
-  panel.ticks.major = list(
-    name = 'panel.ticks.major',
+  panel.grid.major = list(
+    name = 'panel.grid.major',
     type = 'element_line',
     enabled = TRUE
   ),
-  panel.ticks.minor = list(
-    name = 'panel.ticks.minor',
+  panel.grid.minor = list(
+    name = 'panel.grid.minor',
     type = 'element_line',
     enabled = TRUE
   ),
