@@ -1,6 +1,6 @@
 # ggThemeAssist 0.1.9000
 
-
+* Plot height is now a relative value to improve visibility in combinations with lower screen resolutions. Closes #32.
 
 # ggThemeAssist 0.1.0
 
