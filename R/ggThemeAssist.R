@@ -72,41 +72,57 @@ ggThemeAssist <- function(){
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
                                             headingOutput('Axis text'),
+                                            headingOutput('Axis text.x'),
+                                            headingOutput('Axis text.y'),
                                             headingOutput('Axis line'),
                                             headingOutput('Axis ticks')
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
+                                            selectInput('axis.text.x.family', label = 'Family', choices = c('None' = 'NULL', text.families), selected = NULL, width = input.width),
+                                            selectInput('axis.text.y.family', label = 'Family', choices = c('None' = 'NULL', text.families), selected = NULL, width = input.width),
                                             selectInput('axis.line.type', label = 'Type', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
                                             selectInput('axis.ticks.type', label = 'Type', choices = linetypes, selected = default$axis.ticks$linetype, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
+                                            selectInput('axis.text.x.face', label = 'Face', choices = c('None' = 'NULL', text.faces), width = input.width, selected = NULL),
+                                            selectInput('axis.text.y.face', label = 'Face', choices = c('None' = 'NULL', text.faces), width = input.width, selected = NULL),
                                             numericInput('axis.line.size', label = 'Size', step = 0.1, value = default$axis.line$size, min = 0,width = input.width),
                                             numericInput('axis.ticks.size', label = 'Size', step = 0.1, value = default$axis.ticks$size, min = 0,width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('axis.text.size', label = 'Size', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
+                                            numericInput('axis.text.x.size', label = 'Size', min = 1, max = 30, value = NULL, step = 1, width = input.width),
+                                            numericInput('axis.text.y.size', label = 'Size', min = 1, max = 30, value = NULL, step = 1, width = input.width),
                                             selectInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width),
                                             selectInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width),
+                                            selectInput('axis.text.x.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width),
+                                            selectInput('axis.text.y.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width),
                                             "",
                                             ""
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width),
+                                            numericInput('axis.text.hjust.x', 'Hjust', value = NULL, step = 0.25, width = input.width),
+                                            numericInput('axis.text.hjust.y', 'Hjust', value = NULL, step = 0.25, width = input.width),
                                             "",
                                             ""
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
+                                            numericInput('axis.text.x.vjust', 'Vjust', value = NULL, step = 0.25, width = input.width),
+                                            numericInput('axis.text.y.vjust', 'Vjust', value = NULL, step = 0.25, width = input.width),
                                             "",
                                             ""
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width),
+                                            numericInput('axis.text.x.angle', label = 'Angle', min = -180, max = 180, value = NULL, step = 5, width = input.width),
+                                            numericInput('axis.text.y.angle', label = 'Angle', min = -180, max = 180, value = NULL, step = 5, width = input.width),
                                             "",
                                             ""
                                     )
@@ -215,15 +231,32 @@ ggThemeAssist <- function(){
              y = if (input$axis.title.y == '') { NULL } else { input$axis.title.y },
              fill = if (input$legend.fill.title == '') { NULL } else { input$legend.fill.title },
              colour = if (input$legend.colour.title == '') { NULL } else { input$legend.colour.title }) +
-        theme(axis.text = element_text(
-          size = input$axis.text.size,
-          colour = input$axis.text.colour,
-          face = input$axis.text.face,
-          family = input$axis.text.family,
-          angle = input$axis.text.angle,
-          hjust = input$axis.text.hjust,
-          vjust = input$axis.text.vjust,
-          lineheight = input$axis.text.lineheight),
+        theme(
+          axis.text = element_text(
+            size = input$axis.text.size,
+            colour = input$axis.text.colour,
+            face = input$axis.text.face,
+            family = input$axis.text.family,
+            angle = input$axis.text.angle,
+            hjust = input$axis.text.hjust,
+            vjust = input$axis.text.vjust,
+            lineheight = input$axis.text.lineheight),
+          axis.text.x = element_text(
+            size = setNull(input$axis.text.x.size),
+            colour = setNull(input$axis.text.x.colour),
+            family = setNull(input$axis.text.x.family),
+            angle = setNull(input$axis.text.x.angle),
+            hjust = setNull(input$axis.text.x.hjust),
+            vjust = setNull(input$axis.text.x.vjust)
+            ),
+          axis.text.y = element_text(
+            size = setNull(input$axis.text.y.size),
+            colour = setNull(input$axis.text.y.colour),
+            family = setNull(input$axis.text.y.family),
+            angle = setNull(input$axis.text.y.angle),
+            hjust = setNull(input$axis.text.y.hjust),
+            vjust = setNull(input$axis.text.y.vjust)
+          ),
           axis.line = element_line(
             linetype = input$axis.line.type,
             colour = input$axis.line.colour,

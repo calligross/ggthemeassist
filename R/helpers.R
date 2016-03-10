@@ -11,11 +11,15 @@ addQuotes <- function(x){
   x
 }
 
-setNullNA <- function(x) {
-  if (x == 'NULL') {
+setNull <- function(x) {
+  if(is.null(x)) {
+    return(NULL)
+  } else if (is.na(x)) {
+    x <- NULL
+  } else if (x == 'NULL') {
     x <- NULL
   } else if (x == 'NA') {
-    x <- NA
+    x <- NULL
   }
   return(x)
 }
