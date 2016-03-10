@@ -1,11 +1,11 @@
 Package: ggThemeAssist
 Type: Package
-Title: Addin to customize ggplot2 themes
+Title: Add-in to Customize 'ggplot2' Themes
 Version: 0.1.0
 Author: Calli Gross [aut, cre],
         Philipp Ottolinger [aut, ctb]
 Maintainer: Calli Gross <ggthemeassist@icloud.com>
-Description: ggThemeAssist is a RStudio-Addin that delivers a graphical interface for editing ggplot2 theme elements.
+Description: Rstudio add-in that delivers a graphical interface for editing 'ggplot2' theme elements.
 License: GPL-3
 URL: https://github.com/calligross/ggthemeassist
 LazyData: TRUE
