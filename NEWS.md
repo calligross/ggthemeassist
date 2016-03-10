@@ -1,3 +1,7 @@
+# ggThemeAssist 0.1.1.9000
+
+* Plot height is now a relative value to improve visibility in combinations with lower screen resolutions. Closes #32.
+
 # ggThemeAssist 0.1.0
 
 **ggThemeAssist** is now available on CRAN (v0.1.0).

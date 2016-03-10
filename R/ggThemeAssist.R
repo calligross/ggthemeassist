@@ -33,7 +33,7 @@ ggThemeAssist <- function(){
     gadgetTitleBar("ggplot Theme Assistant"),
     miniTabstripPanel(
       miniTabPanel("Panel & Background", icon = icon('sliders'),
-                   plotOutput("ThePlot2", width = '100%', height = '400px'),
+                   plotOutput("ThePlot2", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
                                             headingOutput('Plot Background'),
@@ -68,7 +68,7 @@ ggThemeAssist <- function(){
                    )
       ),
       miniTabPanel("Axis", icon = icon('sliders'),
-                   plotOutput("ThePlot", width = '100%', height = '400px'),
+                   plotOutput("ThePlot", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
                                             headingOutput('Axis text'),
@@ -112,7 +112,7 @@ ggThemeAssist <- function(){
                                     )
                    )),
       miniTabPanel("Title and label", icon = icon('sliders'),
-                   plotOutput("ThePlot4", width = '100%', height = '400px'),
+                   plotOutput("ThePlot4", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
                                             headingOutput('Labels'),
@@ -157,7 +157,7 @@ ggThemeAssist <- function(){
                    )
       ),
       miniTabPanel("Legend", icon = icon('sliders'),
-                   plotOutput("ThePlot3", width = '100%', height = '400px'),
+                   plotOutput("ThePlot3", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
                                             headingOutput('Legend position'),
