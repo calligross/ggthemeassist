@@ -24,6 +24,26 @@ default <- list(
     angle = 0,
     lineheight = 1.1
     ),
+  axis.text.x = list(
+    family = 'sans',
+    size = 10,
+    face = 'plain',
+    colour = 'grey30',
+    hjust = 0.5,
+    vjust = 1,
+    angle = 0,
+    lineheight = 1.1
+  ),
+  axis.text.y = list(
+    family = 'sans',
+    size = 10,
+    face = 'plain',
+    colour = 'grey30',
+    hjust = 1,
+    vjust = 0.5,
+    angle = 0,
+    lineheight = 1.1
+  ),
   axis.line = list(
     colour = 'black',
     size = 1,
@@ -141,6 +161,16 @@ AvailableElements <- list(
   ),
   axis.text = list(
     name = 'axis.text',
+    type = 'element_text',
+    enabled = TRUE
+  ),
+  axis.text.x = list(
+    name = 'axis.text.x',
+    type = 'element_text',
+    enabled = TRUE
+  ),
+  axis.text.y = list(
+    name = 'axis.text.y',
     type = 'element_text',
     enabled = TRUE
   ),
