@@ -57,8 +57,8 @@ ggThemeAssist <- function(){
                                             headingOutput('Grid Minor')
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            selectInput('plot.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$plot.background$fill),
-                                            selectInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill),
+                                            selectizeInput('plot.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$plot.background$fill, options = list(create = TRUE)),
+                                            selectizeInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill, options = list(create = TRUE)),
                                             "",
                                             ""
                                     ),
@@ -75,10 +75,10 @@ ggThemeAssist <- function(){
                                             numericInput('panel.grid.minor.size', label = 'Size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            selectInput('plot.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$plot.background$colour),
-                                            selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour),
-                                            selectInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width),
-                                            selectInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width)
+                                            selectizeInput('plot.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$plot.background$colour, options = list(create = TRUE)),
+                                            selectizeInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour, options = list(create = TRUE)),
+                                            selectizeInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width, options = list(create = TRUE))
                                     )
                    )
       ),
@@ -110,13 +110,13 @@ ggThemeAssist <- function(){
                                             numericInput('axis.text.size', label = 'Size', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
                                             numericInput('axis.text.x.size', label = 'Size', min = 1, max = 30, value = NULL, step = 1, width = input.width),
                                             numericInput('axis.text.y.size', label = 'Size', min = 1, max = 30, value = NULL, step = 1, width = input.width),
-                                            selectInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width),
-                                            selectInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width)
+                                            selectizeInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width, options = list(create = TRUE))
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            selectInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width),
-                                            selectInput('axis.text.x.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width),
-                                            selectInput('axis.text.y.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width),
+                                            selectizeInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('axis.text.x.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('axis.text.y.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width, options = list(create = TRUE)),
                                             "",
                                             ""
                                     ),
@@ -167,8 +167,8 @@ ggThemeAssist <- function(){
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('legend.colour.title', label = 'Colour', value = gg_original$labels$colour, width = input.width),
-                                            selectInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width),
-                                            selectInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width)
+                                            selectizeInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width, options = list(create = TRUE))
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('legend.fill.title', label = 'Fill', value = gg_original$labels$fill, width = input.width),
@@ -201,8 +201,8 @@ ggThemeAssist <- function(){
                                             selectInput('legend.position', label = 'Position', choices = legend.positions, selected = default$legend.position, width = input.width),
                                             selectInput('legend.title.family', label = 'Family', choices = text.families, selected = default$legend.title$family, width = input.width),
                                             selectInput('legend.text.family', label = 'Family', choices = text.families, selected = default$legend.text$family, width = input.width),
-                                            selectInput('legend.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.background$fill),
-                                            selectInput('legend.key.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.key$fill)
+                                            selectizeInput('legend.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.background$fill, options = list(create = TRUE)),
+                                            selectizeInput('legend.key.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.key$fill, options = list(create = TRUE))
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected = default$legend.direction, width = input.width),
@@ -226,10 +226,10 @@ ggThemeAssist <- function(){
                                               condition = "input['legend.position'] == 'XY'",
                                               numericInput('legend.position.y', label = 'Y Coord', min = 0, max = 1, value = default$legend.position.y, step = 0.01, width = input.width)
                                             ),
-                                            selectInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
-                                            selectInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width),
-                                            selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour),
-                                            selectInput('legend.key.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.key$colour)
+                                            selectizeInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour, options = list(create = TRUE)),
+                                            selectizeInput('legend.key.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.key$colour, options = list(create = TRUE))
                                     )
                    )
       )
