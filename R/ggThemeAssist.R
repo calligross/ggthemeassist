@@ -32,6 +32,18 @@ ggThemeAssist <- function(){
   ui <- miniPage(
     gadgetTitleBar("ggplot Theme Assistant"),
     miniTabstripPanel(
+      miniTabPanel("Settings", icon = icon('sliders'),
+                   plotOutput("ThePlot5", width = '100%', height = '45%'),
+                   miniContentPanel(scrollable = TRUE,
+                                    fillRow(height = heading.height, width = '100%',
+                                            headingOutput('Plot dimension')
+                                    ),
+                                    fillRow(height = line.height, width = '100%',
+                                            numericInput('plot.width', label = 'Width', min = 0, max = 100, step = 1, value = 100)
+
+                                    )
+                   )
+      ),
       miniTabPanel("Panel & Background", icon = icon('sliders'),
                    plotOutput("ThePlot2", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
@@ -344,13 +356,14 @@ ggThemeAssist <- function(){
       updateSelectInput(session, 'legend.position.y', selected = round(y.click, 4))
     })
 
-    ThePlot <- renderPlot({
+    ThePlot <- renderPlot(width = function() { input$plot.width / 100 * 990}, {
       print(gg_reactive())
     })
     output$ThePlot <- ThePlot
     output$ThePlot2 <- ThePlot
     output$ThePlot3 <- ThePlot
     output$ThePlot4 <- ThePlot
+    output$ThePlot5 <- ThePlot
 
     observeEvent(input$done, {
       result <- sapply(AvailableElements, compileResults, new = gg_reactive(), original = gg_original, std = default, USE.NAMES = FALSE)
