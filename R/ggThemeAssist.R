@@ -36,12 +36,11 @@ ggThemeAssist <- function(){
                    plotOutput("ThePlot5", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
-                                            headingOutput('Plot dimension')
+                                            headingOutput('Plot dimensions')
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            numericInput('plot.width', label = 'Width', min = 0, max = 100, step = 1, value = 100),
-                                            numericInput('plot.height', label = 'Height', min = 0, max = 100, step = 1, value = 100)
-
+                                            numericInput('plot.width', label = 'Width', min = 0, max = 10, step = 1, value = 10),
+                                            numericInput('plot.height', label = 'Height', min = 0, max = 10, step = 1, value = 5)
                                     )
                    )
       ),
@@ -357,8 +356,7 @@ ggThemeAssist <- function(){
       updateSelectInput(session, 'legend.position.y', selected = round(y.click, 4))
     })
 
-    ThePlot <- renderPlot(width = function() { input$plot.width / 100 * 990},
-                          height = function() { input$plot.height / 100 * 900 * 0.45}, {
+    ThePlot <- renderPlot(width = function() { input$plot.width / input$plot.height * 990 * 45 / 100 }, {
       print(gg_reactive())
     })
     output$ThePlot <- ThePlot
