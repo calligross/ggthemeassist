@@ -1,7 +1,13 @@
 # Choices to pick from
 colours.available <- c('None' = NA, colors())
 text.faces <- c('plain', 'italic', 'bold', 'bold.italic')
-text.families <- names(pdfFonts())
+
+text.families <- if (is.element('extrafont', installed.packages()[, 1])) {
+  c(c('sans', 'serif', 'mono'), extrafont::fonttable()$FamilyName)
+} else {
+  names(pdfFonts())
+}
+
 legend.positions <- c('none', 'left', 'right', 'top', 'bottom', 'XY')
 legend.directions <- c('horizontal', 'vertical')
 linetypes <- c('blank', 'solid', 'dashed', 'dotted', 'dotdash', 'longdash', 'twodash')
