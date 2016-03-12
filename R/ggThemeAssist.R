@@ -30,6 +30,9 @@ ggThemeAssist <- function(){
   default <- updateDefaults(gg_original, default)
 
   ui <- miniPage(
+    tags$script(jscodeWidth),
+    tags$script(jscodeHeight),
+
     gadgetTitleBar("ggplot Theme Assistant"),
     miniTabstripPanel(
       miniTabPanel("Settings", icon = icon('sliders'),
