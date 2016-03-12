@@ -173,7 +173,7 @@ ggThemeAssist <- function(){
                    )
       ),
       miniTabPanel("Legend", icon = icon('sliders'),
-                   plotOutput("ThePlot3", width = '100%', height = '45%'),
+                   plotOutput("ThePlot3", width = '100%', height = '45%', click = 'legend.click'),
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
                                             headingOutput('Legend position'),
@@ -334,6 +334,14 @@ ggThemeAssist <- function(){
           }),
           legend.direction = input$legend.direction
         )
+    })
+
+    observeEvent(input$legend.click, {
+      x.click <- input$legend.click$x / (input$legend.click$domain$right - input$legend.click$domain$left)
+      y.click <- input$legend.click$y / (input$legend.click$domain$top - input$legend.click$domain$bottom)
+      updateSelectInput(session, 'legend.position', selected = 'XY')
+      updateSelectInput(session, 'legend.position.x', selected = round(x.click, 4))
+      updateSelectInput(session, 'legend.position.y', selected = round(y.click, 4))
     })
 
     ThePlot <- renderPlot({
