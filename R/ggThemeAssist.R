@@ -382,7 +382,16 @@ ggThemeAssist <- function(){
       updateSelectInput(session, 'legend.position.y', selected = round(y.click, 4))
     })
 
-    ThePlot <- renderPlot(width = function() { input$plot.width / input$plot.height * 990 * 45 / 100 }, {
+    ThePlot <- renderPlot(width = function() {
+      if (!is.null(input$ViewerWidth)) {
+        min(input$plot.width / input$plot.height * input$ViewerWidth * 45 / 100,
+            input$ViewerWidth
+            )
+           } else {
+             990
+             }
+        },
+      {
       print(gg_reactive())
     })
     output$ThePlot <- ThePlot
