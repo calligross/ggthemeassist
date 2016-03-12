@@ -39,7 +39,8 @@ ggThemeAssist <- function(){
                                             headingOutput('Plot dimension')
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            numericInput('plot.width', label = 'Width', min = 0, max = 100, step = 1, value = 100)
+                                            numericInput('plot.width', label = 'Width', min = 0, max = 100, step = 1, value = 100),
+                                            numericInput('plot.height', label = 'Height', min = 0, max = 100, step = 1, value = 100)
 
                                     )
                    )
@@ -356,7 +357,8 @@ ggThemeAssist <- function(){
       updateSelectInput(session, 'legend.position.y', selected = round(y.click, 4))
     })
 
-    ThePlot <- renderPlot(width = function() { input$plot.width / 100 * 990}, {
+    ThePlot <- renderPlot(width = function() { input$plot.width / 100 * 990},
+                          height = function() { input$plot.height / 100 * 900 * 0.45}, {
       print(gg_reactive())
     })
     output$ThePlot <- ThePlot
