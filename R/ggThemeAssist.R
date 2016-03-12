@@ -240,6 +240,29 @@ ggThemeAssist <- function(){
   server <- function(input, output, session) {
 
     gg_reactive <- reactive({
+
+      validate(
+        need(is.validColour(input$plot.background.fill), ''),
+        need(is.validColour(input$panel.background.fill), ''),
+        need(is.validColour(input$plot.background.colour), ''),
+        need(is.validColour(input$panel.background.colour), ''),
+        need(is.validColour(input$panel.grid.major.colour), ''),
+        need(is.validColour(input$panel.grid.minor.colour), ''),
+        need(is.validColour(input$axis.line.colour), ''),
+        need(is.validColour(input$axis.ticks.colour), ''),
+        need(is.validColour(input$axis.text.colour), ''),
+        need(is.validColour(input$axis.text.x.colour), ''),
+        need(is.validColour(input$axis.text.y.colour), ''),
+        need(is.validColour(input$plot.title.colour), ''),
+        need(is.validColour(input$axis.title.colour), ''),
+        need(is.validColour(input$legend.background.fill), ''),
+        need(is.validColour(input$legend.key.fill), ''),
+        need(is.validColour(input$legend.title.colour), ''),
+        need(is.validColour(input$legend.text.colour), ''),
+        need(is.validColour(input$legend.background.colour), ''),
+        need(is.validColour(input$legend.key.colour), '')
+      )
+
       gg_original +
         labs(title = if (input$plot.title == '') { NULL } else { input$plot.title },
              x = if (input$axis.title.x == '') { NULL } else { input$axis.title.x },

@@ -34,3 +34,16 @@ compileResults <- function(element, original, new, std = default) {
     return(NA)
   }
 }
+
+is.validColour <- function(x) {
+  if (is.null(x)) {
+    return(TRUE)
+  } else if (x %in% c(colours.available, 'NA', 'NULL')) {
+    return(TRUE)
+  } else if (grepl('#[0-9]{6}$', x)) {
+    return(TRUE)
+  }
+  else {
+    return(FALSE)
+  }
+}
