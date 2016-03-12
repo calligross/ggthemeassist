@@ -383,14 +383,15 @@ ggThemeAssist <- function(){
     })
 
     ThePlot <- renderPlot(width = function() {
-      if (!is.null(input$ViewerWidth)) {
+        validate(
+          need(is.numeric(input$plot.width), ''),
+                 need(is.numeric(input$plot.height), ''),
+                 need(!is.null(input$ViewerWidth), '')
+                 )
         min(input$plot.width / input$plot.height * input$ViewerWidth * 45 / 100,
             input$ViewerWidth
             )
-           } else {
-             990
-             }
-        },
+    },
       {
       print(gg_reactive())
     })
