@@ -34,7 +34,7 @@ ggThemeAssist <- function(){
     tags$script(jscodeHeight),
 
     gadgetTitleBar("ggplot Theme Assistant"),
-    miniTabstripPanel(
+    miniTabstripPanel(selected = 'Panel & Background',
       miniTabPanel("Settings", icon = icon('sliders'),
                    plotOutput("ThePlot5", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
