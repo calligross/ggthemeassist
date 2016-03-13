@@ -27,7 +27,7 @@ ggThemeAssist <- function(){
 
   stopifnot(is.ggplot(gg_original))
 
-  default <- updateDefaults(gg_original, default)
+  default <- updateDefaults(gg_original, default, linetypes = linetypes)
 
   ui <- miniPage(
     tags$script(jscodeWidth),
@@ -241,7 +241,7 @@ ggThemeAssist <- function(){
 
     observe({
       if (is.null(input$ViewerWidth))
-        updateInputChoices(session, input, gg_original)
+        updateInputChoices(session, input, gg_original, default = default)
       })
 
     gg_reactive <- reactive({

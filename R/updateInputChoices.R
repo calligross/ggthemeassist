@@ -1,4 +1,4 @@
-updateInputChoices <- function(session, input, gg) {
+updateInputChoices <- function(session, input, gg, default) {
 
   # critical are colours, because they also can be e.g. RGB
   Elements <- reactiveValuesToList(input)
@@ -8,9 +8,9 @@ updateInputChoices <- function(session, input, gg) {
   for (i in ElementsColour) {
     anchor <- gsub(pattern = '\\.[a-z]*$', '', i)
     element <- gsub(pattern = '^.*\\.', '', i)
-    value <- gg$theme[[anchor]][[element]]
+    value <- default[[anchor]][[element]]
     if (!(is.null(value) || is.na(value))) {
-      updateSelectizeInput(session, inputId = i, choices = unique(c(value, colours.available)))
+      updateSelectizeInput(session, inputId = i, choices = unique(c(value, colours.available)), selected = value)
     }
   }
 }

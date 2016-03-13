@@ -20,7 +20,7 @@ heading.height <- '30px'
 
 # default values
 default <- list(
-  axis.text = list(
+  axis.text = structure(list(
     family = 'sans',
     size = 10,
     face = 'plain',
@@ -29,8 +29,8 @@ default <- list(
     vjust = 0.5,
     angle = 0,
     lineheight = 1.1
-    ),
-  axis.text.x = list(
+    ), class = 'element_text'),
+  axis.text.x = structure(list(
     family = 'sans',
     size = 10,
     face = 'plain',
@@ -39,8 +39,8 @@ default <- list(
     vjust = 1,
     angle = 0,
     lineheight = 1.1
-  ),
-  axis.text.y = list(
+  ), class = 'element_text'),
+  axis.text.y = structure(list(
     family = 'sans',
     size = 10,
     face = 'plain',
@@ -49,18 +49,18 @@ default <- list(
     vjust = 0.5,
     angle = 0,
     lineheight = 1.1
-  ),
-  axis.line = list(
+  ),  class = 'element_text'),
+  axis.line = structure(list(
     colour = 'black',
     size = 1,
     linetype = 'blank'
-    ),
-  axis.ticks = list(
+    ), class = 'element_line'),
+  axis.ticks = structure(list(
     colour = 'grey20',
     size = 0.5,
     linetype = 'solid'
-  ),
-  axis.title = list(
+  ), class = 'element_line'),
+  axis.title = structure(list(
     family = 'sans',
     size = 11,
     face = 'plain',
@@ -69,8 +69,8 @@ default <- list(
     vjust = 0.5,
     angle = 0,
     lineheight = 1.1
-  ),
-  plot.title = list(
+  ), class = 'element_text'),
+  plot.title = structure(list(
     family = 'sans',
     size = 13,
     face = 'plain',
@@ -79,53 +79,53 @@ default <- list(
     vjust = 0.5,
     angle = 0,
     lineheight = 1.1
-  ),
-  panel.background = list(
+  ), class = 'element_text'),
+  panel.background = structure(list(
     fill = 'grey92',
     colour = 'NA',
     size = 0.5,
     linetype = 'blank'
-  ),
-  plot.background = list(
+  ), class = 'element_rect'),
+  plot.background = structure(list(
     fill = 'NA',
     colour = 'white',
     size = 0.5,
     linetype = 'blank'
-  ),
-  panel.grid.major = list(
+  ), class = 'element_rect'),
+  panel.grid.major = structure(list(
     colour = 'grey100',
     size = 0.5,
     linetype = 'solid'
-  ),
-  panel.grid.minor = list(
+  ), class = 'element_line'),
+  panel.grid.minor = structure(list(
     colour = 'grey100',
     size = 0.5,
     linetype = 'solid'
-  ),
-  legend.text = list(
+  ), class = 'element_line'),
+  legend.text = structure(list(
     size = 10,
     face = 'plain',
     family = 'sans',
     colour = 'black'
-  ),
-  legend.title = list(
+  ), class = 'element_text'),
+  legend.title = structure(list(
     size = 10,
     face = 'plain',
     family = 'sans',
     colour = 'black'
-  ),
-  legend.background = list(
+  ), class = 'element_text'),
+  legend.background = structure(list(
     fill = 'grey100',
     colour = 'NA',
     size = 0.5,
     linetype = 'blank'
-  ),
-  legend.key = list(
+  ), class = 'element_rect'),
+  legend.key = structure(list(
     fill = 'grey95',
     colour = 'NA',
     size = 0.5,
     linetype = 'blank'
-  ),
+  ), class = 'element_rect'),
   legend.position = 'right',
   legend.position.x = 0.5,
   legend.position.y = 0.5,
