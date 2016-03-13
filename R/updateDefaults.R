@@ -31,7 +31,12 @@ updateDefaults <- function(gg, defaults) {
       }
     }
     else {
-      default[[anchor]][[element]] <- gg[['theme']][[anchor]][[element]]
+      # Relative size needs to be converted to absolute sizes
+      if (class(default[[anchor]][[element]] <- gg[['theme']][[anchor]][[element]]) == 'rel') {
+        default[[anchor]][[element]] <- gg[['theme']][[anchor]][[element]] * gg$theme$text$size
+      } else {
+        default[[anchor]][[element]] <- gg[['theme']][[anchor]][[element]]
+      }
     }
   }
   return(default)

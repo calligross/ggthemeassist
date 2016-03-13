@@ -239,6 +239,11 @@ ggThemeAssist <- function(){
 
   server <- function(input, output, session) {
 
+    observe({
+      if (is.null(input$ViewerWidth))
+        updateInputChoices(session, input, gg_original)
+      })
+
     gg_reactive <- reactive({
 
       validate(

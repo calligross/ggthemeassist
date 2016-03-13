@@ -40,7 +40,7 @@ is.validColour <- function(x) {
     return(TRUE)
   } else if (x %in% c(colours.available, 'NA', 'NULL')) {
     return(TRUE)
-  } else if (grepl('#[0-9]{6}$', x)) {
+  } else if (grepl('#[0-9a-fA-F]{6}$', x)) {
     return(TRUE)
   }
   else {
