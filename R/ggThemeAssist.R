@@ -27,11 +27,26 @@ ggThemeAssist <- function(){
 
   stopifnot(is.ggplot(gg_original))
 
-  default <- updateDefaults(gg_original, default)
+  default <- updateDefaults(gg_original, default, linetypes = linetypes)
 
   ui <- miniPage(
+    tags$script(jscodeWidth),
+    tags$script(jscodeHeight),
+
     gadgetTitleBar("ggplot Theme Assistant"),
-    miniTabstripPanel(
+    miniTabstripPanel(selected = 'Panel & Background',
+      miniTabPanel("Settings", icon = icon('sliders'),
+                   plotOutput("ThePlot5", width = '100%', height = '45%'),
+                   miniContentPanel(scrollable = TRUE,
+                                    fillRow(height = heading.height, width = '100%',
+                                            headingOutput('Plot dimensions')
+                                    ),
+                                    fillRow(height = line.height, width = '100%',
+                                            numericInput('plot.width', label = 'Width', min = 0, max = 10, step = 1, value = 10),
+                                            numericInput('plot.height', label = 'Height', min = 0, max = 10, step = 1, value = 5)
+                                    )
+                   )
+      ),
       miniTabPanel("Panel & Background", icon = icon('sliders'),
                    plotOutput("ThePlot2", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
@@ -42,8 +57,8 @@ ggThemeAssist <- function(){
                                             headingOutput('Grid Minor')
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            selectInput('plot.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$plot.background$fill),
-                                            selectInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill),
+                                            selectizeInput('plot.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$plot.background$fill, options = list(create = TRUE)),
+                                            selectizeInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill, options = list(create = TRUE)),
                                             "",
                                             ""
                                     ),
@@ -60,10 +75,10 @@ ggThemeAssist <- function(){
                                             numericInput('panel.grid.minor.size', label = 'Size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            selectInput('plot.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$plot.background$colour),
-                                            selectInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour),
-                                            selectInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width),
-                                            selectInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width)
+                                            selectizeInput('plot.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$plot.background$colour, options = list(create = TRUE)),
+                                            selectizeInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour, options = list(create = TRUE)),
+                                            selectizeInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width, options = list(create = TRUE))
                                     )
                    )
       ),
@@ -72,41 +87,57 @@ ggThemeAssist <- function(){
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
                                             headingOutput('Axis text'),
+                                            headingOutput('Axis text.x'),
+                                            headingOutput('Axis text.y'),
                                             headingOutput('Axis line'),
                                             headingOutput('Axis ticks')
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('axis.text.family', label = 'Family', choices = text.families, selected = default$axis.text$family, width = input.width),
+                                            selectInput('axis.text.x.family', label = 'Family', choices = c('None' = 'NULL', text.families), selected = NULL, width = input.width),
+                                            selectInput('axis.text.y.family', label = 'Family', choices = c('None' = 'NULL', text.families), selected = NULL, width = input.width),
                                             selectInput('axis.line.type', label = 'Type', choices = linetypes, selected = default$axis.line$linetype, width = input.width),
                                             selectInput('axis.ticks.type', label = 'Type', choices = linetypes, selected = default$axis.ticks$linetype, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('axis.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.text$face),
+                                            selectInput('axis.text.x.face', label = 'Face', choices = c('None' = 'NULL', text.faces), width = input.width, selected = NULL),
+                                            selectInput('axis.text.y.face', label = 'Face', choices = c('None' = 'NULL', text.faces), width = input.width, selected = NULL),
                                             numericInput('axis.line.size', label = 'Size', step = 0.1, value = default$axis.line$size, min = 0,width = input.width),
                                             numericInput('axis.ticks.size', label = 'Size', step = 0.1, value = default$axis.ticks$size, min = 0,width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('axis.text.size', label = 'Size', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
-                                            selectInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width),
-                                            selectInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width)
+                                            numericInput('axis.text.x.size', label = 'Size', min = 1, max = 30, value = NULL, step = 1, width = input.width),
+                                            numericInput('axis.text.y.size', label = 'Size', min = 1, max = 30, value = NULL, step = 1, width = input.width),
+                                            selectizeInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width, options = list(create = TRUE))
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            selectInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width),
+                                            selectizeInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('axis.text.x.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('axis.text.y.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width, options = list(create = TRUE)),
                                             "",
                                             ""
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('axis.text.hjust', 'Hjust', value = default$axis.text$hjust, step = 0.25, width = input.width),
+                                            numericInput('axis.text.hjust.x', 'Hjust', value = NULL, step = 0.25, width = input.width),
+                                            numericInput('axis.text.hjust.y', 'Hjust', value = NULL, step = 0.25, width = input.width),
                                             "",
                                             ""
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('axis.text.vjust', 'Vjust', value = default$axis.text$vjust, step = 0.25, width = input.width),
+                                            numericInput('axis.text.x.vjust', 'Vjust', value = NULL, step = 0.25, width = input.width),
+                                            numericInput('axis.text.y.vjust', 'Vjust', value = NULL, step = 0.25, width = input.width),
                                             "",
                                             ""
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('axis.text.angle', label = 'Angle', min = -180, max = 180, value = default$axis.text$angle, step = 5, width = input.width),
+                                            numericInput('axis.text.x.angle', label = 'Angle', min = -180, max = 180, value = NULL, step = 5, width = input.width),
+                                            numericInput('axis.text.y.angle', label = 'Angle', min = -180, max = 180, value = NULL, step = 5, width = input.width),
                                             "",
                                             ""
                                     )
@@ -136,8 +167,8 @@ ggThemeAssist <- function(){
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('legend.colour.title', label = 'Colour', value = gg_original$labels$colour, width = input.width),
-                                            selectInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width),
-                                            selectInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width)
+                                            selectizeInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width, options = list(create = TRUE))
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('legend.fill.title', label = 'Fill', value = gg_original$labels$fill, width = input.width),
@@ -157,7 +188,7 @@ ggThemeAssist <- function(){
                    )
       ),
       miniTabPanel("Legend", icon = icon('sliders'),
-                   plotOutput("ThePlot3", width = '100%', height = '45%'),
+                   plotOutput("ThePlot3", width = '100%', height = '45%', click = 'legend.click'),
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
                                             headingOutput('Legend position'),
@@ -170,8 +201,8 @@ ggThemeAssist <- function(){
                                             selectInput('legend.position', label = 'Position', choices = legend.positions, selected = default$legend.position, width = input.width),
                                             selectInput('legend.title.family', label = 'Family', choices = text.families, selected = default$legend.title$family, width = input.width),
                                             selectInput('legend.text.family', label = 'Family', choices = text.families, selected = default$legend.text$family, width = input.width),
-                                            selectInput('legend.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.background$fill),
-                                            selectInput('legend.key.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.key$fill)
+                                            selectizeInput('legend.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.background$fill, options = list(create = TRUE)),
+                                            selectizeInput('legend.key.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.key$fill, options = list(create = TRUE))
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected = default$legend.direction, width = input.width),
@@ -195,10 +226,10 @@ ggThemeAssist <- function(){
                                               condition = "input['legend.position'] == 'XY'",
                                               numericInput('legend.position.y', label = 'Y Coord', min = 0, max = 1, value = default$legend.position.y, step = 0.01, width = input.width)
                                             ),
-                                            selectInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width),
-                                            selectInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width),
-                                            selectInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour),
-                                            selectInput('legend.key.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.key$colour)
+                                            selectizeInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour, options = list(create = TRUE)),
+                                            selectizeInput('legend.key.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.key$colour, options = list(create = TRUE))
                                     )
                    )
       )
@@ -208,22 +239,67 @@ ggThemeAssist <- function(){
 
   server <- function(input, output, session) {
 
+    observe({
+      if (is.null(input$ViewerWidth))
+        updateInputChoices(session, input, gg_original, default = default)
+      })
+
     gg_reactive <- reactive({
+
+      validate(
+        need(is.validColour(input$plot.background.fill), ''),
+        need(is.validColour(input$panel.background.fill), ''),
+        need(is.validColour(input$plot.background.colour), ''),
+        need(is.validColour(input$panel.background.colour), ''),
+        need(is.validColour(input$panel.grid.major.colour), ''),
+        need(is.validColour(input$panel.grid.minor.colour), ''),
+        need(is.validColour(input$axis.line.colour), ''),
+        need(is.validColour(input$axis.ticks.colour), ''),
+        need(is.validColour(input$axis.text.colour), ''),
+        need(is.validColour(input$axis.text.x.colour), ''),
+        need(is.validColour(input$axis.text.y.colour), ''),
+        need(is.validColour(input$plot.title.colour), ''),
+        need(is.validColour(input$axis.title.colour), ''),
+        need(is.validColour(input$legend.background.fill), ''),
+        need(is.validColour(input$legend.key.fill), ''),
+        need(is.validColour(input$legend.title.colour), ''),
+        need(is.validColour(input$legend.text.colour), ''),
+        need(is.validColour(input$legend.background.colour), ''),
+        need(is.validColour(input$legend.key.colour), '')
+      )
+
       gg_original +
         labs(title = if (input$plot.title == '') { NULL } else { input$plot.title },
              x = if (input$axis.title.x == '') { NULL } else { input$axis.title.x },
              y = if (input$axis.title.y == '') { NULL } else { input$axis.title.y },
              fill = if (input$legend.fill.title == '') { NULL } else { input$legend.fill.title },
              colour = if (input$legend.colour.title == '') { NULL } else { input$legend.colour.title }) +
-        theme(axis.text = element_text(
-          size = input$axis.text.size,
-          colour = input$axis.text.colour,
-          face = input$axis.text.face,
-          family = input$axis.text.family,
-          angle = input$axis.text.angle,
-          hjust = input$axis.text.hjust,
-          vjust = input$axis.text.vjust,
-          lineheight = input$axis.text.lineheight),
+        theme(
+          axis.text = element_text(
+            size = input$axis.text.size,
+            colour = input$axis.text.colour,
+            face = input$axis.text.face,
+            family = input$axis.text.family,
+            angle = input$axis.text.angle,
+            hjust = input$axis.text.hjust,
+            vjust = input$axis.text.vjust,
+            lineheight = input$axis.text.lineheight),
+          axis.text.x = element_text(
+            size = setNull(input$axis.text.x.size),
+            colour = setNull(input$axis.text.x.colour),
+            family = setNull(input$axis.text.x.family),
+            angle = setNull(input$axis.text.x.angle),
+            hjust = setNull(input$axis.text.x.hjust),
+            vjust = setNull(input$axis.text.x.vjust)
+            ),
+          axis.text.y = element_text(
+            size = setNull(input$axis.text.y.size),
+            colour = setNull(input$axis.text.y.colour),
+            family = setNull(input$axis.text.y.family),
+            angle = setNull(input$axis.text.y.angle),
+            hjust = setNull(input$axis.text.y.hjust),
+            vjust = setNull(input$axis.text.y.vjust)
+          ),
           axis.line = element_line(
             linetype = input$axis.line.type,
             colour = input$axis.line.colour,
@@ -303,13 +379,32 @@ ggThemeAssist <- function(){
         )
     })
 
-    ThePlot <- renderPlot({
+    observeEvent(input$legend.click, {
+      x.click <- input$legend.click$x / (input$legend.click$domain$right - input$legend.click$domain$left)
+      y.click <- input$legend.click$y / (input$legend.click$domain$top - input$legend.click$domain$bottom)
+      updateSelectInput(session, 'legend.position', selected = 'XY')
+      updateSelectInput(session, 'legend.position.x', selected = round(x.click, 4))
+      updateSelectInput(session, 'legend.position.y', selected = round(y.click, 4))
+    })
+
+    ThePlot <- renderPlot(width = function() {
+        validate(
+          need(is.numeric(input$plot.width), ''),
+                 need(is.numeric(input$plot.height), ''),
+                 need(!is.null(input$ViewerWidth), '')
+                 )
+        min(input$plot.width / input$plot.height * input$ViewerWidth * 45 / 100,
+            input$ViewerWidth
+            )
+    },
+      {
       print(gg_reactive())
     })
     output$ThePlot <- ThePlot
     output$ThePlot2 <- ThePlot
     output$ThePlot3 <- ThePlot
     output$ThePlot4 <- ThePlot
+    output$ThePlot5 <- ThePlot
 
     observeEvent(input$done, {
       result <- sapply(AvailableElements, compileResults, new = gg_reactive(), original = gg_original, std = default, USE.NAMES = FALSE)
