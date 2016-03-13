@@ -35,7 +35,11 @@ updateDefaults <- function(gg, defaults) {
       if (class(default[[anchor]][[element]] <- gg[['theme']][[anchor]][[element]]) == 'rel') {
         default[[anchor]][[element]] <- gg[['theme']][[anchor]][[element]] * gg$theme$text$size
       } else {
-        default[[anchor]][[element]] <- gg[['theme']][[anchor]][[element]]
+        if (element == 'linetype' && is.numeric(gg[['theme']][[anchor]][[element]])) {
+          default[[anchor]][[element]] <- linetypes[gg[['theme']][[anchor]][[element]] + 1]
+        } else {
+          default[[anchor]][[element]] <- gg[['theme']][[anchor]][[element]]
+        }
       }
     }
   }
