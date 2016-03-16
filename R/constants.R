@@ -20,6 +20,26 @@ heading.height <- '30px'
 
 # default values
 default <- list(
+  plot.subtitle = structure(list(
+    family = 'sans',
+    size = 9,
+    face = 'plain',
+    colour = 'grey30',
+    hjust = 0,
+    vjust = 0.5,
+    angle = 0,
+    lineheight = 1.1
+  ), class = 'element_text'),
+  plot.caption = structure(list(
+    family = 'sans',
+    size = 9,
+    face = 'plain',
+    colour = 'grey30',
+    hjust = 1,
+    vjust = 0.5,
+    angle = 0,
+    lineheight = 1.1
+  ), class = 'element_text'),
   axis.text = structure(list(
     family = 'sans',
     size = 10,
@@ -135,11 +155,23 @@ default <- list(
     x = '',
     y = '',
     colour = '',
-    fill = ''
+    fill = '',
+    subtitle = '',
+    caption = ''
   )
 )
 
 AvailableElements <- list(
+  plot.subtitle = list(
+    name = 'plot.subtitle',
+    type = 'element_text',
+    enabled = TRUE
+  ),
+  plot.caption = list(
+    name = 'plot.caption',
+    type = 'element_text',
+    enabled = TRUE
+  ),
   axis.line = list(
     name = 'axis.line',
     type = 'element_line',
