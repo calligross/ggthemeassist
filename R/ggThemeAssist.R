@@ -148,42 +148,58 @@ ggThemeAssist <- function(){
                                     fillRow(height = heading.height, width = '100%',
                                             headingOutput('Labels'),
                                             headingOutput('Plot Title'),
-                                            headingOutput('Axis Labels')
+                                            headingOutput('Axis Labels'),
+                                            headingOutput('Subtitle'),
+                                            headingOutput('Caption')
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('plot.title', label = 'Title', value = gg_original$labels$title, width = input.width),
                                             selectInput('plot.title.family', label = 'Family', choices = text.families, selected = default$plot.title$family, width = input.width),
-                                            selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width)
+                                            selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width),
+                                            selectInput('plot.subtitle.family', label = 'Family', choices = text.families, selected = default$plot.subtitle$family, width = input.width),
+                                            selectInput('plot.caption.family', label = 'Family', choices = text.families, selected = default$plot.caption$family, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('axis.title.x', label = 'x-Axis', value = gg_original$labels$x, width = input.width),
                                             selectInput('plot.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
-                                            selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face)
+                                            selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
+                                            selectInput('plot.subtitle.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.subtitle$face),
+                                            selectInput('plot.caption.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.caption$face)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('axis.title.y', label = 'y-Axis', value = gg_original$labels$y, width = input.width),
                                             numericInput('plot.title.size', label = 'Size', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width),
-                                            numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
+                                            numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width),
+                                            numericInput('plot.subtitle.size', label = 'Size', min = 1, max = 30, value = default$plot.subtitle$size, step = 1, width = input.width),
+                                            numericInput('plot.caption.size', label = 'Size', min = 1, max = 30, value = default$plot.caption$size, step = 1, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('legend.colour.title', label = 'Colour', value = gg_original$labels$colour, width = input.width),
                                             selectizeInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width, options = list(create = TRUE)),
-                                            selectizeInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width, options = list(create = TRUE))
+                                            selectizeInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('plot.subtitle.colour', label = 'Colour', choices = colours.available, selected = default$plot.subtitle$colour, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('plot.caption.colour', label = 'Colour', choices = colours.available, selected = default$plot.caption$colour, width = input.width, options = list(create = TRUE))
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('legend.fill.title', label = 'Fill', value = gg_original$labels$fill, width = input.width),
                                             numericInput('plot.title.hjust', 'Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
-                                            numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width)
+                                            numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
+                                            numericInput('plot.subtitle.hjust', 'Hjust', value = default$plot.subtitle$hjust, step = 0.25, width = input.width),
+                                            numericInput('plot.caption.hjust', 'Hjust', value = default$plot.caption$hjust, step = 0.25, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('plot.subtitle', label = 'Subtitle', value = gg_original$labels$subtitle, width = input.width),
+                                            textInput('plot.subtitle.text', label = 'Subtitle', value = gg_original$labels$subtitle, width = input.width),
                                             numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
-                                            numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
+                                            numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width),
+                                            numericInput('plot.subtitle.vjust', 'Vjust', value = default$plot.subtitle$vjust, step = 0.25, width = input.width),
+                                            numericInput('plot.caption.vjust', 'Vjust', value = default$plot.caption$vjust, step = 0.25, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('plot.caption', label = 'Caption', value = gg_original$labels$caption, width = input.width),
+                                            textInput('plot.caption.text', label = 'Caption', value = gg_original$labels$caption, width = input.width),
                                             numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width),
-                                            numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
+                                            numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width),
+                                            numericInput('plot.subtitle.angle', label = 'Angle', min = -180, max = 180, value = default$plot.subtitle$angle, step = 5, width = input.width),
+                                            numericInput('plot.caption.angle', label = 'Angle', min = -180, max = 180, value = default$plot.caption$angle, step = 5, width = input.width)
                                     )
                    )
       ),
@@ -274,9 +290,27 @@ ggThemeAssist <- function(){
              y = if (input$axis.title.y == '') { NULL } else { input$axis.title.y },
              fill = if (input$legend.fill.title == '') { NULL } else { input$legend.fill.title },
              colour = if (input$legend.colour.title == '') { NULL } else { input$legend.colour.title },
-             subtitle = if (input$plot.subtitle == '') { NULL } else { input$plot.subtitle },
-             caption = if (input$plot.caption == '') { NULL } else { input$plot.caption }) +
+             subtitle = if (input$plot.subtitle.text == '') { NULL } else { input$plot.subtitle.text },
+             caption = if (input$plot.caption.text == '') { NULL } else { input$plot.caption.text }) +
         theme(
+          plot.subtitle = element_text(
+            size = input$plot.subtitle.size,
+            colour = input$plot.subtitle.colour,
+            face = input$plot.subtitle.face,
+            family = input$plot.subtitle.family,
+            angle = input$plot.subtitle.angle,
+            hjust = input$plot.subtitle.hjust,
+            vjust = input$plot.subtitle.vjust,
+            lineheight = input$plot.subtitle.lineheight),
+          plot.caption = element_text(
+            size = input$plot.caption.size,
+            colour = input$plot.caption.colour,
+            face = input$plot.caption.face,
+            family = input$plot.caption.family,
+            angle = input$plot.caption.angle,
+            hjust = input$plot.caption.hjust,
+            vjust = input$plot.caption.vjust,
+            lineheight = input$plot.caption.lineheight),
           axis.text = element_text(
             size = input$axis.text.size,
             colour = input$axis.text.colour,
