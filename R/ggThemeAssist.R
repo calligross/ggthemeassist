@@ -176,12 +176,12 @@ ggThemeAssist <- function(){
                                             numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            "",
+                                            textInput('plot.subtitle', label = 'Subtitle', value = gg_original$labels$subtitle, width = input.width),
                                             numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
                                             numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            "",
+                                            textInput('plot.caption', label = 'Caption', value = gg_original$labels$caption, width = input.width),
                                             numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width),
                                             numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
                                     )
@@ -273,7 +273,9 @@ ggThemeAssist <- function(){
              x = if (input$axis.title.x == '') { NULL } else { input$axis.title.x },
              y = if (input$axis.title.y == '') { NULL } else { input$axis.title.y },
              fill = if (input$legend.fill.title == '') { NULL } else { input$legend.fill.title },
-             colour = if (input$legend.colour.title == '') { NULL } else { input$legend.colour.title }) +
+             colour = if (input$legend.colour.title == '') { NULL } else { input$legend.colour.title },
+             subtitle = if (input$plot.subtitle == '') { NULL } else { input$plot.subtitle },
+             caption = if (input$plot.caption == '') { NULL } else { input$plot.caption }) +
         theme(
           axis.text = element_text(
             size = input$axis.text.size,

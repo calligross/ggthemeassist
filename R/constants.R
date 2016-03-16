@@ -135,7 +135,9 @@ default <- list(
     x = '',
     y = '',
     colour = '',
-    fill = ''
+    fill = '',
+    subtitle = '',
+    caption = ''
   )
 )
 
