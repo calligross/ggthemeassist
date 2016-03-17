@@ -1,3 +1,12 @@
+# ggThemeAssist **dev**
+
+[`dev`](https://github.com/calligross/ggthemeassist/tree/dev) now includes a first rough implementation of functionality for
+
+* subtitle
+* caption
+
+Please consider that these features require the [latest version of `ggplot2` from GitHub](https://github.com/hadley/ggplot2#installation).
+
 # ggThemeAssist 0.1.1
 
 ## New features
