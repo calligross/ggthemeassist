@@ -188,18 +188,36 @@ ggThemeAssist <- function(){
                                             numericInput('plot.caption.hjust', 'Hjust', value = default$plot.caption$hjust, step = 0.25, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('plot.subtitle.text', label = 'Subtitle', value = gg_original$labels$subtitle, width = input.width),
+                                            '',#textInput('plot.subtitle.text', label = 'Subtitle', value = gg_original$labels$subtitle, width = input.width),
                                             numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
                                             numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width),
                                             numericInput('plot.subtitle.vjust', 'Vjust', value = default$plot.subtitle$vjust, step = 0.25, width = input.width),
                                             numericInput('plot.caption.vjust', 'Vjust', value = default$plot.caption$vjust, step = 0.25, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('plot.caption.text', label = 'Caption', value = gg_original$labels$caption, width = input.width),
+                                            '',#textInput('plot.caption.text', label = 'Caption', value = gg_original$labels$caption, width = input.width),
                                             numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width),
                                             numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width),
                                             numericInput('plot.subtitle.angle', label = 'Angle', min = -180, max = 180, value = default$plot.subtitle$angle, step = 5, width = input.width),
                                             numericInput('plot.caption.angle', label = 'Angle', min = -180, max = 180, value = default$plot.caption$angle, step = 5, width = input.width)
+                                    ),
+                                    fillRow(width = '100%', height = heading.height,
+                                            headingOutput('Subtitle'),
+                                            headingOutput('Caption')
+                                            ),
+                                    fillRow(width = '100%',
+                                            tags$div(style="display:table; width:100%; margin:auto",
+                                                     tags$textarea(id="plot.subtitle.text", label="Subtitle",
+                                                                   rows=3, cols=80, "",
+                                                                   style="width:inherit; font-size:9pt; padding:5px"
+                                                     )
+                                            ),
+                                            tags$div(style="display:table; width:100%; margin:auto",
+                                                     tags$textarea(id="plot.caption.text", label="Caption",
+                                                                   rows=3, cols=80, "",
+                                                                   style="width:inherit; font-size:9pt; padding:5px"
+                                                     )
+                                            )
                                     )
                    )
       ),
