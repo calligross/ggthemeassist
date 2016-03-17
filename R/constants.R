@@ -14,6 +14,7 @@ linetypes <- c('blank', 'solid', 'dashed', 'dotted', 'dotdash', 'longdash', 'two
 
 # Configurations
 input.width <- '50%'
+input.width2 <- '90%'
 line.height <- '70px'
 heading.height <- '30px'
 
