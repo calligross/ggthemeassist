@@ -20,15 +20,20 @@ ggThemeAssist <- function(){
   # Set the default data to use based on the selection.
   text <- context$selection[[1]]$text
 
-  stopifnot(nchar(text) > 0)
+  if (nchar(text) == 0) {
+    stop('Please highlight a ggplot2 plot before selecting this addin.')
+  }
 
   if (grepl('[\\+\\(]', text)) {
     gg_original <- eval(parse(text = text))
   } else {
+    text <- gsub('\\s+', '', text)
     gg_original <- get(text, envir = .GlobalEnv)
   }
 
-  stopifnot(is.ggplot(gg_original))
+  if (!is.ggplot(gg_original)) {
+    stop('No ggplot2 object has been selected. Fool someone else!')
+  }
 
   default <- updateDefaults(gg_original, default, linetypes = linetypes)
 
