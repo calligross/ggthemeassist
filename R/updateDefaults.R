@@ -53,7 +53,7 @@ updateDefaults <- function(gg, defaults, linetypes = linetypes) {
     }
     else {
       # Relative size needs to be converted to absolute sizes
-      if (class(default[[anchor]][[element]] <- gg[['theme']][[anchor]][[element]]) == 'rel') {
+      if (class(gg[['theme']][[anchor]][[element]]) == 'rel') {
         default[[anchor]][[element]] <- as.numeric(gg[['theme']][[anchor]][[element]]) * gg$theme$text$size
       } else {
         if (element == 'linetype' && is.numeric(gg[['theme']][[anchor]][[element]])) {
