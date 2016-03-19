@@ -96,7 +96,7 @@ default <- list(
     size = 13,
     face = 'plain',
     colour = 'black',
-    hjust = 0.5,
+    hjust = if (any(names(formals(ggtitle)) == 'subtitle')) {0} else {0.5},
     vjust = 0.5,
     angle = 0,
     lineheight = 1.1
