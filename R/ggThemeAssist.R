@@ -11,6 +11,9 @@
 #' @import rstudioapi
 ggThemeAssist <- function(){
 
+  # Check if subtitles are supported
+  SubtitlesSupport <- any(names(formals(ggtitle)) == 'subtitle')
+
   # Get the document context.
   context <- rstudioapi::getActiveDocumentContext()
 
@@ -238,49 +241,51 @@ ggThemeAssist <- function(){
                                     )
                    )
       ),
-      miniTabPanel("Subtitle and Caption", icon = icon('sliders'),
-                   plotOutput("ThePlot6", width = '100%', height = '45%'),
-                   miniContentPanel(scrollable = TRUE,
-                                    fillRow(width = '100%', height = heading.height,
-                                            headingOutput('Subtitle')
-                                    ),
-                                      fillRow(width = '100%', height = line.height,
-                                        tags$div(style="display:table; width:100%; margin:auto",
-                                                 tags$textarea(id="plot.subtitle.text", label="Subtitle",
-                                                               rows=3, cols=80, "",
-                                                               style="width:inherit; font-size:9pt; padding:5px"
-                                                               )
-                                                 )
+      if (SubtitlesSupport) {
+        miniTabPanel("Subtitle and Caption", icon = icon('sliders'),
+                     plotOutput("ThePlot6", width = '100%', height = '45%'),
+                     miniContentPanel(scrollable = TRUE,
+                                      fillRow(width = '100%', height = heading.height,
+                                              headingOutput('Subtitle')
                                       ),
-                                    fillRow(width = '100%', height = line.height,
-                                            selectInput('plot.subtitle.family', label = 'Family', choices = text.families, selected = default$plot.subtitle$family, width = input.width2),
-                                            selectInput('plot.subtitle.face', label = 'Face', choices = text.faces, width = input.width2, selected = default$plot.subtitle$face),
-                                            numericInput('plot.subtitle.size', label = 'Size', min = 1, max = 30, value = default$plot.subtitle$size, step = 1, width = input.width2),
-                                            selectizeInput('plot.subtitle.colour', label = 'Colour', choices = colours.available, selected = default$plot.subtitle$colour, width = input.width2, options = list(create = TRUE)),
-                                            numericInput('plot.subtitle.hjust', 'Hjust', value = default$plot.subtitle$hjust, step = 0.25, width = input.width2)
-                                    ),
-                                    fillRow(width = '100%', height = heading.height,
-                                            headingOutput('Caption')
-                                    ),
-                                    fillRow(width = '100%', height = line.height,
-                                            tags$div(style="display:table; width:100%; margin:auto",
-                                                     tags$textarea(id="plot.caption.text", label="Subtitle",
-                                                                   rows=3, cols=80, "",
-                                                                   style="width:inherit; font-size:9pt; padding:5px"
-                                                     )
-                                            )
-                                    ),
-                                    fillRow(width = '100%', height = line.height,
-                                            selectInput('plot.caption.family', label = 'Family', choices = text.families, selected = default$plot.caption$family, width = input.width2),
-                                            selectInput('plot.caption.face', label = 'Face', choices = text.faces, width = input.width2, selected = default$plot.caption$face),
-                                            numericInput('plot.caption.size', label = 'Size', min = 1, max = 30, value = default$plot.caption$size, step = 1, width = input.width2),
-                                            selectizeInput('plot.caption.colour', label = 'Colour', choices = colours.available, selected = default$plot.caption$colour, width = input.width2, options = list(create = TRUE)),
-                                            numericInput('plot.caption.hjust', 'Hjust', value = default$plot.caption$hjust, step = 0.25, width = input.width2)
-                                    )
+                                      fillRow(width = '100%', height = line.height,
+                                              tags$div(style="display:table; width:100%; margin:auto",
+                                                       tags$textarea(id="plot.subtitle.text", label="Subtitle",
+                                                                     rows=3, cols=80, "",
+                                                                     style="width:inherit; font-size:9pt; padding:5px"
+                                                       )
+                                              )
+                                      ),
+                                      fillRow(width = '100%', height = line.height,
+                                              selectInput('plot.subtitle.family', label = 'Family', choices = text.families, selected = default$plot.subtitle$family, width = input.width2),
+                                              selectInput('plot.subtitle.face', label = 'Face', choices = text.faces, width = input.width2, selected = default$plot.subtitle$face),
+                                              numericInput('plot.subtitle.size', label = 'Size', min = 1, max = 30, value = default$plot.subtitle$size, step = 1, width = input.width2),
+                                              selectizeInput('plot.subtitle.colour', label = 'Colour', choices = colours.available, selected = default$plot.subtitle$colour, width = input.width2, options = list(create = TRUE)),
+                                              numericInput('plot.subtitle.hjust', 'Hjust', value = default$plot.subtitle$hjust, step = 0.25, width = input.width2)
+                                      ),
+                                      fillRow(width = '100%', height = heading.height,
+                                              headingOutput('Caption')
+                                      ),
+                                      fillRow(width = '100%', height = line.height,
+                                              tags$div(style="display:table; width:100%; margin:auto",
+                                                       tags$textarea(id="plot.caption.text", label="Subtitle",
+                                                                     rows=3, cols=80, "",
+                                                                     style="width:inherit; font-size:9pt; padding:5px"
+                                                       )
+                                              )
+                                      ),
+                                      fillRow(width = '100%', height = line.height,
+                                              selectInput('plot.caption.family', label = 'Family', choices = text.families, selected = default$plot.caption$family, width = input.width2),
+                                              selectInput('plot.caption.face', label = 'Face', choices = text.faces, width = input.width2, selected = default$plot.caption$face),
+                                              numericInput('plot.caption.size', label = 'Size', min = 1, max = 30, value = default$plot.caption$size, step = 1, width = input.width2),
+                                              selectizeInput('plot.caption.colour', label = 'Colour', choices = colours.available, selected = default$plot.caption$colour, width = input.width2, options = list(create = TRUE)),
+                                              numericInput('plot.caption.hjust', 'Hjust', value = default$plot.caption$hjust, step = 0.25, width = input.width2)
+                                      )
 
 
-    )
-  )
+                     )
+        )
+        }
     ))
 
 
@@ -316,33 +321,13 @@ ggThemeAssist <- function(){
         need(is.validColour(input$legend.key.colour), '')
       )
 
-      gg_original +
-        labs(title = if (input$plot.title == '') { NULL } else { input$plot.title },
-             x = if (input$axis.title.x == '') { NULL } else { input$axis.title.x },
-             y = if (input$axis.title.y == '') { NULL } else { input$axis.title.y },
-             fill = if (input$legend.fill.title == '') { NULL } else { input$legend.fill.title },
-             colour = if (input$legend.colour.title == '') { NULL } else { input$legend.colour.title },
-             subtitle = if (input$plot.subtitle.text == '') { NULL } else { input$plot.subtitle.text },
-             caption = if (input$plot.caption.text == '') { NULL } else { input$plot.caption.text }) +
+      gg <- gg_original +
+        labs(title = if (input$plot.title == '') {NULL} else {input$plot.title},
+             x = if (input$axis.title.x == '') {NULL} else {input$axis.title.x},
+             y = if (input$axis.title.y == '') {NULL} else {input$axis.title.y},
+             fill = if (input$legend.fill.title == '') {NULL} else {input$legend.fill.title},
+             colour = if (input$legend.colour.title == '') {NULL} else {input$legend.colour.title} ) +
         theme(
-          plot.subtitle = element_text(
-            size = input$plot.subtitle.size,
-            colour = input$plot.subtitle.colour,
-            face = input$plot.subtitle.face,
-            family = input$plot.subtitle.family,
-            #angle = input$plot.subtitle.angle,
-            hjust = input$plot.subtitle.hjust,
-            #vjust = input$plot.subtitle.vjust,
-            lineheight = input$plot.subtitle.lineheight),
-          plot.caption = element_text(
-            size = input$plot.caption.size,
-            colour = input$plot.caption.colour,
-            face = input$plot.caption.face,
-            family = input$plot.caption.family,
-            #angle = input$plot.caption.angle,
-            hjust = input$plot.caption.hjust,
-            #vjust = input$plot.caption.vjust,
-            lineheight = input$plot.caption.lineheight),
           axis.text = element_text(
             size = input$axis.text.size,
             colour = input$axis.text.colour,
@@ -445,6 +430,35 @@ ggThemeAssist <- function(){
           }),
           legend.direction = input$legend.direction
         )
+      if (SubtitlesSupport) {
+        gg <- gg + labs(
+          subtitle = if (input$plot.subtitle.text == '') {NULL} else {input$plot.subtitle.text},
+          caption = if (input$plot.caption.text == '') {NULL} else {input$plot.caption.text}
+        ) +
+          theme(
+            plot.subtitle = element_text(
+              size = input$plot.subtitle.size,
+              colour = input$plot.subtitle.colour,
+              face = input$plot.subtitle.face,
+              family = input$plot.subtitle.family,
+              #angle = input$plot.subtitle.angle,
+              hjust = input$plot.subtitle.hjust,
+              #vjust = input$plot.subtitle.vjust,
+              lineheight = input$plot.subtitle.lineheight),
+            plot.caption = element_text(
+              size = input$plot.caption.size,
+              colour = input$plot.caption.colour,
+              face = input$plot.caption.face,
+              family = input$plot.caption.family,
+              #angle = input$plot.caption.angle,
+              hjust = input$plot.caption.hjust,
+              #vjust = input$plot.caption.vjust,
+              lineheight = input$plot.caption.lineheight)
+          )
+      }
+
+      return(gg)
+
     })
 
     observeEvent(input$legend.click, {
