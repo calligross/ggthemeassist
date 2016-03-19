@@ -159,28 +159,28 @@ ggThemeAssist <- function(){
                                             headingOutput('Axis Labels')
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('plot.title', label = 'Title', value = gg_original$labels$title, width = input.width),
+                                            textInput('plot.title', label = 'Title', value = preserveNewlines(gg_original$labels$title), width = input.width),
                                             selectInput('plot.title.family', label = 'Family', choices = text.families, selected = default$plot.title$family, width = input.width),
                                             selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('axis.title.x', label = 'x-Axis', value = gg_original$labels$x, width = input.width),
+                                            textInput('axis.title.x', label = 'x-Axis', value = preserveNewlines(gg_original$labels$x), width = input.width),
                                             selectInput('plot.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
                                             selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('axis.title.y', label = 'y-Axis', value = gg_original$labels$y, width = input.width),
+                                            textInput('axis.title.y', label = 'y-Axis', value = preserveNewlines(gg_original$labels$y), width = input.width),
                                             numericInput('plot.title.size', label = 'Size', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width),
                                             numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('legend.colour.title', label = 'Colour', value = gg_original$labels$colour, width = input.width),
+                                            textInput('legend.colour.title', label = 'Colour', value = preserveNewlines(gg_original$labels$colour), width = input.width),
                                             selectizeInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width, options = list(create = TRUE)),
                                             selectizeInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width, options = list(create = TRUE))
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('legend.fill.title', label = 'Fill', value = gg_original$labels$fill, width = input.width),
+                                            textInput('legend.fill.title', label = 'Fill', value = preserveNewlines(gg_original$labels$fill), width = input.width),
                                             numericInput('plot.title.hjust', 'Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
                                             numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width)
 
@@ -296,7 +296,6 @@ ggThemeAssist <- function(){
 
 
   server <- function(input, output, session) {
-
     observe({
       if (is.null(input$ViewerWidth))
         updateInputChoices(session, input, gg_original, default = default)
@@ -327,11 +326,13 @@ ggThemeAssist <- function(){
       )
 
       gg <- gg_original +
-        labs(title = if (input$plot.title == '') {NULL} else {input$plot.title},
-             x = if (input$axis.title.x == '') {NULL} else {input$axis.title.x},
-             y = if (input$axis.title.y == '') {NULL} else {input$axis.title.y},
-             fill = if (input$legend.fill.title == '') {NULL} else {input$legend.fill.title},
-             colour = if (input$legend.colour.title == '') {NULL} else {input$legend.colour.title} ) +
+        labs(
+          title = checkInputText(input$plot.title),
+             x = checkInputText(input$axis.title.x),
+             y = checkInputText(input$axis.title.y),
+             fill = checkInputText(input$legend.fill.title),
+             colour = checkInputText(input$legend.colour.title)
+             ) +
         theme(
           axis.text = element_text(
             size = input$axis.text.size,

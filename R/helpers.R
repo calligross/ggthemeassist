@@ -25,9 +25,9 @@ setNull <- function(x) {
 }
 
 compileResults <- function(element, original, new, std = default) {
-  if(element$enabled == TRUE) {
+  if (element$enabled == TRUE) {
     result <- construcThemeString(element$name, original = original, new = new, std = std, element = element$type)
-    if(is.null(result))
+    if (is.null(result))
       result <- NA
     return(result)
   } else {
@@ -45,5 +45,31 @@ is.validColour <- function(x) {
   }
   else {
     return(FALSE)
+  }
+}
+
+is.valid <- function(x) {
+  if (!is.null(x) && !is.na(x)) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+checkInputText <- function(x) {
+  if (x == '') {
+    return(NULL)
+  } else {
+    x <- gsub('\\\\n', '\\\n', x)
+    return(x)
+  }
+}
+
+preserveNewlines <- function(x) {
+  if (is.null(x)) {
+    return('')
+  } else {
+  x <- gsub('\\\n', '\\\\n', x)
+  return(x)
   }
 }
