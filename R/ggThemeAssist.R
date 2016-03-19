@@ -251,7 +251,7 @@ ggThemeAssist <- function(){
                                       fillRow(width = '100%', height = line.height,
                                               tags$div(style="display:table; width:100%; margin:auto",
                                                        tags$textarea(id="plot.subtitle.text", label="Subtitle",
-                                                                     rows=3, cols=80, "",
+                                                                     rows=3, cols=80, gg_original$labels$subtitle,
                                                                      style="width:inherit; font-size:9pt; padding:5px"
                                                        )
                                               )
@@ -269,7 +269,7 @@ ggThemeAssist <- function(){
                                       fillRow(width = '100%', height = line.height,
                                               tags$div(style="display:table; width:100%; margin:auto",
                                                        tags$textarea(id="plot.caption.text", label="Subtitle",
-                                                                     rows=3, cols=80, "",
+                                                                     rows=3, cols=80, gg_original$labels$caption,
                                                                      style="width:inherit; font-size:9pt; padding:5px"
                                                        )
                                               )
