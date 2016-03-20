@@ -82,12 +82,22 @@ getRGBHexColours <- function(gg) {
   return(colours)
 }
 
-colours2rgb <- function(colours) {
+colours2RGB <- function(colours) {
   #return a df of rgb colours
   colours[is.na(colours)] <- 'NA'
-  rgbcolours <- as.character(as.hexmode(col2rgb(colours)))
+  rgbcolours <- matrix(as.character(as.character.hexmode(col2rgb(colours), width = 2)), nrow = 3)
   rgbcolours <- apply(rgbcolours, 2, paste, collapse = '')
   rgbcolours <- paste('#', rgbcolours, sep = '')
-  names(rgbcolours) <- colours
+  rgbcolours <- data.frame(name = colours, rgb = rgbcolours, stringsAsFactors = FALSE)
+  rgbcolours <- rgbcolours[orderRGB(rgbcolours$rgb), ]
   return(rgbcolours)
+}
+
+orderRGB <- function(colours) {
+  # simple method, not very accurate
+  colours <- gsub('#', '', colours)
+  colours <- strsplit(tolower(colours), "")
+  rgb <- sapply(colours, function(x) sum((match(x, c(0L:9L, letters[1L:6L])) - 1L) * 16 ^ (rev(seq_along(x) - 1))))
+  rgb <- order(rgb)
+  return(rgb)
 }

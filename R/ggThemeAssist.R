@@ -243,7 +243,7 @@ ggThemeAssist <- function(){
                                             selectizeInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width, options = list(create = TRUE)),
                                             selectizeInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width, options = list(create = TRUE)),
                                             selectizeInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour, options = list(create = TRUE)),
-                                            selectizeInput('legend.key.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.key$colour, options = list(create = TRUE))
+                                            selectizeInput('legend.key.colour', label = 'Colour', choices = colours2RGB(colours.available), width = input.width, selected = default$legend.key$colour, options = list(create = TRUE))
                                     )
                    )
       ),
@@ -297,14 +297,9 @@ ggThemeAssist <- function(){
 
 
   server <- function(input, output, session) {
-    updateSelectizeInput(session = session, choices = colours2rgb(colours.available),
-                         selected = default$plot.background$fill,
-                         inputId = 'plot.background.fill', options = list(render = I(
-                           '{
-                           option: function(item, escape) {
-                           return "<div><font color =\'" + escape(item.value) + "\'>" + escape(item.label) + "</font></div>";
-                           }
-  }')))
+
+    updateSelectizeInput(session = session, inputId = 'plot.background.fill', choices = colours2RGB(colours.available), selected = default$plot.background$fill, server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'name', valueField = 'name', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'legend.key.colour', choices = colours2RGB(colours.available), selected = default$legend.key$colour, server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'name', valueField = 'name', render = jsColourSelector))
 
     gg_reactive <- reactive({
 
