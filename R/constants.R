@@ -18,6 +18,13 @@ input.width2 <- '90%'
 line.height <- '70px'
 heading.height <- '30px'
 
+# annotations
+annotations <- data.frame(x = 0,
+                          y = 0,
+                          label = "",
+                          size = 9,
+                          stringsAsFactors = F)
+
 
 # default values
 default <- list(

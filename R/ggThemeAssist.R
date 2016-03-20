@@ -9,6 +9,8 @@
 #' @import ggplot2
 #' @import formatR
 #' @import rstudioapi
+
+library(rhandsontable)
 ggThemeAssist <- function(){
 
   # Check if subtitles are supported
@@ -291,12 +293,33 @@ ggThemeAssist <- function(){
 
                      )
         )
-        }
+        },
+      miniTabPanel("Annotate", icon = icon('sliders'),
+                   plotOutput("ThePlot7", width = '100%', height = '45%'),
+                   miniContentPanel(scrollable = TRUE,
+                                    rHandsontableOutput('annotations')
+                   )
+      )
     ))
 
 
 
   server <- function(input, output, session) {
+    # annotate
+    reactAnnotations <- reactiveValues()
+    setHot = function(x) reactAnnotations[["annotations"]] = x
+    output$annotations <- renderRHandsontable({
+      if (!is.null(input$annotations)) {
+        dfAnnotations = hot_to_r(input$annotations)
+      } else {
+        dfAnnotations = annotations
+      }
+      setHot(dfAnnotations)
+      rhandsontable(dfAnnotations) %>%
+        hot_col(col = "size", type = "dropdown", source = 1:20)
+    })
+    #
+
     updateSelectizeInput(session = session, choices = colours2rgb(colours.available),
                          selected = default$plot.background$fill,
                          inputId = 'plot.background.fill', options = list(render = I(
@@ -468,9 +491,15 @@ ggThemeAssist <- function(){
           )
       }
 
+      if (!is.null(reactAnnotations[["annotations"]])) {
+        valAnnotations <- reactAnnotations[["annotations"]]
+        gg <- gg + annotate("text", x=valAnnotations$x, y=valAnnotations$y, label=valAnnotations$label, size=valAnnotations$size)
+      }
+
       return(gg)
 
     })
+
 
     observeEvent(input$legend.click, {
       x.click <- input$legend.click$x / (input$legend.click$domain$right - input$legend.click$domain$left)
@@ -499,6 +528,7 @@ ggThemeAssist <- function(){
     output$ThePlot4 <- ThePlot
     output$ThePlot5 <- ThePlot
     output$ThePlot6 <- ThePlot
+    output$ThePlot7 <- ThePlot
 
     observeEvent(input$done, {
       result <- sapply(AvailableElements, compileResults, new = gg_reactive(), original = gg_original, std = default, USE.NAMES = FALSE)
