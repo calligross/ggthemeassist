@@ -73,3 +73,11 @@ preserveNewlines <- function(x) {
   return(x)
   }
 }
+
+getRGBHexColours <- function(gg) {
+  theme <- unlist(gg$theme)
+  colours <- theme[grep('#[0-9a-fA-F]{6}', theme)]
+  colours <- unname(colours)
+  colours <- unique(colours)
+  return(colours)
+}

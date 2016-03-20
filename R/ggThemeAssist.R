@@ -34,7 +34,8 @@ ggThemeAssist <- function(){
   if (!is.ggplot(gg_original)) {
     stop('No ggplot2 object has been selected. Fool someone else!')
   }
-
+  # add rgb colours to the available colours
+  colours.available <- c(colours.available, getRGBHexColours(gg_original))
   default <- updateDefaults(gg_original, default, linetypes = linetypes)
 
   ui <- miniPage(
@@ -296,10 +297,6 @@ ggThemeAssist <- function(){
 
 
   server <- function(input, output, session) {
-    observe({
-      if (is.null(input$ViewerWidth))
-        updateInputChoices(session, input, gg_original, default = default)
-      })
 
     gg_reactive <- reactive({
 
