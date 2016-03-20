@@ -297,6 +297,14 @@ ggThemeAssist <- function(){
 
 
   server <- function(input, output, session) {
+    updateSelectizeInput(session = session, choices = colours2rgb(colours.available),
+                         selected = default$plot.background$fill,
+                         inputId = 'plot.background.fill', options = list(render = I(
+                           '{
+                           option: function(item, escape) {
+                           return "<div><font color =\'" + escape(item.value) + "\'>" + escape(item.label) + "</font></div>";
+                           }
+  }')))
 
     gg_reactive <- reactive({
 

@@ -81,3 +81,13 @@ getRGBHexColours <- function(gg) {
   colours <- unique(colours)
   return(colours)
 }
+
+colours2rgb <- function(colours) {
+  #return a df of rgb colours
+  colours[is.na(colours)] <- 'NA'
+  rgbcolours <- as.character(as.hexmode(col2rgb(colours)))
+  rgbcolours <- apply(rgbcolours, 2, paste, collapse = '')
+  rgbcolours <- paste('#', rgbcolours, sep = '')
+  names(rgbcolours) <- colours
+  return(rgbcolours)
+}
