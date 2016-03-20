@@ -89,7 +89,7 @@ colours2RGB <- function(colours) {
   rgbcolours <- apply(rgbcolours, 2, paste, collapse = '')
   rgbcolours <- paste('#', rgbcolours, sep = '')
   rgbcolours <- data.frame(name = colours, rgb = rgbcolours, stringsAsFactors = FALSE)
-  rgbcolours <- rgbcolours[orderRGB(rgbcolours$rgb), ]
+  #rgbcolours <- rgbcolours[orderRGB(rgbcolours$rgb), ]
   return(rgbcolours)
 }
 
