@@ -64,5 +64,8 @@ updateDefaults <- function(gg, defaults, linetypes = linetypes) {
       }
     }
   }
+
+  # substitute grey with gray
+  default <- rapply(default, function(x) { gsub('grey', 'gray', x) }, how = 'list')
   return(default)
 }

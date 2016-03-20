@@ -1,5 +1,5 @@
 # Choices to pick from
-colours.available <- c('None' = NA, colors())
+colours.available <- c('None' = NA, colors()[!grepl('grey', colors())]) # We don't want redundant grays
 text.faces <- c('plain', 'italic', 'bold', 'bold.italic')
 
 text.families <- if (is.element('extrafont', installed.packages()[, 1])) {
