@@ -67,8 +67,8 @@ ggThemeAssist <- function(){
                                             headingOutput('Grid Minor')
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            selectizeInput('plot.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$plot.background$fill, options = list(create = TRUE)),
-                                            selectizeInput('panel.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$panel.background$fill, options = list(create = TRUE)),
+                                            selectizeInput('plot.background.fill', label = 'Fill', choices = NULL, width = input.width),
+                                            selectizeInput('panel.background.fill', label = 'Fill', choices = NULL, width = input.width),
                                             "",
                                             ""
                                     ),
@@ -85,10 +85,10 @@ ggThemeAssist <- function(){
                                             numericInput('panel.grid.minor.size', label = 'Size', step = 0.1, value = default$panel.grid.minor$size, min = 0, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            selectizeInput('plot.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$plot.background$colour, options = list(create = TRUE)),
-                                            selectizeInput('panel.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$panel.background$colour, options = list(create = TRUE)),
-                                            selectizeInput('panel.grid.major.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.major$colour, width = input.width, options = list(create = TRUE)),
-                                            selectizeInput('panel.grid.minor.colour', label = 'Colour', choices = colours.available, selected = default$panel.grid.minor$colour, width = input.width, options = list(create = TRUE))
+                                            selectizeInput('plot.background.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('panel.background.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('panel.grid.major.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('panel.grid.minor.colour', label = 'Colour', choices = NULL, width = input.width)
                                     )
                    )
       ),
@@ -120,13 +120,13 @@ ggThemeAssist <- function(){
                                             numericInput('axis.text.size', label = 'Size', min = 1, max = 30, value = default$axis.text$size, step = 1, width = input.width),
                                             numericInput('axis.text.x.size', label = 'Size', min = 1, max = 30, value = NULL, step = 1, width = input.width),
                                             numericInput('axis.text.y.size', label = 'Size', min = 1, max = 30, value = NULL, step = 1, width = input.width),
-                                            selectizeInput('axis.line.colour', label = 'Colour', choices = colours.available, selected = default$axis.line$colour, width = input.width, options = list(create = TRUE)),
-                                            selectizeInput('axis.ticks.colour', label = 'Colour', choices = colours.available, selected = default$axis.ticks$colour, width = input.width, options = list(create = TRUE))
+                                            selectizeInput('axis.line.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('axis.ticks.colour', label = 'Colour', choices = NULL, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            selectizeInput('axis.text.colour', label = 'Colour', choices = colours.available, selected = default$axis.text$colour, width = input.width, options = list(create = TRUE)),
-                                            selectizeInput('axis.text.x.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width, options = list(create = TRUE)),
-                                            selectizeInput('axis.text.y.colour', label = 'Colour', choices = c('None' = 'NULL', colours.available), selected = NULL, width = input.width, options = list(create = TRUE)),
+                                            selectizeInput('axis.text.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('axis.text.x.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('axis.text.y.colour', label = 'Colour', choices = NULL, width = input.width),
                                             "",
                                             ""
                                     ),
@@ -177,8 +177,8 @@ ggThemeAssist <- function(){
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('legend.colour.title', label = 'Colour', value = preserveNewlines(gg_original$labels$colour), width = input.width),
-                                            selectizeInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width, options = list(create = TRUE)),
-                                            selectizeInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width, options = list(create = TRUE))
+                                            selectizeInput('plot.title.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('axis.title.colour', label = 'Colour', choices = NULL, width = input.width)
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
@@ -216,8 +216,8 @@ ggThemeAssist <- function(){
                                             selectInput('legend.position', label = 'Position', choices = legend.positions, selected = default$legend.position, width = input.width),
                                             selectInput('legend.title.family', label = 'Family', choices = text.families, selected = default$legend.title$family, width = input.width),
                                             selectInput('legend.text.family', label = 'Family', choices = text.families, selected = default$legend.text$family, width = input.width),
-                                            selectizeInput('legend.background.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.background$fill, options = list(create = TRUE)),
-                                            selectizeInput('legend.key.fill', label = 'Fill', choices = colours.available, width = input.width, selected = default$legend.key$fill, options = list(create = TRUE))
+                                            selectizeInput('legend.background.fill', label = 'Fill', choices = NULL, width = input.width),
+                                            selectizeInput('legend.key.fill', label = 'Fill', choices = NULL, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             selectInput('legend.direction', label = 'Direction', choices = legend.directions, selected = default$legend.direction, width = input.width),
@@ -241,10 +241,10 @@ ggThemeAssist <- function(){
                                               condition = "input['legend.position'] == 'XY'",
                                               numericInput('legend.position.y', label = 'Y Coord', min = 0, max = 1, value = default$legend.position.y, step = 0.01, width = input.width)
                                             ),
-                                            selectizeInput('legend.title.colour', label = 'Colour', choices = colours.available, selected = default$legend.title$colour, width = input.width, options = list(create = TRUE)),
-                                            selectizeInput('legend.text.colour', label = 'Colour', choices = colours.available, selected = default$legend.text$colour, width = input.width, options = list(create = TRUE)),
-                                            selectizeInput('legend.background.colour', label = 'Colour', choices = colours.available, width = input.width, selected = default$legend.background$colour, options = list(create = TRUE)),
-                                            selectizeInput('legend.key.colour', label = 'Colour', choices = colours2RGB(colours.available), width = input.width, selected = default$legend.key$colour, options = list(create = TRUE))
+                                            selectizeInput('legend.title.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('legend.text.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('legend.background.colour', label = 'Colour', choices = NULL, width = input.width),
+                                            selectizeInput('legend.key.colour', label = 'Colour', choices = NULL, width = input.width)
                                     )
                    )
       ),
@@ -299,11 +299,31 @@ ggThemeAssist <- function(){
 
   server <- function(input, output, session) {
 
-    updateSelectizeInput(session = session, inputId = 'plot.background.fill', choices = colours2RGB(colours.available), selected = default$plot.background$fill, server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'name', valueField = 'name', render = jsColourSelector))
-    updateSelectizeInput(session = session, inputId = 'legend.key.colour', choices = colours2RGB(colours.available), selected = default$legend.key$colour, server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'name', valueField = 'name', render = jsColourSelector))
+    colour.choices <- colours2RGB(colours.available)
+    updateSelectizeInput(session = session, inputId = 'plot.background.fill', choices = colour.choices, selected = NA2text(default$plot.background$fill), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'panel.background.fill', choices = colour.choices, selected = NA2text(default$panel.background$fill), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'plot.background.colour', choices = colour.choices, selected = NA2text(default$plot.background$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'panel.background.colour', choices = colour.choices, selected = NA2text(default$panel.background$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'panel.grid.major.colour', choices = colour.choices, selected = NA2text(default$panel.grid.major$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'panel.grid.minor.colour', choices = colour.choices, selected = NA2text(default$panel.grid.minor$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'axis.line.colour', choices = colour.choices, selected = NA2text(default$axis.line$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'axis.ticks.colour', choices = colour.choices, selected = NA2text(default$axis.ticks$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'axis.text.colour', choices = colour.choices, selected = NA2text(default$axis.text$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'axis.text.x.colour', choices = colour.choices, selected = 'NULL', server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'axis.text.y.colour', choices = colour.choices, selected = 'NULL', server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'plot.title.colour', choices = colour.choices, selected = NA2text(default$plot.title$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'axis.title.colour', choices = colour.choices, selected = NA2text(default$axis.title$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'legend.background.fill', choices = colour.choices, selected = NA2text(default$legend.background$fill), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'legend.key.fill', choices = colour.choices, selected = NA2text(default$legend.key$fill), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'legend.title.colour', choices = colour.choices, selected = NA2text(default$legend.title$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'legend.text.colour', choices = colour.choices, selected = NA2text(default$legend.text$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'legend.background.colour', choices = colour.choices, selected = NA2text(default$legend.background$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'legend.key.colour', choices = colour.choices, selected = NA2text(default$legend.key$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'panel.background.fill', choices = colour.choices, selected = NA2text(default$panel.background$fill), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'legend.key.colour', choices = colour.choices, selected = NA2text(default$legend.key$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
 
+    autoInvalidate <- reactiveTimer(200)
     gg_reactive <- reactive({
-
       validate(
         need(is.validColour(input$plot.background.fill), ''),
         need(is.validColour(input$panel.background.fill), ''),
@@ -487,7 +507,9 @@ ggThemeAssist <- function(){
             )
     },
       {
-      print(gg_reactive())
+        autoInvalidate()
+        print(isolate(gg_reactive()))
+
     })
     output$ThePlot <- ThePlot
     output$ThePlot2 <- ThePlot

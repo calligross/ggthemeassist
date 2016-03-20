@@ -25,7 +25,7 @@ default <- list(
     family = 'sans',
     size = 9,
     face = 'plain',
-    colour = 'grey30',
+    colour = 'gray30',
     hjust = 0,
     vjust = 0.5,
     angle = 0,
@@ -35,7 +35,7 @@ default <- list(
     family = 'sans',
     size = 9,
     face = 'plain',
-    colour = 'grey30',
+    colour = 'gray30',
     hjust = 1,
     vjust = 0.5,
     angle = 0,
@@ -45,7 +45,7 @@ default <- list(
     family = 'sans',
     size = 10,
     face = 'plain',
-    colour = 'grey30',
+    colour = 'gray30',
     hjust = 0.5,
     vjust = 0.5,
     angle = 0,
@@ -55,7 +55,7 @@ default <- list(
     family = 'sans',
     size = 10,
     face = 'plain',
-    colour = 'grey30',
+    colour = 'gray30',
     hjust = 0.5,
     vjust = 1,
     angle = 0,
@@ -65,7 +65,7 @@ default <- list(
     family = 'sans',
     size = 10,
     face = 'plain',
-    colour = 'grey30',
+    colour = 'gray30',
     hjust = 1,
     vjust = 0.5,
     angle = 0,
@@ -77,7 +77,7 @@ default <- list(
     linetype = 'blank'
     ), class = 'element_line'),
   axis.ticks = structure(list(
-    colour = 'grey20',
+    colour = 'gray20',
     size = 0.5,
     linetype = 'solid'
   ), class = 'element_line'),
@@ -102,7 +102,7 @@ default <- list(
     lineheight = 1.1
   ), class = 'element_text'),
   panel.background = structure(list(
-    fill = 'grey92',
+    fill = 'gray92',
     colour = 'NA',
     size = 0.5,
     linetype = 'blank'
@@ -114,12 +114,12 @@ default <- list(
     linetype = 'blank'
   ), class = 'element_rect'),
   panel.grid.major = structure(list(
-    colour = 'grey100',
+    colour = 'gray100',
     size = 0.5,
     linetype = 'solid'
   ), class = 'element_line'),
   panel.grid.minor = structure(list(
-    colour = 'grey100',
+    colour = 'gray100',
     size = 0.5,
     linetype = 'solid'
   ), class = 'element_line'),
@@ -136,13 +136,13 @@ default <- list(
     colour = 'black'
   ), class = 'element_text'),
   legend.background = structure(list(
-    fill = 'grey100',
+    fill = 'gray100',
     colour = 'NA',
     size = 0.5,
     linetype = 'blank'
   ), class = 'element_rect'),
   legend.key = structure(list(
-    fill = 'grey95',
+    fill = 'gray95',
     colour = 'NA',
     size = 0.5,
     linetype = 'blank'
