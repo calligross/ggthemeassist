@@ -321,6 +321,9 @@ ggThemeAssist <- function(){
     updateSelectizeInput(session = session, inputId = 'legend.key.colour', choices = colour.choices, selected = NA2text(default$legend.key$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
     updateSelectizeInput(session = session, inputId = 'panel.background.fill', choices = colour.choices, selected = NA2text(default$panel.background$fill), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
     updateSelectizeInput(session = session, inputId = 'legend.key.colour', choices = colour.choices, selected = NA2text(default$legend.key$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'plot.subtitle.colour', choices = colour.choices, selected = NA2text(default$plot.subtitle$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+    updateSelectizeInput(session = session, inputId = 'plot.caption.colour', choices = colour.choices, selected = NA2text(default$plot.caption$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
+
 
     autoInvalidate <- reactiveTimer(200)
     gg_reactive <- reactive({
