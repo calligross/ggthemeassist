@@ -41,6 +41,7 @@ ggThemeAssist <- function(){
   ui <- miniPage(
     tags$script(jscodeWidth),
     tags$script(jscodeHeight),
+    tags$style(type = "text/css", ".selectize-dropdown{ width: 200px !important; }"),
 
     gadgetTitleBar("ggplot Theme Assistant"),
     miniTabstripPanel(selected = 'Panel & Background',
