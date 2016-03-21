@@ -2,26 +2,37 @@
 #'
 #' \code{ggThemeAssist} is a RStudio-Addin that delivers a graphical interface for editing ggplot2 theme elements.
 #'
-#' @details To run the addin, highlight a ggplot2-object in your current script and select \code{ggThemeAssist} from the Addins-menu within RStudio. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
+#' @details To run as an RStudio addin, highlight a ggplot2 object in your current script and select \code{ggThemeAssist} from the Addins-menu within RStudio. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
+#'
+#' To run as a Shiny Gadget outside of RStudio, pass the name of the ggplot2-objeobject to the `text` parameter of this function.  The gadget will be opened in the default browser.  After editing themes and terminating the addin, a character string containing the desired changes will be echoed on thethe command line.
+#' 
+#' @param text (string) The name of a ggplot2 object, or code to create a ggplot2 object.  Only for use in the console; has no effect when running as an RStudio addin.
+#'
 #' @return \code{ggThemeAssist} returns a character vector.
 #' @import miniUI
 #' @import shiny
 #' @import ggplot2
 #' @import formatR
 #' @import rstudioapi
-ggThemeAssist <- function(){
+#' @export
+ggThemeAssist <- function(text = ""){
 
   # Check if subtitles are supported
   SubtitlesSupport <- any(names(formals(ggtitle)) == 'subtitle')
 
-  # Get the document context.
-  context <- rstudioapi::getActiveDocumentContext()
+  # Find out whether it is being run as an RStudio add-in or in the console
+  addin <- missing(text) && rstudioapi::isAvailable()
 
-  # Set the default data to use based on the selection.
-  text <- context$selection[[1]]$text
+  # If this is being run as an RStudio addin, then get the document context.
+  if (addin) {
+    context <- rstudioapi::getActiveDocumentContext()
+
+    # Set the default data to use based on the selection.
+    text <- context$selection[[1]]$text
+  }
 
   if (nchar(text) == 0) {
-    stop('Please highlight a ggplot2 plot before selecting this addin.')
+    stop('Please highlight a ggplot2 plot before selecting this addin, or, if using in the console, please provide a ggplot2 object to the `text` parameter.')
   }
 
   if (grepl('[\\+\\(]', text)) {
@@ -509,9 +520,15 @@ ggThemeAssist <- function(){
 
         result <- formatR::tidy_source(text = result, output = FALSE, width.cutoff = 40)$text.tidy
         result <- paste(result, collapse = "\n")
-        rstudioapi::insertText(result)
+        if (addin) {
+          rstudioapi::insertText(result)
+        }
       }
-      invisible(stopApp())
+      if (addin) {
+        invisible(stopApp())
+      } else {
+        stopApp(result)
+      }
     })
 
     observeEvent(input$cancel, {
