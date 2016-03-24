@@ -2,27 +2,20 @@
 #'
 #' \code{ggThemeAssist} is a RStudio-Addin that delivers a graphical interface for editing ggplot2 theme elements.
 #'
-#' @details To run the addin, highlight a ggplot2-object in your current script and select \code{ggThemeAssist} from the Addins-menu within RStudio. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
+#' @details To run the addin, either highlight a ggplot2-object in your current script and select \code{ggThemeAssist} from the Addins-menu within RStudio, or run \code{ggThemeAssistGadget(plot)} with a ggplot2 object as the parameter. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
+#' @param plot A ggplot2 plot object to manipulate its theme.
 #' @return \code{ggThemeAssist} returns a character vector.
 #' @import miniUI
 #' @import shiny
 #' @import ggplot2
 #' @import formatR
 #' @import rstudioapi
-ggThemeAssist <- function(){
+#' @name ggThemeAssist
+NULL
 
-  # Check if subtitles are supported
+ggThemeAssist <- function(text){
+
   SubtitlesSupport <- any(names(formals(ggtitle)) == 'subtitle')
-
-  # Get the document context.
-  context <- rstudioapi::getActiveDocumentContext()
-
-  # Set the default data to use based on the selection.
-  text <- context$selection[[1]]$text
-
-  if (nchar(text) == 0) {
-    stop('Please highlight a ggplot2 plot before selecting this addin.')
-  }
 
   if (grepl('[\\+\\(]', text)) {
     gg_original <- eval(parse(text = text))
@@ -522,5 +515,27 @@ ggThemeAssist <- function(){
 
   viewer <- dialogViewer(dialogName = 'ggThemeAssist', width = 990, height = 900)
   runGadget(ui, server, stopOnCancel = FALSE, viewer = viewer)
+}
 
+#' @export
+#' @rdname ggThemeAssist
+ggThemeAssistGadget <- function(plot) {
+  if (missing(plot)) {
+    stop('You must provide a ggplot2 plot.', call. = FALSE)
+  }
+  ggThemeAssist(deparse(substitute(plot)))
+}
+
+ggThemeAssistAddin <- function() {
+  # Get the document context.
+  context <- rstudioapi::getActiveDocumentContext()
+
+  # Set the default data to use based on the selection.
+  text <- context$selection[[1]]$text
+
+  if (nchar(text) == 0) {
+    stop('Please highlight a ggplot2 plot before selecting this addin.')
+  }
+
+  ggThemeAssist(text)
 }
