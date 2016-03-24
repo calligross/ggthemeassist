@@ -5,7 +5,7 @@ headingOutput <- function(heading, height = '20px', css = 'color: #ad1d28; text-
 }
 
 addQuotes <- function(x){
-  chars <- grepl(pattern = '[a-zA-Z]', x)
+  chars <- grepl(pattern = '[a-zA-Z#]', x)
   chars[grep('^(c\\(.*|NA|NULL)*$', x)] <- FALSE
   x[chars] <- paste("'", x[chars], "'", sep = '')
   x
@@ -32,5 +32,18 @@ compileResults <- function(element, original, new, std = default) {
     return(result)
   } else {
     return(NA)
+  }
+}
+
+is.validColour <- function(x) {
+  if (is.null(x)) {
+    return(TRUE)
+  } else if (x %in% c(colours.available, 'NA', 'NULL')) {
+    return(TRUE)
+  } else if (grepl('#[0-9a-fA-F]{6}$', x)) {
+    return(TRUE)
+  }
+  else {
+    return(FALSE)
   }
 }

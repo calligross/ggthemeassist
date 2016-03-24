@@ -1,6 +1,17 @@
-# ggThemeAssist 0.1.1.9000
+# ggThemeAssist 0.1.1
 
+## New features
+* Set legend position by click
+* Set the plot dimensions
+
+
+## Bugfixes
 * Plot height is now a relative value to improve visibility in combinations with lower screen resolutions. Closes #32.
+* Apply preset themes correctly to input widgets. Closes #36
+* Added validate checks for colours. Closes #41
+* Reduce the given fonts if extrafont package is installed. Closes #35
+
+
 
 # ggThemeAssist 0.1.0
 
