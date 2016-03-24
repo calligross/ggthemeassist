@@ -17,16 +17,24 @@ ggThemeAssist <- function(text){
 
   SubtitlesSupport <- any(names(formals(ggtitle)) == 'subtitle')
 
-  if (grepl('[\\+\\(]', text)) {
-    gg_original <- eval(parse(text = text))
-  } else {
+  if(grepl('^\\s*[[:alpha:]]+[[:alnum:]\\.]*\\s*$', text)) {
     text <- gsub('\\s+', '', text)
-    gg_original <- get(text, envir = .GlobalEnv)
+    if (any(ls(envir = .GlobalEnv) == text)) {
+      gg_original <- get(text, envir = .GlobalEnv)
+    } else {
+      stop(paste0('I\'m sorry, I couldn\'t find  object', text, '.'))
+    }
+  } else {
+    gg_original <- try(eval(parse(text = text)), silent = TRUE)
+    if(class(gg_original)[1] == 'try-error') {
+      stop(paste0('I\'m sorry, I was unable to parse the string you gave to me.\n', gg_original))
+    }
   }
 
   if (!is.ggplot(gg_original)) {
     stop('No ggplot2 object has been selected. Fool someone else!')
   }
+
   # add rgb colours to the available colours
   colours.available <- c(colours.available, getRGBHexColours(gg_original))
   default <- updateDefaults(gg_original, default, linetypes = linetypes)
