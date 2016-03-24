@@ -18,6 +18,15 @@ input.width2 <- '90%'
 line.height <- '70px'
 heading.height <- '30px'
 
+# annotations
+annotations <- data.frame(X = ggplot_build(gg)$panel$ranges[[1]]$x.major_source[1],
+                          Y = ggplot_build(gg)$panel$ranges[[1]]$y.major_source[1],
+                          Label = '',
+                          Size = 5,
+                          Colour = 'black',
+                          Family = 'sans',
+                          stringsAsFactors = F)
+
 
 # default values
 default <- list(

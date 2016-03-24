@@ -10,6 +10,8 @@
 #' @import ggplot2
 #' @import formatR
 #' @import rstudioapi
+#' @import rhandsontable
+#' @import dplyr
 #' @name ggThemeAssist
 NULL
 
@@ -299,15 +301,38 @@ ggThemeAssist <- function(text){
 
                      )
         )
-        }
+        },
+      miniTabPanel("Annotate", icon = icon('sliders'),
+                   plotOutput("ThePlot7", width = '100%', height = '45%'),
+                   miniContentPanel(scrollable = TRUE,
+                                    rHandsontableOutput('annotations')
+                   )
+      )
     ))
 
 
 
   server <- function(input, output, session) {
 
-    updateSelectizeInput(session = session, inputId = 'plot.background.fill', choices = colours2RGB(colours.available), selected = default$plot.background$fill, server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'name', valueField = 'name', render = jsColourSelector))
-    updateSelectizeInput(session = session, inputId = 'legend.key.colour', choices = colours2RGB(colours.available), selected = default$legend.key$colour, server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'name', valueField = 'name', render = jsColourSelector))
+    # annotate
+    reactAnnotations <- reactiveValues()
+    setHot = function(x) reactAnnotations[["annotations"]] = x
+    output$annotations <- renderRHandsontable({
+      if (!is.null(input$annotations)) {
+        dfAnnotations = hot_to_r(input$annotations)
+      } else {
+        dfAnnotations = annotations
+      }
+      setHot(dfAnnotations)
+      rhandsontable(dfAnnotations) %>%
+        hot_col(col = "X", width = 75, default = ggplot_build(gg)$panel$ranges[[1]]$x.major_source[1]) %>%
+        hot_col(col = "Y", width = 75, default = ggplot_build(gg)$panel$ranges[[1]]$y.major_source[1]) %>%
+        hot_col(col = "Label", width = 300, default = "") %>%
+        hot_col(col = "Size", width = 40, default = 5, type = "dropdown", source = 1:20) %>%
+        hot_col(col = "Colour", width = 150, default = "black", type = "dropdown", source = as.vector(colours.available)) %>%
+        hot_col(col = "Family", width = 150, default = "sans", type = "dropdown", source = text.families) %>%
+        hot_context_menu(allowRowEdit = T, allowColEdit = F, allowComments = F)
+    })
 
     gg_reactive <- reactive({
 
@@ -475,9 +500,15 @@ ggThemeAssist <- function(text){
           )
       }
 
+      if (!is.null(reactAnnotations[["annotations"]])) {
+        valAnnotations <- reactAnnotations[["annotations"]]
+        gg <- gg + annotate("text", x=valAnnotations$X, y=valAnnotations$Y, label=valAnnotations$Label, size=valAnnotations$Size, colour = valAnnotations$Colour, family = valAnnotations$Family)
+      }
+
       return(gg)
 
     })
+
 
     observeEvent(input$legend.click, {
       x.click <- input$legend.click$x / (input$legend.click$domain$right - input$legend.click$domain$left)
@@ -506,6 +537,7 @@ ggThemeAssist <- function(text){
     output$ThePlot4 <- ThePlot
     output$ThePlot5 <- ThePlot
     output$ThePlot6 <- ThePlot
+    output$ThePlot7 <- ThePlot
 
     observeEvent(input$done, {
       result <- sapply(AvailableElements, compileResults, new = gg_reactive(), original = gg_original, std = default, USE.NAMES = FALSE)
