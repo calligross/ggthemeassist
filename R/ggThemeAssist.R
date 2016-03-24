@@ -9,8 +9,9 @@
 #' @import ggplot2
 #' @import formatR
 #' @import rstudioapi
+#' @import rhandsontable
+#' @import dplyr
 
-library(rhandsontable)
 ggThemeAssist <- function(){
 
   # Check if subtitles are supported
@@ -316,7 +317,13 @@ ggThemeAssist <- function(){
       }
       setHot(dfAnnotations)
       rhandsontable(dfAnnotations) %>%
-        hot_col(col = "size", type = "dropdown", source = 1:20)
+        hot_col(col = "X", width = 75, default = ggplot_build(gg)$panel$ranges[[1]]$x.major_source[1]) %>%
+        hot_col(col = "Y", width = 75, default = ggplot_build(gg)$panel$ranges[[1]]$y.major_source[1]) %>%
+        hot_col(col = "Label", width = 300, default = "") %>%
+        hot_col(col = "Size", width = 40, default = 5, type = "dropdown", source = 1:20) %>%
+        hot_col(col = "Colour", width = 150, default = "black", type = "dropdown", source = as.vector(colours.available)) %>%
+        hot_col(col = "Family", width = 150, default = "sans", type = "dropdown", source = text.families) %>%
+        hot_context_menu(allowRowEdit = T, allowColEdit = F, allowComments = F)
     })
     #
 
@@ -493,7 +500,7 @@ ggThemeAssist <- function(){
 
       if (!is.null(reactAnnotations[["annotations"]])) {
         valAnnotations <- reactAnnotations[["annotations"]]
-        gg <- gg + annotate("text", x=valAnnotations$x, y=valAnnotations$y, label=valAnnotations$label, size=valAnnotations$size)
+        gg <- gg + annotate("text", x=valAnnotations$X, y=valAnnotations$Y, label=valAnnotations$Label, size=valAnnotations$Size, colour = valAnnotations$Colour, family = valAnnotations$Family)
       }
 
       return(gg)

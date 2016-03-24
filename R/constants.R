@@ -19,10 +19,12 @@ line.height <- '70px'
 heading.height <- '30px'
 
 # annotations
-annotations <- data.frame(x = 0,
-                          y = 0,
-                          label = "",
-                          size = 9,
+annotations <- data.frame(X = ggplot_build(gg)$panel$ranges[[1]]$x.major_source[1],
+                          Y = ggplot_build(gg)$panel$ranges[[1]]$y.major_source[1],
+                          Label = '',
+                          Size = 5,
+                          Colour = 'black',
+                          Family = 'sans',
                           stringsAsFactors = F)
 
 
