@@ -1,17 +1,16 @@
-# ggThemeAssist **dev**
-
-[`dev`](https://github.com/calligross/ggthemeassist/tree/dev) now includes a first rough implementation of functionality for
-
-* subtitle
-* caption
-
-Please consider that these features require the [latest version of `ggplot2` from GitHub](https://github.com/hadley/ggplot2#installation).
+# ggThemeAssist
 
 # ggThemeAssist 0.1.1
 
 ## New features
+* subtitle* 
+* caption*
 * Set legend position by click
 * Set the plot dimensions
+* Run ggThemeAssist from the console, e.g.: ggThemeAssistGadget(gg)
+* Legend labels now support size, shape, alpha and linetype
+
+*) Please consider that subtitle and captions require the [latest version of `ggplot2` from GitHub](https://github.com/hadley/ggplot2#installation).
 
 
 ## Bugfixes
@@ -19,6 +18,7 @@ Please consider that these features require the [latest version of `ggplot2` fro
 * Apply preset themes correctly to input widgets. Closes #36
 * Added validate checks for colours. Closes #41
 * Reduce the given fonts if extrafont package is installed. Closes #35
+* Handle newlines correctly. Closes #44
 
 
 

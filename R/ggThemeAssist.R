@@ -2,38 +2,39 @@
 #'
 #' \code{ggThemeAssist} is a RStudio-Addin that delivers a graphical interface for editing ggplot2 theme elements.
 #'
-#' @details To run the addin, highlight a ggplot2-object in your current script and select \code{ggThemeAssist} from the Addins-menu within RStudio. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
+#' @details To run the addin, either highlight a ggplot2-object in your current script and select \code{ggThemeAssist} from the Addins-menu within RStudio, or run \code{ggThemeAssistGadget(plot)} with a ggplot2 object as the parameter. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
+#' @param plot A ggplot2 plot object to manipulate its theme.
 #' @return \code{ggThemeAssist} returns a character vector.
 #' @import miniUI
 #' @import shiny
 #' @import ggplot2
 #' @import formatR
 #' @import rstudioapi
-ggThemeAssist <- function(){
+#' @name ggThemeAssist
+NULL
 
-  # Check if subtitles are supported
+ggThemeAssist <- function(text){
+
   SubtitlesSupport <- any(names(formals(ggtitle)) == 'subtitle')
 
-  # Get the document context.
-  context <- rstudioapi::getActiveDocumentContext()
-
-  # Set the default data to use based on the selection.
-  text <- context$selection[[1]]$text
-
-  if (nchar(text) == 0) {
-    stop('Please highlight a ggplot2 plot before selecting this addin.')
-  }
-
-  if (grepl('[\\+\\(]', text)) {
-    gg_original <- eval(parse(text = text))
-  } else {
+  if(grepl('^\\s*[[:alpha:]]+[[:alnum:]\\.]*\\s*$', text)) {
     text <- gsub('\\s+', '', text)
-    gg_original <- get(text, envir = .GlobalEnv)
+    if (any(ls(envir = .GlobalEnv) == text)) {
+      gg_original <- get(text, envir = .GlobalEnv)
+    } else {
+      stop(paste0('I\'m sorry, I couldn\'t find  object', text, '.'))
+    }
+  } else {
+    gg_original <- try(eval(parse(text = text)), silent = TRUE)
+    if(class(gg_original)[1] == 'try-error') {
+      stop(paste0('I\'m sorry, I was unable to parse the string you gave to me.\n', gg_original))
+    }
   }
 
   if (!is.ggplot(gg_original)) {
     stop('No ggplot2 object has been selected. Fool someone else!')
   }
+
   # add rgb colours to the available colours
   colours.available <- c(colours.available, getRGBHexColours(gg_original))
   default <- updateDefaults(gg_original, default, linetypes = linetypes)
@@ -166,39 +167,45 @@ ggThemeAssist <- function(){
                                             selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('axis.title.x', label = 'x-Axis', value = preserveNewlines(gg_original$labels$x), width = input.width),
+                                            textInput('axis.title.x', label = 'x-Axis label', value = preserveNewlines(gg_original$labels$x), width = input.width),
                                             selectInput('plot.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
                                             selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('axis.title.y', label = 'y-Axis', value = preserveNewlines(gg_original$labels$y), width = input.width),
+                                            textInput('axis.title.y', label = 'y-Axis label', value = preserveNewlines(gg_original$labels$y), width = input.width),
                                             numericInput('plot.title.size', label = 'Size', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width),
                                             numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('legend.colour.title', label = 'Colour', value = preserveNewlines(gg_original$labels$colour), width = input.width),
+                                            textInput('legend.colour.title', label = 'Colour label', value = preserveNewlines(gg_original$labels$colour), width = input.width),
                                             selectizeInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width, options = list(create = TRUE)),
                                             selectizeInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width, options = list(create = TRUE))
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('legend.fill.title', label = 'Fill', value = preserveNewlines(gg_original$labels$fill), width = input.width),
+                                            textInput('legend.fill.title', label = 'Fill label', value = preserveNewlines(gg_original$labels$fill), width = input.width),
                                             numericInput('plot.title.hjust', 'Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
                                             numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width)
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            '',
+                                            textInput('legend.size.title', label = 'Size label', value = preserveNewlines(gg_original$labels$size), width = input.width),
                                             numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
                                             numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            '',
+                                            textInput('legend.alpha.title', label = 'Alpha label', value = preserveNewlines(gg_original$labels$alpha), width = input.width),
                                             numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width),
                                             numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
-
+                                    ),
+                                    fillRow(height = line.height, width = '33%',
+                                            textInput('legend.linetype.title', label = 'Linetype label', value = preserveNewlines(gg_original$labels$linetype), width = input.width)
+                                    ),
+                                    fillRow(height = line.height, width = '33%',
+                                            textInput('legend.shape.title', label = 'Shape label', value = preserveNewlines(gg_original$labels$shape), width = input.width)
                                     )
+
 
                    )
       ),
@@ -329,10 +336,14 @@ ggThemeAssist <- function(){
       gg <- gg_original +
         labs(
           title = checkInputText(input$plot.title),
-             x = checkInputText(input$axis.title.x),
-             y = checkInputText(input$axis.title.y),
-             fill = checkInputText(input$legend.fill.title),
-             colour = checkInputText(input$legend.colour.title)
+          x = checkInputText(input$axis.title.x),
+          y = checkInputText(input$axis.title.y),
+          fill = checkInputText(input$legend.fill.title),
+          linetype = checkInputText(input$legend.linetype.title),
+          alpha = checkInputText(input$legend.alpha.title),
+          size = checkInputText(input$legend.size.title),
+          shape = checkInputText(input$legend.shape.title),
+          colour = checkInputText(input$legend.colour.title)
              ) +
         theme(
           axis.text = element_text(
@@ -526,5 +537,27 @@ ggThemeAssist <- function(){
 
   viewer <- dialogViewer(dialogName = 'ggThemeAssist', width = 990, height = 900)
   runGadget(ui, server, stopOnCancel = FALSE, viewer = viewer)
+}
 
+#' @export
+#' @rdname ggThemeAssist
+ggThemeAssistGadget <- function(plot) {
+  if (missing(plot)) {
+    stop('You must provide a ggplot2 plot.', call. = FALSE)
+  }
+  ggThemeAssist(deparse(substitute(plot)))
+}
+
+ggThemeAssistAddin <- function() {
+  # Get the document context.
+  context <- rstudioapi::getActiveDocumentContext()
+
+  # Set the default data to use based on the selection.
+  text <- context$selection[[1]]$text
+
+  if (nchar(text) == 0) {
+    stop('Please highlight a ggplot2 plot before selecting this addin.')
+  }
+
+  ggThemeAssist(text)
 }
