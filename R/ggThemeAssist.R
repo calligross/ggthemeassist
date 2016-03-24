@@ -166,39 +166,45 @@ ggThemeAssist <- function(text){
                                             selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('axis.title.x', label = 'x-Axis', value = preserveNewlines(gg_original$labels$x), width = input.width),
+                                            textInput('axis.title.x', label = 'x-Axis label', value = preserveNewlines(gg_original$labels$x), width = input.width),
                                             selectInput('plot.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
                                             selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('axis.title.y', label = 'y-Axis', value = preserveNewlines(gg_original$labels$y), width = input.width),
+                                            textInput('axis.title.y', label = 'y-Axis label', value = preserveNewlines(gg_original$labels$y), width = input.width),
                                             numericInput('plot.title.size', label = 'Size', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width),
                                             numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('legend.colour.title', label = 'Colour', value = preserveNewlines(gg_original$labels$colour), width = input.width),
+                                            textInput('legend.colour.title', label = 'Colour label', value = preserveNewlines(gg_original$labels$colour), width = input.width),
                                             selectizeInput('plot.title.colour', label = 'Colour', choices = colours.available, selected = default$plot.title$colour, width = input.width, options = list(create = TRUE)),
                                             selectizeInput('axis.title.colour', label = 'Colour', choices = colours.available, selected = default$axis.title$colour, width = input.width, options = list(create = TRUE))
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            textInput('legend.fill.title', label = 'Fill', value = preserveNewlines(gg_original$labels$fill), width = input.width),
+                                            textInput('legend.fill.title', label = 'Fill label', value = preserveNewlines(gg_original$labels$fill), width = input.width),
                                             numericInput('plot.title.hjust', 'Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
                                             numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width)
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            '',
+                                            textInput('legend.size.title', label = 'Size label', value = preserveNewlines(gg_original$labels$size), width = input.width),
                                             numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
                                             numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width)
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
-                                            '',
+                                            textInput('legend.alpha.title', label = 'Alpha label', value = preserveNewlines(gg_original$labels$alpha), width = input.width),
                                             numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width),
                                             numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width)
-
+                                    ),
+                                    fillRow(height = line.height, width = '33%',
+                                            textInput('legend.linetype.title', label = 'Linetype label', value = preserveNewlines(gg_original$labels$linetype), width = input.width)
+                                    ),
+                                    fillRow(height = line.height, width = '33%',
+                                            textInput('legend.shape.title', label = 'Shape label', value = preserveNewlines(gg_original$labels$shape), width = input.width)
                                     )
+
 
                    )
       ),
@@ -326,10 +332,14 @@ ggThemeAssist <- function(text){
       gg <- gg_original +
         labs(
           title = checkInputText(input$plot.title),
-             x = checkInputText(input$axis.title.x),
-             y = checkInputText(input$axis.title.y),
-             fill = checkInputText(input$legend.fill.title),
-             colour = checkInputText(input$legend.colour.title)
+          x = checkInputText(input$axis.title.x),
+          y = checkInputText(input$axis.title.y),
+          fill = checkInputText(input$legend.fill.title),
+          linetype = checkInputText(input$legend.linetype.title),
+          alpha = checkInputText(input$legend.alpha.title),
+          size = checkInputText(input$legend.size.title),
+          shape = checkInputText(input$legend.shape.title),
+          colour = checkInputText(input$legend.colour.title)
              ) +
         theme(
           axis.text = element_text(

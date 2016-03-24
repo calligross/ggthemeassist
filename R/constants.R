@@ -157,6 +157,10 @@ default <- list(
     y = '',
     colour = '',
     fill = '',
+    size = '',
+    linetype = '',
+    shape = '',
+    alpha = '',
     subtitle = '',
     caption = ''
   )
