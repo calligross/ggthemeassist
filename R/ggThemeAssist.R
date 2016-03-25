@@ -519,8 +519,9 @@ ggThemeAssist <- function(text){
     ThePlot <- renderPlot(width = function() {
         validate(
           need(is.numeric(input$plot.width), ''),
-                 need(is.numeric(input$plot.height), ''),
-                 need(!is.null(input$ViewerWidth), '')
+          need(is.numeric(input$plot.height), ''),
+          need(!is.null(input$ViewerWidth), ''),
+          need(is.validColour(input$legend.key.colour), '')
                  )
         min(input$plot.width / input$plot.height * input$ViewerWidth * 45 / 100,
             input$ViewerWidth
