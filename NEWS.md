@@ -9,6 +9,7 @@
 * Set the plot dimensions
 * Run ggThemeAssist from the console, e.g.: ggThemeAssistGadget(gg)
 * Legend labels now support size, shape, alpha and linetype
+* Preview while colour selection
 
 *) Please consider that subtitle and captions require the [latest version of `ggplot2` from GitHub](https://github.com/hadley/ggplot2#installation).
 
