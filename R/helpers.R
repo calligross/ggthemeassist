@@ -82,7 +82,7 @@ getRGBHexColours <- function(gg) {
   return(colours)
 }
 
-colours2RGB <- function(colours) {
+colours2RGB <- function(colours, Inherit = FALSE) {
   #return a df of rgb colours
   colours[is.na(colours)] <- 'NA'
   rgbcolours <- matrix(as.character(as.character.hexmode(col2rgb(colours), width = 2)), nrow = 3)
@@ -90,7 +90,9 @@ colours2RGB <- function(colours) {
   rgbcolours <- paste('#', rgbcolours, sep = '')
   rgbcolours <- data.frame(name = colours, colour = colours, rgb = rgbcolours, stringsAsFactors = FALSE)
   rgbcolours[1, 1] <- 'None'
-  rgbcolours <- rbind(data.frame(name = 'Inherit', colour = 'NULL', rgb = '#ffffff'), rgbcolours)
+  if (Inherit) {
+    rgbcolours <- rbind(data.frame(name = 'Inherit', colour = 'NULL', rgb = '#ffffff'), rgbcolours)
+  }
   rgbcolours <- rbind(data.frame(name = 'None', colour = NA, rgb = '#ffffff'), rgbcolours)
   #rgbcolours <- rgbcolours[orderRGB(rgbcolours$rgb), ]
   return(rgbcolours)
