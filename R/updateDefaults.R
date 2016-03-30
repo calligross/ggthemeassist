@@ -14,7 +14,9 @@ updateDefaults <- function(gg, defaults, linetypes = linetypes) {
     DefaultClasses <- names(DefaultClasses)
     if (length(DefaultClasses) > 0) {
       for (j in DefaultClasses) {
-        default[[j]][names(default[[j]])] <- lapply(gg$theme[[i]][names(default[[j]])], unname)
+        gg$theme[[i]][which(gg$theme[[i]][names(default[[j]])] == '')] <- NULL
+        default[[j]][names(gg$theme[[i]])] <- lapply(gg$theme[[i]][names(gg$theme[[i]])], unname)
+
       }
     }
   }
