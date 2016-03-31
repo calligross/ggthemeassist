@@ -21,11 +21,13 @@ ggThemeAssist <- function(text){
     text <- gsub('\\s+', '', text)
     if (any(ls(envir = .GlobalEnv) == text)) {
       gg_original <- get(text, envir = .GlobalEnv)
+      allowOneline <- TRUE
     } else {
       stop(paste0('I\'m sorry, I couldn\'t find  object', text, '.'))
     }
   } else {
     gg_original <- try(eval(parse(text = text)), silent = TRUE)
+    allowOneline <- FALSE
     if(class(gg_original)[1] == 'try-error') {
       stop(paste0('I\'m sorry, I was unable to parse the string you gave to me.\n', gg_original))
     }
@@ -54,7 +56,10 @@ ggThemeAssist <- function(text){
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('plot.width', label = 'Width', min = 0, max = 10, step = 1, value = 10),
-                                            numericInput('plot.height', label = 'Height', min = 0, max = 10, step = 1, value = 5)
+                                            numericInput('plot.height', label = 'Height', min = 0, max = 10, step = 1, value = 5),
+                                            if (allowOneline) {
+                                              checkboxInput('oneline', 'Oneline', value = TRUE)
+                                            }
                                     )
                    )
       ),
@@ -540,22 +545,23 @@ ggThemeAssist <- function(text){
     output$ThePlot6 <- ThePlot
 
     observeEvent(input$done, {
-      result <- sapply(AvailableElements, compileResults, new = gg_reactive(), original = gg_original, std = default, USE.NAMES = FALSE)
-      result <- result[!is.na(result)]
+      themeResult <- sapply(AvailableElements, compileResults, new = gg_reactive(), original = gg_original, std = default, USE.NAMES = FALSE)
+      themeResult <- themeResult[!is.na(themeResult)]
 
       labelResult <- construcThemeString('labs', original = gg_original, new = gg_reactive(), std = default, category = 'labels')
 
-      if(!is.null(result) || !is.null(labelResult)) {
-        if(!is.null(result) && length(result) > 0) {
-          result <- paste0(' + theme(', paste(result, collapse = ', '),')')
+      if((!is.null(themeResult) & length(themeResult) > 0) | !is.null(labelResult)) {
+        if (!is.null(input$oneline)) {
+          if (input$oneline) {
+            oneline <- TRUE
+          } else {
+            oneline <- FALSE
+          }
+        } else {
+          oneline <- TRUE
         }
-        if(!is.null(labelResult)) {
-          result <- c(result, ' + ', labelResult)
-        }
-        result <- paste0(text, paste(result, collapse = ' '))
 
-        result <- formatR::tidy_source(text = result, output = FALSE, width.cutoff = 40)$text.tidy
-        result <- paste(result, collapse = "\n")
+        result <- formatResult(text = text, themestring = themeResult, labelstring = labelResult, oneline = oneline)
         rstudioapi::insertText(result)
       }
       invisible(stopApp())
