@@ -56,9 +56,18 @@ ggThemeAssist <- function(text){
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             numericInput('plot.width', label = 'Width', min = 0, max = 10, step = 1, value = 10),
-                                            numericInput('plot.height', label = 'Height', min = 0, max = 10, step = 1, value = 5),
+                                            numericInput('plot.height', label = 'Height', min = 0, max = 10, step = 1, value = 5)
+                                    ),
+                                    fillRow(height = heading.height, width = '100%',
+                                            tags$div(
+                                              title = 'If enabled, formatR will be used. Set options(ggThemeAssist.formatR = FALSE) to disable it permanently.',
+                                              checkboxInput('formatR', 'Use FormatR', value = getOption("ggThemeAssist.formatR", default = TRUE))
+                                            ),
                                             if (allowOneline) {
-                                              checkboxInput('oneline', 'Oneline', value = TRUE)
+                                              tags$div(
+                                                title = 'If multiline support is enabled, a theme function is returned for each element. To set this option permanently set options(ggThemeAssist.multiline = TRUE).',
+                                                checkboxInput('multiline', 'Multiline results', value = getOption("ggThemeAssist.multiline", default = FALSE))
+                                              )
                                             }
                                     )
                    )
@@ -551,17 +560,17 @@ ggThemeAssist <- function(text){
       labelResult <- construcThemeString('labs', original = gg_original, new = gg_reactive(), std = default, category = 'labels')
 
       if((!is.null(themeResult) & length(themeResult) > 0) | !is.null(labelResult)) {
-        if (!is.null(input$oneline)) {
-          if (input$oneline) {
-            oneline <- TRUE
-          } else {
+        if (!is.null(input$multiline)) {
+          if (input$multiline) {
             oneline <- FALSE
+          } else {
+            oneline <- TRUE
           }
         } else {
           oneline <- TRUE
         }
 
-        result <- formatResult(text = text, themestring = themeResult, labelstring = labelResult, oneline = oneline)
+        result <- formatResult(text = text, themestring = themeResult, labelstring = labelResult, oneline = oneline, formatR = input$formatR)
         rstudioapi::insertText(result)
       }
       invisible(stopApp())

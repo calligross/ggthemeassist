@@ -1,6 +1,26 @@
 # ggThemeAssist
 
-# ggThemeAssist 0.1.1
+# ggThemeAssist 0.1.3
+
+## New features
+
+* Enable/disable formatR
+* Multiline results
+
+Muliline results look like:
+
+```r
+gg <- gg + theme(panel.grid.major = element_line(size  =  0.6))
+gg <- gg + theme(panel.grid.minor = element_line(size  =  0.6))
+gg <- gg + theme(panel.background = element_rect(size  =  0.6))
+```
+
+## Bugfixes
+
+* Handling of empty theme strings. Closes #55
+
+
+# ggThemeAssist 0.1.2
 
 ## New features
 * subtitle* 
@@ -9,7 +29,7 @@
 * Set the plot dimensions
 * Run ggThemeAssist from the console, e.g.: ggThemeAssistGadget(gg)
 * Legend labels now support size, shape, alpha and linetype
-* Preview while colour selection
+* Previews for colour selection
 
 *) Please consider that subtitle and captions require the [latest version of `ggplot2` from GitHub](https://github.com/hadley/ggplot2#installation).
 

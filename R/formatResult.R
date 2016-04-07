@@ -1,6 +1,6 @@
-formatResult <- function(text, themestring, labelstring, oneline) {
+formatResult <- function(text, themestring, labelstring, oneline, formatR = TRUE) {
   result <- NULL
-  cat(oneline)
+
   if (!is.null(themestring) && length(themestring) > 0) {
     if (oneline) {
       result <- paste0(' + theme(', paste(themestring, collapse = ', '),')')
@@ -18,11 +18,13 @@ formatResult <- function(text, themestring, labelstring, oneline) {
     }
   }
 
-
-
   if (oneline) {
+    if (formatR) {
+      result <- formatR::tidy_source(text = result, output = FALSE, width.cutoff = 40)$text.tidy
+      result <- gsub('^\\+theme', ' + theme', result)
+    }
     result <- paste0(text, paste(result, collapse = ' '))
-    result <- formatR::tidy_source(text = result, output = FALSE, width.cutoff = 40)$text.tidy
+
   }
 
   result <- paste(result, collapse = "\n")
