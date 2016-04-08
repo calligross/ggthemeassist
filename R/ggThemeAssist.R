@@ -59,6 +59,8 @@ ggThemeAssist <- function(text){
                                             numericInput('plot.height', label = 'Height', min = 0, max = 10, step = 1, value = 5)
                                     ),
                                     fillRow(height = heading.height, width = '100%',
+                                            headingOutput("General options")),
+                                    fillRow(height = heading.height, width = '100%',
                                             tags$div(
                                               title = 'If enabled, formatR will be used. Set options(ggThemeAssist.formatR = FALSE) to disable it permanently.',
                                               checkboxInput('formatR', 'Use FormatR', value = getOption("ggThemeAssist.formatR", default = TRUE))
