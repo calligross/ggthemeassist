@@ -114,3 +114,10 @@ NA2text <- function(x) {
     return(x)
   }
 }
+
+hasLegend <- function(gg) {
+  mappings <- names(gg$mapping)
+  mappings <- mappings[!mappings %in% c('x', 'y')]
+  length(mappings) > 0
+}
+

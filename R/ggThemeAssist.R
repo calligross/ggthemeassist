@@ -527,9 +527,11 @@ ggThemeAssist <- function(text){
     observeEvent(input$legend.click, {
       x.click <- input$legend.click$x / (input$legend.click$domain$right - input$legend.click$domain$left)
       y.click <- input$legend.click$y / (input$legend.click$domain$top - input$legend.click$domain$bottom)
-      updateSelectInput(session, 'legend.position', selected = 'XY')
-      updateSelectInput(session, 'legend.position.x', selected = round(x.click, 4))
-      updateSelectInput(session, 'legend.position.y', selected = round(y.click, 4))
+      if (hasLegend(gg_original)) {
+        updateSelectInput(session, 'legend.position', selected = 'XY')
+        updateSelectInput(session, 'legend.position.x', selected = round(x.click, 4))
+        updateSelectInput(session, 'legend.position.y', selected = round(y.click, 4))
+      }
     })
 
     ThePlot <- renderPlot(width = function() {
