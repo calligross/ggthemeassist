@@ -7,13 +7,14 @@
 * Enable/disable formatR
 * Multiline results
 
-Muliline results look like:
+Multiline results look like:
 
 ```r
 gg <- gg + theme(panel.grid.major = element_line(size  =  0.6))
 gg <- gg + theme(panel.grid.minor = element_line(size  =  0.6))
 gg <- gg + theme(panel.background = element_rect(size  =  0.6))
 ```
+Multiline results are only available, if an ggplot2 object has been highlighted.
 
 ## Bugfixes
 
