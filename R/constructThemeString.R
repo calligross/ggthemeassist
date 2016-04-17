@@ -1,6 +1,7 @@
 construcThemeString <- function(theme, original, new, std = default, element = NULL, category = 'theme') {
   result <- NULL
   std <- unlist(std[[theme]])
+  std[is.na(std)] <- 'NA'
 
   if (category == 'theme') {
     # if you value good style of coding, don't read the next few lines, it's an ugly workaround for legend.position
