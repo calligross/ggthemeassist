@@ -10,6 +10,7 @@
 #' @import ggplot2
 #' @import formatR
 #' @import rstudioapi
+#' @importFrom grDevices col2rgb
 #' @name ggThemeAssist
 NULL
 
