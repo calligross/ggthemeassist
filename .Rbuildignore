@@ -6,3 +6,4 @@
 ^.RData
 ^NEWS\.md$
 ^cran-comments\.md$
+^\.travis\.yml$

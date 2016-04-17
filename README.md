@@ -1,5 +1,6 @@
 ggThemeAssist
 ==============
+[![Build Status](https://travis-ci.org/calligross/ggthemeassist.svg?branch=master)](https://travis-ci.org/calligross/ggthemeassist)
 [![CRAN](http://www.r-pkg.org/badges/version/ggThemeAssist)](http://cran.rstudio.com/package=ggThemeAssist) [![Downloads](http://cranlogs.r-pkg.org/badges/ggThemeAssist?color=brightgreen)](http://www.r-pkg.org/pkg/ggThemeAssist)
 
 
