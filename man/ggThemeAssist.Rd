@@ -23,4 +23,12 @@ Addin to help style your ggplot2 themes
 \details{
 To run the addin, either highlight a ggplot2-object in your current script and select \code{ggThemeAssist} from the Addins-menu within RStudio, or run \code{ggThemeAssistGadget(plot)} with a ggplot2 object as the parameter. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
 }
+\examples{
+\dontrun{
+# example for ggThemeAssist command line usage.
+library(ggplot2)
+gg <- ggplot(mtcars, aes(x = hp, y = mpg, colour = as.factor(cyl))) + geom_point()
+ggThemeAssistGadget(gg)
+}
+}
 

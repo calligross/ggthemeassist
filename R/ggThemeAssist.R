@@ -4,6 +4,13 @@
 #'
 #' @details To run the addin, either highlight a ggplot2-object in your current script and select \code{ggThemeAssist} from the Addins-menu within RStudio, or run \code{ggThemeAssistGadget(plot)} with a ggplot2 object as the parameter. After editing themes and terminating the addin, a character string containing the desired changes is inserted in your current script.
 #' @param plot A ggplot2 plot object to manipulate its theme.
+#' @examples
+#' \dontrun{
+#' # example for ggThemeAssist command line usage.
+#' library(ggplot2)
+#' gg <- ggplot(mtcars, aes(x = hp, y = mpg, colour = as.factor(cyl))) + geom_point()
+#' ggThemeAssistGadget(gg)
+#' }
 #' @return \code{ggThemeAssist} returns a character vector.
 #' @import miniUI
 #' @import shiny
@@ -18,7 +25,7 @@ ggThemeAssist <- function(text){
 
   SubtitlesSupport <- any(names(formals(ggtitle)) == 'subtitle')
 
-  if(grepl('^\\s*[[:alpha:]]+[[:alnum:]\\.]*\\s*$', text)) {
+  if (grepl('^\\s*[[:alpha:]]+[[:alnum:]\\.]*\\s*$', paste0(text, collapse = ''))) {
     text <- gsub('\\s+', '', text)
     if (any(ls(envir = .GlobalEnv) == text)) {
       gg_original <- get(text, envir = .GlobalEnv)
@@ -595,9 +602,15 @@ ggThemeAssist <- function(text){
 #' @rdname ggThemeAssist
 ggThemeAssistGadget <- function(plot) {
   if (missing(plot)) {
-    stop('You must provide a ggplot2 plot.', call. = FALSE)
+    stop('You must provide a ggplot2 plot object.', call. = FALSE)
   }
-  ggThemeAssist(deparse(substitute(plot)))
+  plot <- deparse(substitute(plot))
+  if (grepl('^\\s*[[:alpha:]]+[[:alnum:]\\.]*\\s*$', paste0(plot, collapse = ''))) {
+    ggThemeAssist(plot)
+  } else {
+    stop('You must provide a ggplot2 plot object.', call. = FALSE)
+  }
+
 }
 
 ggThemeAssistAddin <- function() {
