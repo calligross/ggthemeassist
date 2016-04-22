@@ -553,7 +553,7 @@ ggThemeAssist <- function(text){
             )
     },
       {
-        print(isolate(gg_reactive()))
+        gg_reactive()
 
     })
     output$ThePlot <- ThePlot
