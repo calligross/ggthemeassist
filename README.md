@@ -46,5 +46,6 @@ After installing, **ggThemeAssist** is available in the Addins menu within RStud
 
 To edit `ggplot2` themes, just highlight a `ggplot2` object in your current script and run the Addin from the Addins menu. **ggplot2** will analyze your current plot, update its defaults to your current specification and give you a preview. Use the input widgets to get your ideas into shape. After terminating **ggThemeAssist** a character string containing your desired changes in standard `ggplot2` notation is inserted in your script. Re-running your script now produces the plot you just configured using **ggThemeAssist**.
 
+<center>[**Click to enlarge**](https://raw.githubusercontent.com/calligross/ggthemeassist/master/examples/ggThemeAssist2.gif)<center>
 ![Screenshot](examples/ggThemeAssist2.gif)
 
