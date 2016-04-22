@@ -1,5 +1,11 @@
 # ggThemeAssist
 
+# ggThemeAssist 0.1.4
+
+Second CRAN release after 0.1.0
+
+* Removed invalidateLater() due to rendering problems with facetted plots.
+
 # ggThemeAssist 0.1.3
 
 ## New features

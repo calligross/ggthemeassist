@@ -7,14 +7,9 @@
 
 ## R CMD check results
 
-There was one warning and one note.
+0 errors | 0 warnings | 1 notes
 
-### checking for code which exercises the package ... WARNING
-No examples, no tests, no vignettes
-
-Due to the usage as an add-in, no examples, vignettes or tests are suitable.
-
-## checking CRAN incoming feasibility ... NOTE
+\* checking CRAN incoming feasibility ... NOTE   
 Maintainer: 'Calli Gross <ggthemeassist@icloud.com>'
 
 ## Downstream dependencies
