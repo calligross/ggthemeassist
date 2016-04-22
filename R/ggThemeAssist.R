@@ -356,7 +356,6 @@ ggThemeAssist <- function(text){
       updateSelectizeInput(session = session, inputId = 'plot.caption.colour', choices = colour.choices, selected = NA2text(default$plot.caption$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
     }
 
-    autoInvalidate <- reactiveTimer(200)
     gg_reactive <- reactive({
       validate(
         need(is.validColour(input$plot.background.fill), ''),
@@ -554,7 +553,6 @@ ggThemeAssist <- function(text){
             )
     },
       {
-        autoInvalidate()
         print(isolate(gg_reactive()))
 
     })
