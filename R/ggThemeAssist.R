@@ -21,7 +21,7 @@
 #' @name ggThemeAssist
 NULL
 
-ggThemeAssist <- function(text){
+ggThemeAssist <- function(text, mode){
 
   SubtitlesSupport <- any(names(formals(ggtitle)) == 'subtitle')
 
@@ -581,14 +581,21 @@ ggThemeAssist <- function(text){
         }
 
         result <- formatResult(text = text, themestring = themeResult, labelstring = labelResult, oneline = oneline, formatR = input$formatR)
-        rstudioapi::insertText(result)
+        if (mode == "addin") {
+          rstudioapi::insertText(result)
+        }
       }
-      invisible(stopApp())
+      if (mode == "addin") {
+        invisible(stopApp())
+      } else {
+        stopApp(paste(text," <- ",result, sep=""))
+      }
     })
 
     observeEvent(input$cancel, {
       invisible(stopApp())
     })
+
 
   }
 
@@ -604,7 +611,7 @@ ggThemeAssistGadget <- function(plot) {
   }
   plot <- deparse(substitute(plot))
   if (grepl('^\\s*[[:alpha:]]+[[:alnum:]\\.]*\\s*$', paste0(plot, collapse = ''))) {
-    ggThemeAssist(plot)
+    ggThemeAssist(plot, mode = "gadget")
   } else {
     stop('You must provide a ggplot2 plot object.', call. = FALSE)
   }
@@ -622,5 +629,5 @@ ggThemeAssistAddin <- function() {
     stop('Please highlight a ggplot2 plot before selecting this addin.')
   }
 
-  ggThemeAssist(text)
+  ggThemeAssist(text, mode = "addin")
 }
