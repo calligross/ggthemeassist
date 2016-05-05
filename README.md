@@ -8,15 +8,6 @@ ggThemeAssist
 
 For a full list of features see [`NEWS`](./NEWS.md).
 
-User interface issues
-------------
-
-There are two known problems with the UI which easily can be fixed:
-
-1. On linux and windows, please ensure that you've installed at least shiny version 0.13.1.
-1. We realized shorty after the cran release that there is an issue with smaller screens. Some users may expirience an unapropiate sized plot. This issue has been fixed in version 0.1.1, which can be installed from github (please see below).
-
-
 
 Installation
 ------------
@@ -34,11 +25,14 @@ devtools::install_github("calligross/ggthemeassist")
 
 #### Install from CRAN
 
-The first stable version of **ggThemeAssist**, v0.1.0, is now available on CRAN:
+The stable version of **ggThemeAssist**, v0.1.4, is available on CRAN:
 ```r
 install.packages("ggThemeAssist")
 ```
-We advise users to install from github. Due to CRAN policies and the rapid development of ggThemeAssist, many new features and bugfixes will be available on CRAN several weeks later.
+<!---
+
+We advise users to install from github. Due to CRAN policies and the rapid development of ggThemeAssist, many new features and bugfixes may be available on CRAN several weeks later.
+-->
 
 Usage
 ------------
