@@ -1,5 +1,9 @@
 # ggThemeAssist
 
+# ggThemeAssist 0.1.5
+
+This is a bug fix release. When theme$text$size was NULL, ggThemeAssist crashed at start. (#65)
+
 # ggThemeAssist 0.1.4
 
 Second CRAN release after 0.1.0
