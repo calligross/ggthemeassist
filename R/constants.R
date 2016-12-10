@@ -27,7 +27,7 @@ default <- list(
     face = 'plain',
     colour = 'gray30',
     hjust = 0,
-    vjust = 0.5,
+    vjust = 1,
     angle = 0,
     lineheight = 1.1
   ), class = 'element_text'),
@@ -37,7 +37,7 @@ default <- list(
     face = 'plain',
     colour = 'gray30',
     hjust = 1,
-    vjust = 0.5,
+    vjust = 1,
     angle = 0,
     lineheight = 1.1
   ), class = 'element_text'),

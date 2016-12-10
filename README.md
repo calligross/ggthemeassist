@@ -2,6 +2,7 @@ ggThemeAssist
 ==============
 [![Build Status](https://travis-ci.org/calligross/ggthemeassist.svg?branch=master)](https://travis-ci.org/calligross/ggthemeassist)
 [![CRAN](http://www.r-pkg.org/badges/version/ggThemeAssist)](http://cran.rstudio.com/package=ggThemeAssist) [![Downloads](http://cranlogs.r-pkg.org/badges/ggThemeAssist?color=brightgreen)](http://www.r-pkg.org/pkg/ggThemeAssist)
+[![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/calligross)
 
 
 **ggThemeAssist** is a RStudio-Addin that uses the [`rstudioapi`](https://github.com/rstudio/rstudioapi) package and provides a GUI for editing [`ggplot2`](https://github.com/hadley/ggplot2) themes. 
