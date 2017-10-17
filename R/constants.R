@@ -119,6 +119,16 @@ default <- list(
     size = 0.5,
     linetype = 'blank'
   ), class = 'element_rect'),
+  strip.text = structure(list(
+    family = 'sans',
+    size = 10,
+    face = 'plain',
+    colour = 'gray30',
+    hjust = 0.5,
+    vjust = 1,
+    angle = 0,
+    lineheight = 1.1
+  ), class = 'element_text'),
   panel.grid.major = structure(list(
     colour = 'gray100',
     size = 0.5,
@@ -251,6 +261,11 @@ AvailableElements <- list(
   strip.background = list(
     name = 'strip.background',
     type = 'element_rect',
+    enabled = TRUE
+  ),
+  strip.text = list(
+    name = 'strip.text',
+    type = 'element_text',
     enabled = TRUE
   ),
   legend.key = list(

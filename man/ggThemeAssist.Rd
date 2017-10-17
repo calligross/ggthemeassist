@@ -4,6 +4,7 @@
 \name{ggThemeAssist}
 \alias{ggThemeAssist}
 \alias{ggThemeAssist-package}
+\alias{ggThemeAssist}
 \alias{ggThemeAssistGadget}
 \title{RStudio Addins}
 \usage{
@@ -31,4 +32,3 @@ gg <- ggplot(mtcars, aes(x = hp, y = mpg, colour = as.factor(cyl))) + geom_point
 ggThemeAssistGadget(gg)
 }
 }
-

@@ -16,6 +16,6 @@ Imports:
     ggplot2,
     formatR
 Suggests: extrafont
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Depends:
     R (>= 3.0.0)

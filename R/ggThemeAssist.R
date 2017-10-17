@@ -177,7 +177,7 @@ ggThemeAssist <- function(text){
                                             ""
                                     )
                    )),
-      miniTabPanel("Title & Label", icon = icon('sliders'),
+      miniTabPanel("Title, Label & Facet", icon = icon('sliders'),
                    plotOutput("ThePlot4", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
@@ -192,35 +192,35 @@ ggThemeAssist <- function(text){
                                             selectInput('plot.title.family', label = 'Family', choices = text.families, selected = default$plot.title$family, width = input.width),
                                             selectInput('axis.title.family', label = 'Family', choices = text.families, selected = default$axis.title$family, width = input.width),
                                             selectizeInput('strip.background.fill', label = 'Fill', choices = NULL, width = input.width),
-                                            ''
+                                            selectInput('strip.text.family', label = 'Family', choices = text.families, selected = default$strip.text$family, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('axis.title.x', label = 'x-Axis label', value = preserveNewlines(gg_original$labels$x), width = input.width),
                                             selectInput('plot.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$plot.title$face),
                                             selectInput('axis.title.face', label = 'Face', choices = text.faces, width = input.width, selected = default$axis.title$face),
                                             selectInput('strip.background.linetype', label = 'Type', choices = linetypes, selected = default$strip.background$linetype, width = input.width),
-                                            ''
+                                            selectInput('strip.text.face', label = 'Face', choices = text.faces, width = input.width, selected = default$strip.text$face)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('axis.title.y', label = 'y-Axis label', value = preserveNewlines(gg_original$labels$y), width = input.width),
                                             numericInput('plot.title.size', label = 'Size', min = 1, max = 30, value = default$plot.title$size, step = 1, width = input.width),
                                             numericInput('axis.title.size', label = 'Size', min = 1, max = 30, value = default$axis.title$size, step = 1, width = input.width),
                                             numericInput('strip.background.size', label = 'Size', step = 0.1, value = default$strip.background$size, width = input.width),
-                                            ''
+                                            numericInput('strip.text.size', label = 'Size', min = 1, max = 30, value = default$strip.text$size, step = 1, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('legend.colour.title', label = 'Colour', value = preserveNewlines(gg_original$labels$colour), width = input.width),
                                             selectizeInput('plot.title.colour', label = 'Colour', choices = NULL, width = input.width),
                                             selectizeInput('axis.title.colour', label = 'Colour', choices = NULL, width = input.width),
                                             selectizeInput('strip.background.colour', label = 'Colour', choices = NULL, width = input.width),
-                                            ''
+                                            selectizeInput('strip.text.colour', label = 'Colour', choices = NULL, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '100%',
                                             textInput('legend.fill.title', label = 'Fill label', value = preserveNewlines(gg_original$labels$fill), width = input.width),
                                             numericInput('plot.title.hjust', 'Hjust', value = default$plot.title$hjust, step = 0.25, width = input.width),
                                             numericInput('axis.title.hjust', 'Hjust', value = default$axis.title$hjust, step = 0.25, width = input.width),
                                             '',
-                                            ''
+                                            numericInput('strip.text.hjust', 'Hjust', value = default$strip.text$hjust, step = 0.25, width = input.width)
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
@@ -228,7 +228,7 @@ ggThemeAssist <- function(text){
                                             numericInput('plot.title.vjust', 'Vjust', value = default$plot.title$vjust, step = 0.25, width = input.width),
                                             numericInput('axis.title.vjust', 'Vjust', value = default$axis.title$vjust, step = 0.25, width = input.width),
                                             '',
-                                            ''
+                                            numericInput('strip.text.vjust', 'Vjust', value = default$strip.text$vjust, step = 0.25, width = input.width)
 
                                     ),
                                     fillRow(height = line.height, width = '100%',
@@ -236,7 +236,7 @@ ggThemeAssist <- function(text){
                                             numericInput('plot.title.angle', label = 'Angle', min = -180, max = 180, value = default$plot.title$angle, step = 5, width = input.width),
                                             numericInput('axis.title.angle', label = 'Angle', min = -180, max = 180, value = default$axis.title$angle, step = 5, width = input.width),
                                             '',
-                                            ''
+                                            numericInput('strip.text.angle', label = 'Angle', min = -180, max = 180, value = default$strip.text$angle, step = 5, width = input.width)
                                     ),
                                     fillRow(height = line.height, width = '33%',
                                             textInput('legend.linetype.title', label = 'Linetype label', value = preserveNewlines(gg_original$labels$linetype), width = input.width)
@@ -369,7 +369,7 @@ ggThemeAssist <- function(text){
     updateSelectizeInput(session = session, inputId = 'legend.key.colour', choices = colour.choices, selected = NA2text(default$legend.key$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
     updateSelectizeInput(session = session, inputId = 'strip.background.fill', choices = colour.choices, selected = NA2text(default$strip.background$fill), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
     updateSelectizeInput(session = session, inputId = 'strip.background.colour', choices = colour.choices, selected = NA2text(default$strip.background$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
-
+    updateSelectizeInput(session = session, inputId = 'strip.text.colour', choices = colour.choices, selected = NA2text(default$strip.text$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
     if (SubtitlesSupport) {
       updateSelectizeInput(session = session, inputId = 'plot.subtitle.colour', choices = colour.choices, selected = NA2text(default$plot.subtitle$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
       updateSelectizeInput(session = session, inputId = 'plot.caption.colour', choices = colour.choices, selected = NA2text(default$plot.caption$colour), server = TRUE, options = list(create = TRUE, labelField = 'name', searchField = 'colour', valueField = 'colour', render = jsColourSelector))
@@ -397,7 +397,8 @@ ggThemeAssist <- function(text){
         need(is.validColour(input$legend.background.colour), ''),
         need(is.validColour(input$legend.key.colour), ''),
         need(is.validColour(input$strip.background.fill), ''),
-        need(is.validColour(input$strip.background.colour), '')
+        need(is.validColour(input$strip.background.colour), ''),
+        need(is.validColour(input$strip.text.colour), '')
       )
       if (SubtitlesSupport) {
         validate(
@@ -488,6 +489,14 @@ ggThemeAssist <- function(text){
             size = input$strip.background.size,
             linetype = input$strip.background.linetype
           ),
+          strip.text = element_text(
+            size = input$strip.text.size,
+            colour = input$strip.text.colour,
+            face = input$strip.text.face,
+            family = input$strip.text.family,
+            angle = input$strip.text.angle,
+            hjust = input$strip.text.hjust,
+            vjust = input$strip.text.vjust),
           panel.grid.major = element_line(
             linetype = input$panel.grid.major.type,
             colour = input$panel.grid.major.colour,

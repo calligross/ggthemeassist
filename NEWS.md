@@ -2,7 +2,7 @@
 
 # ggThemeAssist 0.1.5.9000
 
-* Added support for strip.background
+* Added support for strip.background and strip.text
 
 # ggThemeAssist 0.1.5
 
