@@ -177,7 +177,7 @@ ggThemeAssist <- function(text){
                                             ""
                                     )
                    )),
-      miniTabPanel("Title and label", icon = icon('sliders'),
+      miniTabPanel("Title & Label", icon = icon('sliders'),
                    plotOutput("ThePlot4", width = '100%', height = '45%'),
                    miniContentPanel(scrollable = TRUE,
                                     fillRow(height = heading.height, width = '100%',
