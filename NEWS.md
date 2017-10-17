@@ -1,5 +1,9 @@
 # ggThemeAssist
 
+# ggThemeAssist 0.1.5.9000
+
+* Added support for strip.background
+
 # ggThemeAssist 0.1.5
 
 This is a bug fix release. When theme$text$size was NULL, ggThemeAssist crashed at start. (#65)

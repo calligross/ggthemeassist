@@ -113,6 +113,12 @@ default <- list(
     size = 0.5,
     linetype = 'blank'
   ), class = 'element_rect'),
+  strip.background = structure(list(
+    fill = 'NA',
+    colour = 'white',
+    size = 0.5,
+    linetype = 'blank'
+  ), class = 'element_rect'),
   panel.grid.major = structure(list(
     colour = 'gray100',
     size = 0.5,
@@ -232,13 +238,18 @@ AvailableElements <- list(
     type = 'element_text',
     enabled = TRUE
   ),
-    panel.background = list(
+  panel.background = list(
     name = 'panel.background',
     type = 'element_rect',
     enabled = TRUE
   ),
   plot.background = list(
     name = 'plot.background',
+    type = 'element_rect',
+    enabled = TRUE
+  ),
+  strip.background = list(
+    name = 'strip.background',
     type = 'element_rect',
     enabled = TRUE
   ),
