@@ -3,6 +3,7 @@
 # ggThemeAssist 0.1.5.9000
 
 * Added support for strip.background and strip.text
+* Escape single quoted strings (#69)
 
 # ggThemeAssist 0.1.5
 
