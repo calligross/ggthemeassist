@@ -1,5 +1,7 @@
 updateDefaults <- function(gg, defaults, linetypes = linetypes) {
 
+  gg <- list(theme = normalizeTheme(gg$theme))
+
   # Set default values for all elements
   for (i in c('rect', 'line', 'text')) {
     #substitute numeric linetypes to named, otherwise input widgets can't handle them

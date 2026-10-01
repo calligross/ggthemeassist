@@ -15,7 +15,8 @@ Imports:
     rstudioapi (>= 0.5),
     ggplot2,
     formatR
-Suggests: extrafont
+Suggests: extrafont,
+    S7
 RoxygenNote: 6.0.1
 Depends:
     R (>= 3.0.0)
