@@ -11,7 +11,7 @@ construcThemeString <- function(theme, original, new, std = default, element = N
       new[[category]][[theme]] <- legend_position
     }
 
-    new <- unlist(new[[category]][[theme]])
+    new <- unlist(normalizeElement(new[[category]][[theme]]))
 
     if (theme == 'legend.position' && length(original[[category]][[theme]]) > 1) {
       legend_position <- original[[category]][[theme]]
@@ -19,7 +19,7 @@ construcThemeString <- function(theme, original, new, std = default, element = N
       original[[category]][[theme]] <- legend_position
     }
 
-    original <- unlist(original[[category]][[theme]])
+    original <- unlist(normalizeElement(original[[category]][[theme]]))
 
   } else if (category == 'labels') {
     new <- unlist(new[[category]])

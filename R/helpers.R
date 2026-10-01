@@ -77,7 +77,7 @@ preserveNewlines <- function(x) {
 }
 
 getRGBHexColours <- function(gg) {
-  theme <- unlist(gg$theme)
+  theme <- unlist(normalizeTheme(gg$theme))
   colours <- theme[grep('#[0-9a-fA-F]{6}', theme)]
   colours <- unname(colours)
   colours <- unique(colours)
@@ -123,3 +123,31 @@ hasLegend <- function(gg) {
   length(mappings) > 0
 }
 
+
+# ggplot2 >= 4.0 implements theme elements with S7. Those are no longer lists,
+# so unlist() and names() don't work on them. Convert them back to the classic
+# list representation the rest of the package relies on.
+normalizeElement <- function(x) {
+  if (!inherits(x, 'S7_object') || !requireNamespace('S7', quietly = TRUE)) {
+    return(x)
+  }
+  props <- S7::props(x)
+  # S7 values (e.g. margins) and NULLs are not handled by the UI
+  props <- props[!vapply(props, function(p) is.null(p) || inherits(p, 'S7_object'), logical(1))]
+  # linewidth replaced size for lines and rects
+  if ('linewidth' %in% names(props)) {
+    names(props)[names(props) == 'linewidth'] <- 'size'
+  }
+  class(props) <- sub('^.*::', '', setdiff(class(x), c('S7_object')))[1]
+  props
+}
+
+normalizeTheme <- function(theme) {
+  nms <- names(theme)
+  if (is.null(nms)) {
+    return(theme)
+  }
+  items <- lapply(nms, function(n) normalizeElement(theme[[n]]))
+  names(items) <- nms
+  items
+}
